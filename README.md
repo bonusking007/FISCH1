@@ -4690,7 +4690,7 @@ local Main_2_left = Main_2_Page:section({name = "Misc",side = "left",size = 500}
 local Main_3_left = Main_3_Page:section({name = "Teleport",side = "left",size = 1000})
 local Main_3_right = Main_3_Page:section({name = "Totem",side = "right",size = 500})
 
-Main_1_left:button({name = "Autofish (Key:F)",def = false,callback = function()
+Main_1_left:button({name = "Autofish (Key:F) [ broke ]",def = false,callback = function()
 	local Players = game:GetService("Players")
 local CoreGui = game:GetService("StarterGui")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -5005,7 +5005,7 @@ Main_2_left:button({name = "Deploy 5000 Cages",callback = function()
 	
 		game:GetService("Players").LocalPlayer.Character:FindFirstChild("Crab Cage").Deploy:FireServer(unpack(args))
 	end
-	
+
 end})
 
 Main_2_left:button({name = "Fps Boost",callback = function()
@@ -5193,7 +5193,47 @@ end})
 Main_3_left:button({name = "Deep Ocean (safeplace)",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-508, -62, -7688))
+end})
 
+Main_3_left:button({name = "Buy luck",callback = function()
+	local Players = game:GetService("Players")
+	Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-931, 226, -995))
+end})
+
+Main_3_left:button({name = "Forsaken shore",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-2504, 136, 1573))
+end})
+
+Main_3_left:button({name = "Best farm?",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-3146, 137, 1459))
+end})
+
+Main_3_left:button({name = "Priate",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-2823, 214, 1521))
+end})
+
+Main_3_left:button({name = "Chest",callback = function()
+	local chests = workspace.world.chests:GetChildren()
+local player = game.Players.LocalPlayer
+local lastChest = 0  -- Keeps track of the last teleported chest
+
+-- Teleport to the next chest
+lastChest = (lastChest % #chests) + 1  -- Cycle through each chest
+player.Character.HumanoidRootPart.CFrame = chests[lastChest].CFrame
+
+end})
+
+Main_3_left:button({name = "Shipwreck",callback = function()
+	local Players = game:GetService("Players")
+	Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-3596, 141, 1605))
+end})
+
+Main_3_left:button({name = "Snowcap inside",callback = function()
+	local Players = game:GetService("Players")
+	Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(2848, 135, 2615))
 end})
 
 Main_3_left:button({name = "Boat Tp To Spawn",callback = function()
