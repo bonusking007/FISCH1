@@ -5374,12 +5374,12 @@ end})
 
 Main_3_left:button({name = "Abyssal (new)",callback = function()
     local Players = game:GetService("Players")
-Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1208.90796, -718.287781, 1316.12476, -0.258864403, 0, 0.965913713, 0, 1, 0, -0.965913713, 0, -0.258864403))
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1208.90796, -716.287781, 1316.12476, -0.258864403, 0, 0.965913713, 0, 1, 0, -0.965913713, 0, -0.258864403))
 end})
 
 Main_3_left:button({name = "Hexed (new)",callback = function()
     local Players = game:GetService("Players")
-Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1051.00208, -634.073181, 1316.28882, -0.998992562, 0, -0.0448761396, 0, 1, 0, 0.0448761396, 0, -0.998992562))
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1051.00208, -632.073181, 1316.28882, -0.998992562, 0, -0.0448761396, 0, 1, 0, 0.0448761396, 0, -0.998992562))
 end})
 
 Main_3_left:button({name = "The Depths Serpent Zone(new)",callback = function()
@@ -5526,7 +5526,7 @@ end})
 
 Main_3_right:button({name = "Abyssus (NPC)",callback = function()
     local Players = game:GetService("Players")
-Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1399.04749, -1016.03229, 966.244202, -0.351242661, -0.155072242, -0.923353255, 0.0506991558, 0.981591761, -0.184139013, 0.934910834, -0.111490704, -0.336914897))
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1399.04749, -1018.03229, 966.244202, -0.351242661, -0.155072242, -0.923353255, 0.0506991558, 0.981591761, -0.184139013, 0.934910834, -0.111490704, -0.336914897))
 end})
 
 Main_3_right:button({name = "Aspicientis (NPC)",callback = function()
