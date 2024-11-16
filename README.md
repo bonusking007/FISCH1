@@ -4690,21 +4690,8 @@ local Main_2_left = Main_2_Page:section({name = "Misc",side = "left",size = 500}
 local Main_3_left = Main_3_Page:section({name = "Teleport",side = "left",size = 1000})
 local Main_3_right = Main_3_Page:section({name = "Totem",side = "right",size = 500})
 
-Main_1_left:button({name = "Autofish (Key:F) [ broke ]",def = false,callback = function()
-	local Players = game:GetService("Players")
-local CoreGui = game:GetService("StarterGui")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local ContextActionService = game:GetService("ContextActionService")
-local VirtualInputManager = game:GetService("VirtualInputManager")
-local GuiService = game:GetService("GuiService")
+Main_1_left:button({name = "Autofish Stackperfect (Key:F)",def = false,callback = function()
 
-local LocalPlayer = Players.LocalPlayer
-local Enabled = false
-local Rod = false
-local Casted = false
-local Progress = false
-local Finished = false
-local Keybind = Enum.KeyCode.F
 
 function ShowNotification(String)
     CoreGui:SetCore(
@@ -4717,88 +4704,183 @@ function ShowNotification(String)
     )
 end
 
-function ToggleFarm(Name, State, Input)
-    if State == Enum.UserInputState.Begin then
-        Enabled = not Enabled
+-- Configuration variables
+local config = {
+    fpsCap = 9999,
+    disableChat = false,            -- Set to true to hide the chat
+    enableBigButton = true,        -- Set to true to enlarge the button in the shake UI
+    bigButtonScaleFactor = 2,      -- Scale factor for big button size
+    shakeSpeed = 0.05,             -- Lower value means faster shake (e.g., 0.05 for fast, 0.1 for normal)
+    FreezeWhileFishing = false      -- Set to true to freeze your character while fishing
+}
 
-        if not Enabled then
-            Finished = false
-            Progress = false
-            if Rod then
-                Rod.events.reset:FireServer()
+-- Set FPS cap
+setfpscap(config.fpsCap)
+
+-- Toggle autofarm variable
+local autofarmEnabled = false
+
+-- Services
+local players = game:GetService("Players")
+local vim = game:GetService("VirtualInputManager")
+local run_service = game:GetService("RunService")
+local replicated_storage = game:GetService("ReplicatedStorage")
+local localplayer = players.LocalPlayer
+local playergui = localplayer.PlayerGui
+local StarterGui = game:GetService("StarterGui")
+
+-- Disable chat if the option is enabled in config
+if config.disableChat then
+    StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Chat, false)
+end
+
+-- Utility functions
+local utility = {blacklisted_attachments = {"bob", "bodyweld"}}; do
+    function utility.simulate_click(x, y, mb)
+        vim:SendMouseButtonEvent(x, y, (mb - 1), true, game, 1)
+        vim:SendMouseButtonEvent(x, y, (mb - 1), false, game, 1)
+    end
+
+    function utility.move_fix(bobber)
+        for index, value in bobber:GetDescendants() do
+            if (value.ClassName == "Attachment" and table.find(utility.blacklisted_attachments, value.Name)) then
+                value:Destroy()
             end
         end
-
-        ShowNotification(string.format("Status: %s", tostring(Enabled)))
     end
 end
 
-LocalPlayer.Character.ChildAdded:Connect(
-    function(Child)
-        if Child:IsA("Tool") and Child.Name:lower():find("rod") then
-            Rod = Child
-        end
-    end
-)
+local farm = {reel_tick = nil, cast_tick = nil}; do
 
-LocalPlayer.Character.ChildRemoved:Connect(
-    function(Child)
-        if Child == Rod then
-            Enabled = false
-            Finished = false
-            Progress = false
-            Rod = nil
-        end
-    end
-)
+    function farm.find_rod()
+        local character = localplayer.Character
+        if not character then return nil end
 
-LocalPlayer.PlayerGui.DescendantAdded:Connect(
-    function(Descendant)
-        if Descendant.Name == "button" and Descendant.Parent.Name == "safezone" then
-            GuiService.SelectedObject = Descendant
-            VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.Return, false, game)
-            task.wait(0.05)
-            VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.Return, false, game)
-        elseif Descendant.Name == "playerbar" and Descendant.Parent.Name == "bar" then
-            Finished = true
-            Descendant:GetPropertyChangedSignal("Position"):Wait()
-            ReplicatedStorage.events.reelfinished:FireServer(100, true)
+        for _, tool in ipairs(character:GetChildren()) do
+            if tool:IsA("Tool") and (tool.Name:find("rod") or tool.Name:find("Rod")) then
+                return tool
+            end
         end
+        return nil
     end
-)
 
-LocalPlayer.PlayerGui.DescendantRemoving:Connect(
-    function(Descendant)
-        if Descendant.Name == "reel" then
-            Finished = false
-            Progress = false
-        end
-    end
-)
-
-coroutine.wrap(
-    function()
-        while true do
-            if Enabled and not Progress then
-                if Rod then
-                    Progress = true
-                    task.wait(1)
-                    Rod.events.reset:FireServer()
-                    Rod.events.cast:FireServer(100.5)
+    function farm.freeze_character(freeze)
+        local character = localplayer.Character
+        if character then
+            local humanoid = character:FindFirstChildOfClass("Humanoid")
+            if humanoid then
+                if freeze then
+                    humanoid.WalkSpeed = 0
+                    humanoid.JumpPower = 0
+                else
+                    humanoid.WalkSpeed = 16  -- Default WalkSpeed
+                    humanoid.JumpPower = 50  -- Default JumpPower
                 end
             end
-            task.wait(0.1)
         end
     end
-)()
 
-local NewRod = LocalPlayer.Character:FindFirstChildWhichIsA("Tool")
-if NewRod and NewRod.Name:lower():find("rod") then
-    Rod = NewRod
+    function farm.cast()
+        local character = localplayer.Character
+        if not character then return end
+
+        local rod = farm.find_rod()
+        if not rod then return end
+
+        -- Instantly cast without cooldown
+        local args = { [1] = 100, [2] = 1 }
+        rod.events.cast:FireServer(unpack(args))
+        farm.cast_tick = 0  -- Reset last cast time
+    end
+
+    function farm.shake()
+        local shake_ui = playergui:FindFirstChild("shakeui")
+        if shake_ui then
+            local safezone = shake_ui:FindFirstChild("safezone")
+            local button = safezone and safezone:FindFirstChild("button")
+
+            if button then
+                -- Apply big button option from config
+                if config.enableBigButton then
+                    button.Size = UDim2.new(config.bigButtonScaleFactor, 0, config.bigButtonScaleFactor, 0)
+                else
+                    button.Size = UDim2.new(1, 0, 1, 0)  -- Reset to default size if disabled
+                end
+
+                if button.Visible then
+                    utility.simulate_click(
+                        button.AbsolutePosition.X + button.AbsoluteSize.X / 2,
+                        button.AbsolutePosition.Y + button.AbsoluteSize.Y / 2,
+                        1
+                    )
+                end
+            end
+        end
+    end
+
+    function farm.reel()
+        local reel_ui = playergui:FindFirstChild("reel")
+        if not reel_ui then return end
+
+        local reel_bar = reel_ui:FindFirstChild("bar")
+        if not reel_bar then return end
+      
+        local reel_client = reel_bar:FindFirstChild("reel")
+        if not reel_client then return end
+
+        if reel_client.Disabled == true then
+            reel_client.Disabled = false
+        end
+
+        local update_colors = getsenv(reel_client).UpdateColors
+
+        -- Instant reel without waiting
+        if update_colors then
+            setupvalue(update_colors, 1, 100)
+            replicated_storage.events.reelfinished:FireServer(getupvalue(update_colors, 1), true)
+        end
+    end
+  
 end
 
-ContextActionService:BindAction("ToggleFarm", ToggleFarm, false, Keybind)
-ShowNotification(string.format("Press '%s' to enable/disable", Keybind.Name))
+-- Toggle function to start or stop the autofarm
+local function toggleAutofarm()
+    autofarmEnabled = not autofarmEnabled
+    if autofarmEnabled then
+        print("Autofarm Enabled")
+    else
+        print("Autofarm Disabled")
+        farm.freeze_character(false)  -- Unfreeze character when autofarm stops
+    end
+end
+
+-- Bind the toggle to a key (e.g., "F")
+local UserInputService = game:GetService("UserInputService")
+UserInputService.InputBegan:Connect(function(input)
+    if input.KeyCode == Enum.KeyCode.F then  -- Change 'P' to any preferred key
+        toggleAutofarm()
+    end
+end)
+
+-- Main loop with rod check, configurable shake speed, and freeze feature
+run_service.Heartbeat:Connect(function()
+    if autofarmEnabled then
+        local rod = farm.find_rod() -- Check if player is holding a rod
+        if rod then
+            -- Freeze character if enabled in config
+            if config.FreezeWhileFishing then
+                farm.freeze_character(true)
+            end
+            farm.cast()
+            farm.shake()
+            farm.reel()
+        else
+            -- Unfreeze character when not fishing
+            farm.freeze_character(false)
+        end
+    end
+end)
+
 
 end})
 
@@ -4865,6 +4947,26 @@ task.wait(0.1)  -- Wait a short time to simulate key press duration
 VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.X, false, game)  -- Key up
 end})
 
+Main_1_left:button({name = "insta coin",def = false,callback = function()
+	local args = {
+		[1] = 100,
+		[2] = true
+	}
+	
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	
+	local function fireEvent()
+		ReplicatedStorage:WaitForChild("events"):WaitForChild("reelfinished"):FireServer(unpack(args))
+	end
+	
+	task.spawn(function()
+		while true do
+			fireEvent()
+			task.wait(0.00001)
+		end
+	end)
+end})
+
 Main_1_left:keybind({name = "set ui keybind",def = nil,callback = function(key)
    window.key = key
 end})
@@ -4900,6 +5002,15 @@ end})
 Main_2_left:button({name = "TP To Seller",callback = function()
     local player = game.Players.LocalPlayer
 player.Character.HumanoidRootPart.CFrame = CFrame.new(476, 151, 232)
+end})
+
+Main_2_left:button({name = "Auto fix map",callback = function()
+	for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do 
+        if v.Name == "Treasure Map" then
+            game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+            workspace.world.npcs["Jack Marrow"].treasure.repairmap:InvokeServer()
+        end
+    end
 end})
 
 Main_2_left:button({name = "Auto Press E",callback = function()
@@ -5170,22 +5281,22 @@ Main_3_left:button({name = "Birch",callback = function()
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1739, 141, -2486))
 end})
 
-Main_3_left:button({name = "Deepshop (new)",callback = function()
+Main_3_left:button({name = "Deepshop",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-984, -245, -2704))
 end})
 
-Main_3_left:button({name = "Deepshop2 (new)",callback = function()
+Main_3_left:button({name = "Deepshop2",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-1659, -214, -2846))
 end})
 
-Main_3_left:button({name = "Trident (new)",callback = function()
+Main_3_left:button({name = "Trident",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-1479, -226, -2386))
 end})
 
-Main_3_left:button({name = "Brine Pool (new)",callback = function()
+Main_3_left:button({name = "Brine Pool",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-1788, -143, -3418))
 end})
@@ -5234,6 +5345,62 @@ end})
 Main_3_left:button({name = "Snowcap inside",callback = function()
 	local Players = game:GetService("Players")
 	Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(2848, 135, 2615))
+end})
+
+Main_3_left:button({name = "upper deepsolate",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-791, 142, -3103))
+end})
+
+Main_3_left:button({name = "Vertigo outside (new)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-7, -706, 1229))
+end})
+
+Main_3_left:button({name = "Vertigo inside (new)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(95, -701, 1225))
+end})
+
+Main_3_left:button({name = "Depth (new)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(574, -704, 1225))
+end})
+
+Main_3_left:button({name = "Depth merchant (new)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(949, -712, 1255))
+end})
+
+Main_3_left:button({name = "Abyssal (new)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1208.90796, -718.287781, 1316.12476, -0.258864403, 0, 0.965913713, 0, 1, 0, -0.965913713, 0, -0.258864403))
+end})
+
+Main_3_left:button({name = "Hexed (new)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1051.00208, -634.073181, 1316.28882, -0.998992562, 0, -0.0448761396, 0, 1, 0, 0.0448761396, 0, -0.998992562))
+end})
+
+Main_3_left:button({name = "The Depths Serpent Zone(new)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1097, -738, 1089))
+end})
+
+
+Main_3_left:button({name = "Rod of the Depths (new)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1703, -903, 1444))
+end})
+
+Main_3_left:button({name = "Scurvy Rod (new)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-2826, 215, 1513))
+end})
+
+Main_3_left:button({name = "Secert elevator",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(2232, -803, 1014))
 end})
 
 Main_3_left:button({name = "Boat Tp To Spawn",callback = function()
@@ -5356,6 +5523,36 @@ end})
 Main_3_right:button({name = "Aurora Totem",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-1812, -137, -3282))
+end})
+
+Main_3_right:button({name = "Abyssus (NPC)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1399.04749, -1016.03229, 966.244202, -0.351242661, -0.155072242, -0.923353255, 0.0506991558, 0.981591761, -0.184139013, 0.934910834, -0.111490704, -0.336914897))
+end})
+
+Main_3_right:button({name = "Aspicientis (NPC)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1214.53125, -708.644043, 1320.80188, 0.225700855, 0.128283948, 0.965713382, -0.0272023976, 0.991735399, -0.125383079, -0.973816752, 0.00202933699, 0.227325141))
+end})
+
+Main_3_right:button({name = "Occultus (NPC)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1022.30933, -705.266174, 1564.73145, 0.996510863, -0.0350344256, 0.0757544413, 0.0481100902, 0.982790411, -0.178349033, -0.0682023838, 0.181371287, 0.981046855))
+end})
+
+Main_3_right:button({name = "Perditus (NPC)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(770.052124, -730.62854, 1383.49512, 0.980628371, 0.0350823216, -0.19271028, -0.0284765773, 0.99891156, 0.0369425006, 0.193796545, -0.0307391342, 0.980560064))
+end})
+
+Main_3_right:button({name = "Submersus (NPC)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1211.42651, -1015.7981, 1315.828, -0.990251422, 0.0733327195, 0.118424594, 0.0506683066, 0.981590569, -0.184153795, -0.12974897, -0.176358193, -0.975737095))
+end})
+
+Main_3_right:button({name = "Tenebris (NPC)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1061.18408, -631.130432, 1310.31323, -0.730399609, -0.0307225361, 0.682328701, -0.0463540554, 0.998914301, -0.00464264117, -0.681445241, -0.0350196883, -0.731030703))
 end})
 
 return library
