@@ -4687,8 +4687,8 @@ local Main_1_left = Main_1_Page:section({name = "General",side = "left",size = 5
 
 local Main_2_left = Main_2_Page:section({name = "Misc",side = "left",size = 500})
 
-local Main_3_left = Main_3_Page:section({name = "Teleport",side = "left",size = 1000})
-local Main_3_right = Main_3_Page:section({name = "Totem",side = "right",size = 500})
+local Main_3_left = Main_3_Page:section({name = "Teleport",side = "left",size = 2000})
+local Main_3_right = Main_3_Page:section({name = "Totem",side = "right",size = 1000})
 
 Main_1_left:button({name = "Autofish Stackperfect (Key:F)",def = false,callback = function()
 
@@ -5384,7 +5384,7 @@ end})
 
 Main_3_left:button({name = "The Depths Serpent Zone(new)",callback = function()
     local Players = game:GetService("Players")
-Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1097, -738, 1089))
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1046, -738, 1064))
 end})
 
 Main_3_left:button({name = "Rod of the Depths (new)",callback = function()
