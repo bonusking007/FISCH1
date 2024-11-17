@@ -5293,7 +5293,7 @@ end})
 
 Main_3_left:button({name = "Trident",callback = function()
     local Players = game:GetService("Players")
-Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-1479, -226, -2386))
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-1484, -224, -2198))
 end})
 
 Main_3_left:button({name = "Brine Pool",callback = function()
