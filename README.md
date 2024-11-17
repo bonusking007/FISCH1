@@ -5384,7 +5384,37 @@ end})
 
 Main_3_left:button({name = "The Depths Serpent Zone(new)",callback = function()
     local Players = game:GetService("Players")
-Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1046, -738, 1064))
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1047, -782, 1056))
+end})
+
+Main_3_left:button({name = "The Depths Serpent Zone(new)",callback = function()
+-- Script to teleport to "The Depths - Serpent" or show a notification
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
+
+-- Pathway to the target zone
+local zonePath = workspace.zones.fishing:FindFirstChild("The Depths - Serpent")
+
+-- Function to notify player
+local function notifyPlayer(message)
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Notification";
+        Text = message;
+        Duration = 5; -- Duration of notification
+    })
+end
+
+-- Check if the zone exists
+if zonePath then
+    -- Teleport to the zone
+    HumanoidRootPart.CFrame = zonePath.CFrame
+    notifyPlayer("Teleported to The Depths - Serpent!")
+else
+    -- Notify if the zone does not exist
+    notifyPlayer("The Depths - Serpent has not spawned yet!")
+end
 end})
 
 Main_3_left:button({name = "Rod of the Depths (new)",callback = function()
