@@ -5316,6 +5316,11 @@ Main_3_left:button({name = "Forsaken shore",callback = function()
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-2504, 136, 1573))
 end})
 
+Main_3_left:button({name = "Captain goldenfish",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-2753, 217, 1729))
+end})
+
 Main_3_left:button({name = "Best farm?",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-3146, 137, 1459))
