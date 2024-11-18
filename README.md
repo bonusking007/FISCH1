@@ -5079,12 +5079,10 @@ Main_3_left:button({name = "Merchant Boat",callback = function()
     
 end})
 
-Main_2_left:button({name = "No Cooldown Grab Ingredients",callback = function()
-    for i,v in ipairs(game:GetService("Workspace"):GetDescendants()) do
-        if v.ClassName == "ProximityPrompt" then
-            v.HoldDuration = 0
-        end
-    end
+Main_2_left:button({name = "Buy Relic",callback = function()
+	while wait(0.2) do
+		workspace:WaitForChild("world"):WaitForChild("npcs"):WaitForChild("Merlin"):WaitForChild("Merlin"):WaitForChild("power"):InvokeServer()
+	end 
 end})
 
 Main_2_left:button({name = "Go To Witch",callback = function()
@@ -5630,7 +5628,7 @@ local positions = {
 for _, position in ipairs(positions) do
     humanoidRootPart.CFrame = CFrame.new(position)
     print("Teleported to:", position)
-    task.wait(3) -- Wait 3 seconds
+    task.wait(2) -- Wait 3 seconds
 end
 
 end})
