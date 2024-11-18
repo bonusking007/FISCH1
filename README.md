@@ -5589,4 +5589,50 @@ Main_3_right:button({name = "Tenebris (NPC)",callback = function()
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1061.18408, -631.130432, 1310.31323, -0.730399609, -0.0307225361, 0.682328701, -0.0463540554, 0.998914301, -0.00464264117, -0.681445241, -0.0350196883, -0.731030703))
 end})
 
+Main_3_right:button({name = "FARM XP",callback = function()
+	local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+-- List of positions
+local positions = {
+    Vector3.new(386, 135, 252),
+    Vector3.new(73, 142, -1028),
+    Vector3.new(-1889, 168, 329),
+    Vector3.new(-1255, 138, 1554),
+    Vector3.new(999, 131, -1237),
+    Vector3.new(1742, 142, -2502),
+    Vector3.new(2501, 131, -721),
+    Vector3.new(1296, -805, -299),
+    Vector3.new(-30, -247, 199),
+    Vector3.new(2501, 131, -721),
+    Vector3.new(2649, 142, 2521),
+    Vector3.new(2939, 281, 2567),
+    Vector3.new(-1477, 134, 672),
+    Vector3.new(-112, -515, 1040),
+    Vector3.new(-933, 132, -1120),
+    Vector3.new(-144, 145, 1910),
+    Vector3.new(1739, 141, -2486),
+    Vector3.new(-984, -245, -2704),
+    Vector3.new(-1659, -214, -2846),
+    Vector3.new(-1484, -224, -2198),
+    Vector3.new(-1788, -143, -3418),
+    Vector3.new(-2504, 136, 1573),
+    Vector3.new(-791, 142, -3103),
+    Vector3.new(-7, -706, 1229),
+    Vector3.new(95, -701, 1225),
+    Vector3.new(574, -704, 1225),
+    Vector3.new(949, -712, 1255),
+    Vector3.new(1703, -903, 1444)
+}
+
+-- Teleport to each position with a 3-second delay
+for _, position in ipairs(positions) do
+    humanoidRootPart.CFrame = CFrame.new(position)
+    print("Teleported to:", position)
+    task.wait(3) -- Wait 3 seconds
+end
+
+end})
+
 return library
