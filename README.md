@@ -4987,6 +4987,48 @@ end
 
 end})
 
+Main_2_left:button({name = "Equip tool",callback = function()
+		local Players = game:GetService("Players")
+		local player = Players.LocalPlayer
+		local character = player.Character or player.CharacterAdded:Wait()
+		local backpack = player:WaitForChild("Backpack")
+		
+		-- Function to equip a tool
+		local function equipTool(toolName)
+			local tool = backpack:FindFirstChild(toolName) or character:FindFirstChild(toolName)
+			if tool and tool:IsA("Tool") then
+				tool.Parent = character
+			end
+		end
+		
+		-- Example usage
+		equipTool("No-Life Rod")
+		equipTool("Rapid Rod")
+		equipTool("Nocturnal Rod")
+		equipTool("Lucky Rod")
+		equipTool("Destiny Rod")
+		equipTool("Aurora Rod")
+		equipTool("Fast Rod")
+		equipTool("Training Rod")
+		equipTool("Buddy Bond Rod")
+		equipTool("Reinforced Rod")
+		equipTool("Rod Of The Depths")
+		equipTool("Scurvy Rod")
+		equipTool("Steady Rod")
+		equipTool("Trident Rod")
+		equipTool("Ultratech Rod")
+		equipTool("Tetra Rod")
+		equipTool("Mythical Rod")
+		equipTool("Magma Rod")
+		equipTool("Magnet Rod")
+		equipTool("Mystic Staff")
+		equipTool("Midas Rod")
+		equipTool("Executive Rod")
+		equipTool("Haunted Rod")
+		equipTool("Fischer's Rod")
+		equipTool("Kings Rod")
+end})
+
 Main_2_left:button({name = "Sell All",callback = function()
     workspace:WaitForChild("world"):WaitForChild("npcs"):WaitForChild("Marc Merchant"):WaitForChild("merchant"):WaitForChild("sellall"):InvokeServer()
 end})
@@ -5319,11 +5361,6 @@ Main_3_left:button({name = "Captain goldenfish",callback = function()
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-2753, 217, 1729))
 end})
 
-Main_3_left:button({name = "Best farm?",callback = function()
-    local Players = game:GetService("Players")
-Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-3146, 137, 1459))
-end})
-
 Main_3_left:button({name = "Priate",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-2823, 214, 1521))
@@ -5355,42 +5392,42 @@ Main_3_left:button({name = "upper deepsolate",callback = function()
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-791, 142, -3103))
 end})
 
-Main_3_left:button({name = "Vertigo outside (new)",callback = function()
+Main_3_left:button({name = "Vertigo outside",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-7, -706, 1229))
 end})
 
-Main_3_left:button({name = "Vertigo inside (new)",callback = function()
+Main_3_left:button({name = "Vertigo inside",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(95, -701, 1225))
 end})
 
-Main_3_left:button({name = "Depth (new)",callback = function()
+Main_3_left:button({name = "Depth",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(574, -704, 1225))
 end})
 
-Main_3_left:button({name = "Depth merchant (new)",callback = function()
+Main_3_left:button({name = "Depth merchant",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(949, -712, 1255))
 end})
 
-Main_3_left:button({name = "Abyssal (new)",callback = function()
+Main_3_left:button({name = "Abyssal",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1208.90796, -716.287781, 1316.12476, -0.258864403, 0, 0.965913713, 0, 1, 0, -0.965913713, 0, -0.258864403))
 end})
 
-Main_3_left:button({name = "Hexed (new)",callback = function()
+Main_3_left:button({name = "Hexed",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1051.00208, -632.073181, 1316.28882, -0.998992562, 0, -0.0448761396, 0, 1, 0, 0.0448761396, 0, -0.998992562))
 end})
 
-Main_3_left:button({name = "The Depths Serpent Zone(new)",callback = function()
+Main_3_left:button({name = "Best Farm Zone",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1047, -782, 1056))
 end})
 
-Main_3_left:button({name = "The Depths Serpent Zone(new)",callback = function()
+Main_3_left:button({name = "The Depths Serpent Zone",callback = function()
 -- Script to teleport to "The Depths - Serpent" or show a notification
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
@@ -5420,7 +5457,7 @@ else
 end
 end})
 
-Main_3_left:button({name = "Rod of the Depths (new)",callback = function()
+Main_3_left:button({name = "Rod of the Depths",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1703, -903, 1444))
 end})
@@ -5433,6 +5470,16 @@ end})
 Main_3_left:button({name = "Secert elevator",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(2232, -803, 1014))
+end})
+
+Main_3_left:button({name = "AncientIslesMini (new)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(4040, 131, 78))
+end})
+
+Main_3_left:button({name = "Relic Rod (new)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(4098, 40, 28))
 end})
 
 Main_3_left:button({name = "Boat Tp To Spawn",callback = function()
@@ -5555,6 +5602,11 @@ end})
 Main_3_right:button({name = "Aurora Totem",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-1812, -137, -3282))
+end})
+
+Main_3_right:button({name = "Dr. Finneus (NPC)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1169.18237, 132.075562, 2456.31689, 0, 0, -1, 0, 1, 0, 1, 0, 0))
 end})
 
 Main_3_right:button({name = "Abyssus (NPC)",callback = function()
