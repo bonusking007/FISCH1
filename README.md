@@ -1,1304 +1,5688 @@
-if not game:IsLoaded() then repeat game.Loaded:Wait() until game:IsLoaded() end
--- v1.6
+local TweenService = game:GetService('TweenService')
+local object = cre
+local tweenInfo = TweenInfo.new(2.5)
 
-local ProtectPremium = true
+while getfenv().RGB do
+local r, g, b = math.random(), math.random(), math.random()
+local goal = {Color = Color3.new(r, g, b)}
 
---<>----<>----<>----< Getting Services >----<>----<>----<>--
-AnalyticsService = game:GetService("AnalyticsService")
-CollectionService = game:GetService("CollectionService")
-DataStoreService = game:GetService("DataStoreService")
-HttpService = game:GetService("HttpService")
-Lighting = game:GetService("Lighting")
-MarketplaceService = game:GetService("MarketplaceService")
-Players = game:GetService("Players")
-ReplicatedFirst = game:GetService("ReplicatedFirst")
-ReplicatedStorage = game:GetService("ReplicatedStorage")
-RunService = game:GetService("RunService")
-ServerScriptService = game:GetService("ServerScriptService")
-ServerStorage = game:GetService("ServerStorage")
-SoundService = game:GetService("SoundService")
-StarterGui = game:GetService("StarterGui")
-StarterPack = game:GetService("StarterPack")
-StarterPlayer = game:GetService("StarterPlayer")
-TeleportService = game:GetService("TeleportService")
-TweenService = game:GetService("TweenService")
-Teams = game:GetService("Teams")
-VirtualUser = game:GetService("VirtualUser")
-Workspace = game:GetService("Workspace")
-UserInputService = game:GetService("UserInputService")
-VirtualInputManager = game:GetService("VirtualInputManager")
-ContextActionService = game:GetService("ContextActionService")
-GuiService = game:GetService("GuiService")
-print("ClientMonsterTools.lua loaded")
+local tween = TweenService:Create(object, tweenInfo, goal)
+tween:Play()
+tween.Completed:Wait()
+end
 
+if game.CoreGui:FindFirstChild("ToggleUI") then
+	game.CoreGui:FindFirstChild("ToggleUI"):Destroy()
+end
+local ToggleUI = Instance.new("ScreenGui")
+local ToggleButton = Instance.new("TextButton")
+local ToggleButtonHUI = Instance.new("UICorner")
+ToggleUI.Name = "ToggleUI"
+ToggleUI.Parent = game.CoreGui
+ToggleUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
---<>----<>----<>----< Anti Afk >----<>----<>----<>--
-game.Players.LocalPlayer.Idled:Connect(function()
-    VirtualUser:CaptureController()
-    VirtualUser:ClickButton2(Vector2.new())
-    print("Roblox Tried to kick you but we didn't let them kick you :D")
+ToggleButton.Name = "ToggleButton"
+ToggleButton.Parent = ToggleUI
+ToggleButton.BackgroundColor3 = Color3.fromRGB(30,20,20)
+ToggleButton.BackgroundTransparency = 0.1
+ToggleButton.BorderSizePixel = 0
+ToggleButton.Position = UDim2.new(0.120833337, 0, 0.0952890813, 0)
+ToggleButton.Size = UDim2.new(0, 50, 0, 50)
+ToggleButton.Font = Enum.Font.SourceSans
+ToggleButton.Text = ""
+ToggleButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+ToggleButton.TextSize = 14.000
+ToggleButton.Draggable = true
+ToggleButton.MouseButton1Click:Connect(function()
+	game.CoreGui:FindFirstChild("Kenei").Enabled = not game.CoreGui:FindFirstChild("Kenei").Enabled
 end)
-warn("[Anti Afk] - loaded successfully") 
 
---<>----<>----<>----< Main Script >----<>----<>----<>--
-print("[Sea Hub | Fisch]: loading...")
-local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
-local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+coroutine.wrap(
+	function()
+	do
+    local CoreGui = {}
+    local CheckCoreGui = {}
+    local CoreGui = game:GetService("CoreGui"):FindFirstChild("Kenei")
+        if CoreGui then 
+         CoreGui:Destroy() 
+        elseif CoreGui then 
+        local CheckCoreGui = not game.CoreGui:FindFirstChild("Kenei").Enabled
+            if CheckCoreGui then
+            CoreGui:Destroy()
+            elseif not CoreGui and CheckCoreGuithen == nil then
+                 local CoreGui = nil or {nil}
+                 local CheckCoreGu = nil or {nil}
+            end
+        end
+    end
+end)();
+-- // variables
+local library = {}
+local pages = {}
+local sections = {}
+local multisections = {}
+local mssections = {}
+local toggles = {}
+local buttons = {}
+local sliders = {}
+local dropdowns = {}
+local multiboxs = {}
+local buttonboxs = {}
+local textboxs = {}
+local keybinds = {}
+local colorpickers = {}
+local configloaders = {}
+local watermarks = {}
+local loaders = {}
+--
+local utility = {}
+--
+local plrs = game:GetService("Players")
+local cre = game:GetService("CoreGui")
+local rs = game:GetService("RunService")
+local ts = game:GetService("TweenService") 
+local uis = game:GetService("UserInputService") 
+local hs = game:GetService("HttpService")
+local ws = game:GetService("Workspace")
+local plr = plrs.LocalPlayer
+local cam = ws.CurrentCamera
+-- // indexes
+library.__index = library
+pages.__index = pages
+sections.__index = sections
+multisections.__index = multisections
+mssections.__index = mssections
+toggles.__index = toggles
+buttons.__index = buttons
+sliders.__index = sliders
+dropdowns.__index = dropdowns
+multiboxs.__index = multiboxs
+buttonboxs.__index = buttonboxs
+textboxs.__index = textboxs
+keybinds.__index = keybinds
+colorpickers.__index = colorpickers
+configloaders.__index = configloaders
+watermarks.__index = watermarks
+loaders.__index = loaders
+-- // functions
+utility.new = function(instance,properties) 
+	-- // instance
+	local ins = Instance.new(instance)
+	-- // properties setting
+	for property,value in pairs(properties) do
+		ins[property] = value
+	end
+	-- // return
+	return ins
+end
+--
+utility.dragify = function(ins,touse)
+	local dragging
+	local dragInput
+	local dragStart
+	local startPos
+	--
+	local function update(input)
+		local delta = input.Position - dragStart
+		touse:TweenPosition(UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y),Enum.EasingDirection.Out,Enum.EasingStyle.Quad,0.1,true)
+	end
+	--
+	ins.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = true
+			dragStart = input.Position
+			startPos = touse.Position
 
-local Window = Fluent:CreateWindow({
-    Title = "Fisch | Sea Hub",
-    SubTitle = "vNormal",
-    TabWidth = 150,
-    Size = UDim2.fromOffset(600, 400),
-    Acrylic = false,
-    Theme = "Darker",
-    MinimizeKey = Enum.KeyCode.LeftControl
-})
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragging = false
+				end
+			end)
+		end
+	end)
+	--
+	ins.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			dragInput = input
+		end
+	end)
+	--
+	uis.InputChanged:Connect(function(input)
+		if input == dragInput and dragging then
+			update(input)
+		end
+	end)
+end
+--
+utility.round = function(n,d)
+	return tonumber(string.format("%."..(d or 0).."f",n))
+end
+--
+utility.zigzag = function(X)
+	return math.acos(math.cos(X*math.pi))/math.pi
+end
+--
+utility.capatalize = function(s)
+	local l = ""
+	for v in s:gmatch('%u') do
+		l = l..v
+	end
+	return l
+end
+--
+utility.splitenum = function(enum)
+	local s = tostring(enum):split(".")
+	return s[#s]
+end
+--
+utility.from_hex = function(h)
+	local r,g,b = string.match(h,"^#?(%w%w)(%w%w)(%w%w)$")
+	return Color3.fromRGB(tonumber(r,16), tonumber(g,16), tonumber(b,16))
+end
+--
+utility.to_hex = function(c)
+	return string.format("#%02X%02X%02X",c.R *255,c.G *255,c.B *255)
+end
+--
+utility.removespaces = function(s)
+   return s:gsub(" ","")
+end
+-- // main
+function library:new(props)
+	-- // properties
+	local textsize = props.textsize or props.TextSize or props.textSize or props.Textsize or 12
+	local font = props.font or props.Font or "RobotoMono"
+	local name = props.name or props.Name or props.UiName or props.Uiname or props.uiName or props.username or props.Username or props.UserName or props.userName or "new ui"
+	local color = props.color or props.Color or props.mainColor or props.maincolor or props.MainColor or props.Maincolor or props.Accent or props.accent or Color3.fromRGB(225, 58, 81)
+	-- // variables
+	local window = {}
+	-- // main
+	local screen = utility.new(
+		"ScreenGui",
+		{
+			Name = "Kenei",
+			DisplayOrder = 9999,
+			ResetOnSpawn = false,
+			ZIndexBehavior = "Global",
+			Parent = cre
+		}
+	)
+	-- 1
+	local outline = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0.5,0.5),
+			BackgroundColor3 = color,
+			BorderColor3 = Color3.fromRGB(12, 12, 12),
+			BorderSizePixel = 1,
+			Size = UDim2.new(0,541,0,341),
+			Position = UDim2.new(0.5,0,0.5,0),
+			Parent = screen
+		}
+	)
+	-- 2
+	local outline2 = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0.5,0.5),
+			BackgroundColor3 = Color3.fromRGB(0, 0, 0),
+			BorderColor3 = Color3.fromRGB(12, 12, 12),
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,-4,1,-4),
+			Position = UDim2.new(0.5,0,0.5,0),
+			Parent = outline
+		}
+	)
+	-- 3
+	local indent = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0.5,0.5),
+			BackgroundColor3 = Color3.fromRGB(20, 20, 20),
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0.5,0,0.5,0),
+			Parent = outline2
+		}
+	)
+	-- 4
+	local main = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0.5,1),
+			BackgroundColor3 = Color3.fromRGB(20, 20, 20),
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,-10,1,-25),
+			Position = UDim2.new(0.5,0,1,-5),
+			Parent = outline2
+		}
+	)
+	--
+	local title = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0.5,0),
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,0,20),
+			Position = UDim2.new(0.5,0,0,0),
+			Parent = outline2
+		}
+	)
+	-- 5
+	local outline3 = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0.5,0.5),
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(12, 12, 12),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0.5,0,0.5,0),
+			Parent = main
+		}
+	)
+	--
+	local titletext = utility.new(
+		"TextLabel",
+		{
+			AnchorPoint = Vector2.new(0.5,0),
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,-10,1,0),
+			Position = UDim2.new(0.5,0,0,0),
+			Font = font,
+			Text = name,
+			TextColor3 = Color3.fromRGB(255,255,255),
+			TextXAlignment = "Left",
+			TextSize = textsize,
+			TextStrokeTransparency = 0,
+			Parent = title
+		}
+	)
+	-- 6
+	local holder = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0.5,0.5),
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,-6,1,-6),
+			Position = UDim2.new(0.5,0,0.5,0),
+			Parent = main
+		}
+	)
+	-- 7
+	local holder = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0.5,0.5),
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,-6,1,-6),
+			Position = UDim2.new(0.5,0,0.5,0),
+			Parent = main
+		}
+	)
+	-- 8
+	local tabs = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0.5,1),
+			BackgroundColor3 = Color3.fromRGB(20, 20, 20),
+			BorderColor3 = Color3.fromRGB(12, 12, 12),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,1,-20),
+			Position = UDim2.new(0.5,0,1,0),
+			Parent = holder
+		}
+	)
+	--
+	local tabsbuttons = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0.5,0),
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,0,21),
+			Position = UDim2.new(0.5,0,0,0),
+			ZIndex = 2,
+			Parent = holder
+		}
+	)
+	-- 9
+	local outline4 = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(20, 20, 20),
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			Parent = tabs
+		}
+	)
+	--
+	utility.new(
+		"UIListLayout",
+		{
+			FillDirection = "Horizontal",
+			Padding = UDim.new(0,2),
+			Parent = tabsbuttons
+		}
+	)
+	--
+	utility.dragify(title,outline)
+	-- // window tbl
+	window = {
+		["screen"] = screen,
+		["holder"] = holder,
+		["labels"] = {},
+		["tabs"] = outline4,
+		["tabsbuttons"] = tabsbuttons,
+		["outline"] = outline,
+		["pages"] = {},
+		["pointers"] = {},
+		["dropdowns"] = {},
+		["multiboxes"] = {},
+		["buttonboxs"] = {},
+		["colorpickers"] = {},
+		["x"] = true,
+		["y"] = true,
+		["key"] = Enum.KeyCode.RightShift,
+		["textsize"] = textsize,
+		["font"] = font,
+		["theme"] = {
+			["accent"] = color
+		},
+		["themeitems"] = {
+			["accent"] = {
+				["BackgroundColor3"] = {},
+				["BorderColor3"] = {},
+				["TextColor3"] = {}
+			}
+		}
+	}
+	--
+	table.insert(window.themeitems["accent"]["BackgroundColor3"],outline)
+	--
+	local toggled = true
+	local cooldown = false
+	local saved = UDim2.new(0,0,0,0)
+	--
+	uis.InputBegan:Connect(function(Input)
+		if Input.UserInputType == Enum.UserInputType.Keyboard then
+			if Input.KeyCode == window.key then
+				if cooldown == false then
+					if toggled then
+						cooldown = true
+						toggled = not toggled
+						saved = outline.Position
+						local xx,yy = 0,0
+						local xxx,yyy = 0,0
+						--
+						if (outline.AbsolutePosition.X+(outline.AbsoluteSize.X/2)) < (cam.ViewportSize.X/2) then
+							xx = -3
+						else
+							xx = 3
+						end
+						--
+						if window.y then
+							if (outline.AbsolutePosition.Y+(outline.AbsoluteSize.Y/2)) < (cam.ViewportSize.Y/2) then
+								yy = -3
+							else
+								yy = 3
+							end
+						else
+							yy = saved.Y.Scale
+							yyy = saved.Y.Offset
+						end
+						--
+						if window.x == false and window.y == false then
+							screen.Enabled = false
+						else
+							ts:Create(outline, TweenInfo.new(0.5,Enum.EasingStyle.Quad,Enum.EasingDirection.In), {Position = UDim2.new(xx,xxx,yy,yyy)}):Play()
+						end
+						wait(0.5)
+						cooldown = false
+					else
+						cooldown = true
+						toggled = not toggled
+						if window.x == false and window.y == false then
+							screen.Enabled = true
+						else
+							ts:Create(outline, TweenInfo.new(0.5,Enum.EasingStyle.Quad,Enum.EasingDirection.Out), {Position = saved}):Play()
+						end
+						wait(0.5)
+						cooldown = false
+					end
+				end
+			end
+		end
+	end)
+	--
+	window.labels[#window.labels+1] = titletext
+	-- // metatable indexing + return
+	setmetatable(window, library)
+	return window
+end
+--
+function library:watermark()
+	local watermark = {}
+	--
+	local outline = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(1,0),
+			BackgroundColor3 = self.theme.accent,
+			BorderColor3 = Color3.fromRGB(12, 12, 12),
+			BorderSizePixel = 1,
+			Size = UDim2.new(0,300,0,26),
+			Position = UDim2.new(1,-10,0,10),
+			ZIndex = 9900,
+			Visible = false,
+			Parent = self.screen
+		}
+	)
+	--
+	table.insert(self.themeitems["accent"]["BackgroundColor3"],outline)
+	--
+	local outline2 = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0.5,0.5),
+			BackgroundColor3 = Color3.fromRGB(0, 0, 0),
+			BorderColor3 = Color3.fromRGB(12, 12, 12),
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,-4,1,-4),
+			Position = UDim2.new(0.5,0,0.5,0),
+			ZIndex = 9901,
+			Parent = outline
+		}
+	)
+	--
+	local indent = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0.5,0.5),
+			BackgroundColor3 = Color3.fromRGB(20, 20, 20),
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0.5,0,0.5,0),
+			ZIndex = 9902,
+			Parent = outline2
+		}
+	)
+	--
+	local title = utility.new(
+		"TextLabel",
+		{
+			AnchorPoint = Vector2.new(0.5,0),
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,-10,1,0),
+			Position = UDim2.new(0.5,0,0,0),
+			Font = self.font,
+			Text = "",
+			TextColor3 = Color3.fromRGB(255,255,255),
+			TextXAlignment = "Left",
+			TextSize = self.textsize,
+			TextStrokeTransparency = 0,
+			ZIndex = 9903,
+			Parent = indent
+		}
+	)
+	--
+	local con
+	con = title:GetPropertyChangedSignal("TextBounds"):Connect(function()
+		outline.Size = UDim2.new(0,title.TextBounds.X+20,0,26)
+	end)
+	--
+	watermark = {
+		["outline"] = outline,
+		["outline2"] = outline2,
+		["indent"] = indent,
+		["title"] = title,
+		["connection"] = con
+	}
+	--
+	self.labels[#self.labels+1] = title
+	--
+	setmetatable(watermark,watermarks)
+	return watermark
+end
+--
+function watermarks:update(content)
+	local content = content or {}
+	local watermark = self
+	--
+	local text = ""
+	--
+	for i,v in pairs(content) do
+		text = text..i..": "..v.."  "
+	end
+	--
+	text = text:sub(0, -3)
+	--
+	watermark.title.Text = text
+end
+--
+function watermarks:updateside(side)
+	side = utility.removespaces(tostring(side):lower())
+	--
+	local sides = {
+		topright = {
+			AnchorPoint = Vector2.new(1,0),
+			Position = UDim2.new(1,-10,0,10)
+		},
+		topleft = {
+			AnchorPoint = Vector2.new(0,0),
+			Position = UDim2.new(0,10,0,10)
+		},
+		bottomright = {
+			AnchorPoint = Vector2.new(1,1),
+			Position = UDim2.new(1,-10,1,-10)
+		},
+		bottomleft = {
+			AnchorPoint = Vector2.new(0,1),
+			Position = UDim2.new(0,10,1,-10)
+		}
+	}
+	--
+	if sides[side] then
+		self.outline.AnchorPoint = sides[side].AnchorPoint
+		self.outline.Position = sides[side].Position
+	end
+end
+--
+function library:loader(props)
+	local name = props.name or props.Name or props.LoaderName or props.Loadername or props.loaderName or props.loadername or "Loader"
+	local scriptname = props.scriptname or props.Scriptname or props.ScriptName or props.scriptName or "Universal"
+	local closed = props.close or props.Close or props.closecallback or props.Closecallback or props.CloseCallback or props.closeCallback or function()end
+	local logedin = props.login or props.Login or props.logincallback or props.Logincallback or props.LoginCallback or props.loginCallback or function()end
+	local loader = {}
+	--
+	local screen = utility.new(
+		"ScreenGui",
+		{
+			Name = tostring(math.random(0,999999))..tostring(math.random(0,999999)),
+			DisplayOrder = 9999,
+			ResetOnSpawn = false,
+			ZIndexBehavior = "Global",
+			Parent = cre
+		}
+	)
+	local outline = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0.5,0.5),
+			BackgroundColor3 = Color3.fromRGB(168, 52, 235),
+			BorderColor3 = Color3.fromRGB(12, 12, 12),
+			BorderSizePixel = 1,
+			Size = UDim2.new(0,300,0,90),
+			Position = UDim2.new(0.5,0,0.5,0),
+			ZIndex = 9900,
+			Visible = false,
+			Parent = screen
+		}
+	)
+	--
+	local outline2 = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0.5,0.5),
+			BackgroundColor3 = Color3.fromRGB(0, 0, 0),
+			BorderColor3 = Color3.fromRGB(12, 12, 12),
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,-4,1,-4),
+			Position = UDim2.new(0.5,0,0.5,0),
+			ZIndex = 9901,
+			Parent = outline
+		}
+	)
+	--
+	local indent = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0.5,0.5),
+			BackgroundColor3 = Color3.fromRGB(20, 20, 20),
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0.5,0,0.5,0),
+			ZIndex = 9902,
+			Parent = outline2
+		}
+	)
+	--
+	local title = utility.new(
+		"TextLabel",
+		{
+			AnchorPoint = Vector2.new(0.5,0),
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,-10,0,20),
+			Position = UDim2.new(0.5,0,0,0),
+			Font = "RobotoMono",
+			Text = name,
+			TextColor3 = Color3.fromRGB(168, 52, 235),
+			TextXAlignment = "Center",
+			TextSize = 12,
+			TextStrokeTransparency = 0,
+			ZIndex = 9903,
+			Parent = indent
+		}
+	)
+	--
+	local scripttitle = utility.new(
+		"TextLabel",
+		{
+			AnchorPoint = Vector2.new(0.5,0),
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,-10,0,20),
+			Position = UDim2.new(0.5,0,0,20),
+			Font = "RobotoMono",
+			Text = "Script: "..scriptname,
+			TextColor3 = Color3.fromRGB(255, 255, 255),
+			TextXAlignment = "Center",
+			TextSize = 12,
+			TextStrokeTransparency = 0,
+			ZIndex = 9903,
+			Parent = indent
+		}
+	)
+	--
+	local makebutton = function(name,parent)
+		local button_holder = utility.new(
+			"Frame",
+			{
+				BackgroundTransparency = 1,
+				BorderSizePixel = 0,
+				ZIndex = 9904,
+				Parent = parent
+			}
+		)
+		--
+		local button_outline = utility.new(
+			"Frame",
+			{
+				BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+				BorderColor3 = Color3.fromRGB(12, 12, 12),
+				BorderMode = "Inset",
+				BorderSizePixel = 1,
+				Position = UDim2.new(0,0,0,0),
+				Size = UDim2.new(1,0,1,0),
+				ZIndex = 9905,
+				Parent = button_holder
+			}
+		)
+		--
+		local button_outline2 = utility.new(
+			"Frame",
+			{
+				BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+				BorderColor3 = Color3.fromRGB(56, 56, 56),
+				BorderMode = "Inset",
+				BorderSizePixel = 1,
+				Position = UDim2.new(0,0,0,0),
+				Size = UDim2.new(1,0,1,0),
+				ZIndex = 9906,
+				Parent = button_outline
+			}
+		)
+		--
+		local button_color = utility.new(
+			"Frame",
+			{
+				AnchorPoint = Vector2.new(0,0),
+				BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+				BorderSizePixel = 0,
+				Size = UDim2.new(1,0,0,0),
+				Position = UDim2.new(0,0,0,0),
+				ZIndex = 9907,
+				Parent = button_outline2
+			}
+		)
+		--
+		utility.new(
+			"UIGradient",
+			{
+				Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(199, 191, 204)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))},
+				Rotation = 90,
+				Parent = button_color
+			}
+		)
+		--
+		local button_button = utility.new(
+			"TextButton",
+			{
+				AnchorPoint = Vector2.new(0,0),
+				BackgroundTransparency = 1,
+				Size = UDim2.new(1,0,1,0),
+				Position = UDim2.new(0,0,0,0),
+				Text = name,
+				TextColor3 = Color3.fromRGB(255,255,255),
+				TextSize = 12,
+				TextStrokeTransparency = 0,
+				Font = "RobotoMono",
+				ZIndex = 9908,
+				Parent = button_holder
+			}
+		)
+		--
+		return {button_holder,button_outline,button_button}
+	end
+	--
+	local close = makebutton("close",indent)
+	local login = makebutton("login",indent)
+	--
+	close[1].AnchorPoint = Vector2.new(0.5,0)
+	close[1].Size = UDim2.new(0.5,0,0,20)
+	close[1].Position = UDim2.new(0.5,0,0,40)
+	--
+	login[1].AnchorPoint = Vector2.new(0.5,0)
+	login[1].Size = UDim2.new(0.5,0,0,20)
+	login[1].Position = UDim2.new(0.5,0,0,62)
+	--
+	close[3].MouseButton1Down:Connect(function()
+		close[2].BorderColor3 = Color3.fromRGB(168, 52, 235)
+		outline:TweenPosition(UDim2.new(-1.5,0,0.5,0),Enum.EasingDirection.Out,Enum.EasingStyle.Quad,0.75,true)
+		closed()
+		wait(0.05)
+		close[2].BorderColor3 = Color3.fromRGB(12,12,12)
+		wait(0.7)
+		screen:Remove()
+	end)
+	--
+	login[3].MouseButton1Down:Connect(function()
+		login[2].BorderColor3 = Color3.fromRGB(168, 52, 235)
+		outline:TweenPosition(UDim2.new(1.5,0,0.5,0),Enum.EasingDirection.Out,Enum.EasingStyle.Quad,0.75,true)
+		logedin()
+		wait(0.05)
+		login[2].BorderColor3 = Color3.fromRGB(12,12,12)
+		wait(0.7)
+		screen:Remove()
+	end)
+	--
+	loader = {
+		["outline"] = outline,
+		["outline2"] = outline2,
+		["indent"] = indent,
+		["title"] = title
+	}
+	--
+	setmetatable(loader,loaders)
+	return loader
+end
+--
+function loaders:toggle()
+	self.outline.Visible = true
+end
+--
+function watermarks:toggle(bool)
+	local watermark = self
+	--
+	watermark.outline.Visible = bool
+end
+--
+function library:saveconfig()
+	local cfg = {}
+	--
+	for i,v in pairs(self.pointers) do
+		cfg[i] = {}
+		for c,d in pairs(v) do
+			cfg[i][c] = {}
+			for x,z in pairs(d) do
+				if typeof(z.current) == "Color3" then
+					cfg[i][c][x] = {z.current.R,z.current.G,z.current.B}
+				else
+					cfg[i][c][x] = z.current
+				end
+			end
+		end
+	end
+	--
+	return hs:JSONEncode(cfg)
+end
+--
+function library:loadconfig(cfg)
+	local cfg = hs:JSONDecode(readfile(cfg))
+	for i,v in pairs(cfg) do
+		for c,d in pairs(v) do
+			for x,z in pairs(d) do
+				if z ~= nil then
+					if self.pointers[i] ~= nil and self.pointers[i][c] ~= nil and self.pointers[i][c][x] ~= nil then
+						self.pointers[i][c][x]:set(z)
+					end
+				end
+			end
+		end
+	end
+end
+--
+function library:settheme(theme,color)
+	local window = self
+	--
+	if window.theme[theme] then
+		window.theme[theme] = color
+	end
+	--
+	if window.themeitems[theme] then
+		for i,v in pairs(window.themeitems[theme]) do
+			for z,x in pairs(v) do
+				x[i] = color
+			end
+		end
+	end
+end
+--
+function library:setkey(key)
+	if typeof(key) == "EnumItem" then
+		local window = self
+		window.key = key
+	end
+end
+--
+function library:settoggle(side,bool)
+	if side == "x" then
+		self.x = bool
+	else
+		self.y = bool
+	end
+end
+--
+function library:setfont(font)
+	if font ~= nil then
+		local window = self
+		for i,v in pairs(window.labels) do
+			if v ~= nil then
+				v.Font = font
+			end
+		end
+	end
+end
+--
+function library:settextsize(size)
+	if size ~= nil then
+		local window = self
+		for i,v in pairs(window.labels) do
+			if v ~= nil then
+				v.TextSize = size
+			end
+		end
+	end
+end
+--
+function library:page(props)
+	-- // properties
+	local name = props.name or props.Name or props.page or props.Page or props.pagename or props.Pagename or props.PageName or props.pageName or "new ui"
+	-- // variables
+	local page = {}
+	-- // main
+	local tabbutton = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(20, 20, 20),
+			BorderColor3 = Color3.fromRGB(12, 12, 12),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(0,75,1,0),
+			Parent = self.tabsbuttons
+		}
+	)
+	--
+	local outline = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			Parent = tabbutton
+		}
+	)
+	--
+	local button = utility.new(
+		"TextButton",
+		{
+			AnchorPoint = Vector2.new(0,0),
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			Text = "",
+			Parent = tabbutton
+		}
+	)
+	--
+	local r_line = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(56, 56, 56),
+			BorderSizePixel = 0,
+			Size = UDim2.new(0,1,0,1),
+			Position = UDim2.new(1,0,1,1),
+			ZIndex = 2,
+			Parent = outline
+		}
+	)
+	--
+	local l_line = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(1,0),
+			BackgroundColor3 = Color3.fromRGB(56, 56, 56),
+			BorderSizePixel = 0,
+			Size = UDim2.new(0,1,0,1),
+			Position = UDim2.new(0,0,1,1),
+			ZIndex = 2,
+			Parent = outline
+		}
+	)
+	--
+	local line = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderSizePixel = 0,
+			Size = UDim2.new(1,0,0,2),
+			Position = UDim2.new(0,0,1,0),
+			ZIndex = 2,
+			Parent = outline
+		}
+	)
+	--
+	local label = utility.new(
+		"TextLabel",
+		{
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,0,20),
+			Position = UDim2.new(0,0,0,0),
+			Font = self.font,
+			Text = name,
+			TextColor3 = Color3.fromRGB(255,255,255),
+			TextSize = self.textsize,
+			TextStrokeTransparency = 0,
+			Parent = outline
+		}
+	)
+	--
+	local pageholder = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0.5,0.5),
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,-20,1,-20),
+			Position = UDim2.new(0.5,0,0.5,0),
+			Visible = false,
+			Parent = self.tabs
+		}
+	)
+	--
+	local left = utility.new(
+		"ScrollingFrame",
+		{
+			BackgroundTransparency = 1,
+			BorderSizePixel = 0,
+			Size = UDim2.new(0.5,-5,1,0),
+			Position = UDim2.new(0,0,0,0),
+			AutomaticCanvasSize = "Y",
+			CanvasSize = UDim2.new(0,0,0,0),
+			ScrollBarImageTransparency = 1,
+			ScrollBarImageColor3 = Color3.fromRGB(0,0,0),
+			ScrollBarThickness = 0,
+			ClipsDescendants = true,
+			VerticalScrollBarInset = "None",
+			VerticalScrollBarPosition = "Right",
+			Parent = pageholder
+		}
+	)
+	--
+	utility.new(
+		"UIListLayout",
+		{
+			FillDirection = "Vertical",
+			Padding = UDim.new(0,10),
+			Parent = left
+		}
+	)
+	--
+	local right = utility.new(
+		"ScrollingFrame",
+		{
+			AnchorPoint = Vector2.new(1,0),
+			BackgroundTransparency = 1,
+			BorderSizePixel = 0,
+			Size = UDim2.new(0.5,-5,1,0),
+			Position = UDim2.new(1,0,0,0),
+			AutomaticCanvasSize = "Y",
+			CanvasSize = UDim2.new(0,0,0,0),
+			ScrollBarImageTransparency = 1,
+			ScrollBarImageColor3 = Color3.fromRGB(0,0,0),
+			ScrollBarThickness = 0,
+			ClipsDescendants = true,
+			VerticalScrollBarInset = "None",
+			VerticalScrollBarPosition = "Right",
+			Parent = pageholder
+		}
+	)
+	--
+	utility.new(
+		"UIListLayout",
+		{
+			FillDirection = "Vertical",
+			Padding = UDim.new(0,10),
+			Parent = right
+		}
+	)
+	-- // page tbl
+	page = {
+		["library"] = self,
+		["outline"] = outline,
+		["r_line"] = r_line,
+		["l_line"] = l_line,
+		["line"] = line,
+		["page"] = pageholder,
+		["left"] = left,
+		["right"] = right,
+		["open"] = false,
+		["pointers"] = {}
+	}
+	--
+	table.insert(self.pages,page)
+	--
+	button.MouseButton1Down:Connect(function()
+		if page.open == false then
+			for i,v in pairs(self.pages) do
+				if v ~= page then
+					if v.open then
+						v.page.Visible = false
+						v.open = false
+						v.outline.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+						v.line.Size = UDim2.new(1,0,0,2)
+						v.line.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+					end
+				end
+			end
+			--
+			self:closewindows()
+			--
+			page.page.Visible = true
+			page.open = true
+			page.outline.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+			page.line.Size = UDim2.new(1,0,0,3)
+			page.line.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+		end
+	end)
+	--
+	local pointer = props.pointer or props.Pointer or props.pointername or props.Pointername or props.PointerName or props.pointerName or nil
+	--
+	if pointer then
+		self.pointers[tostring(pointer)] = page.pointers
+	end
+	--
+	self.labels[#self.labels+1] = label
+	-- // metatable indexing + return
+	setmetatable(page, pages)
+	return page
+end
+--
+function pages:openpage()
+	local page = self
+	--
+	if page.open == false then
+		for i,v in pairs(page.library.pages) do
+			if v ~= page then
+				if v.open then
+					v.page.Visible = false
+					v.open = false
+					v.outline.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+					v.line.Size = UDim2.new(1,0,0,2)
+					v.line.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+				end
+			end
+		end
+		--
+		page.page.Visible = true
+		page.open = true
+		page.outline.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+		page.line.Size = UDim2.new(1,0,0,3)
+		page.line.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+	end
+end
+--
+function pages:section(props)
+	-- // properties
+	local name = props.name or props.Name or props.page or props.Page or props.pagename or props.Pagename or props.PageName or props.pageName or "new ui"
+	local side = props.side or props.Side or props.sectionside or props.Sectionside or props.SectionSide or props.sectionSide or "left"
+	local size = props.size or props.Size or props.yaxis or props.yAxis or props.YAxis or props.Yaxis or 200
+	side = side:lower()
+	-- // variables
+	local section = {}
+	-- // main
+	local sectionholder = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,0,size),
+			Parent = self[side]
+		}
+	)
 
--- Creating tabs
-local Tabs = {
-    Home = Window:AddTab({ Title = "Home", Icon = "home" }),
-    Main = Window:AddTab({ Title = "Main", Icon = "code" }),
-    Teleports = Window:AddTab({ Title = "Teleports", Icon = "compass" }),
-    Misc = Window:AddTab({ Title = "Misc", Icon = "file-text" }),
-    Fun = Window:AddTab({ Title = "Fun", Icon = "coffee" }),
-    Webhook = Window:AddTab({ Title = "Webhook", Icon = "clock" }),
-    Premium = Window:AddTab({ Title = "Premium", Icon = "diamond" }),
-    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
+	--[[BackgroundTransparency = 1,
+			BorderSizePixel = 0,
+			Size = UDim2.new(0.5,-5,1,0),
+			Position = UDim2.new(0,0,0,0),
+			AutomaticCanvasSize = "Y",
+			CanvasSize = UDim2.new(0,0,0,0),
+			ScrollBarImageTransparency = 1,
+			ScrollBarImageColor3 = Color3.fromRGB(0,0,0),
+			ScrollBarThickness = 0,
+			ClipsDescendants = false,
+			VerticalScrollBarInset = "None",
+			VerticalScrollBarPosition = "Right",
+			Parent = pageholder
+		}]]
+	local outline = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(12, 12, 12),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,1,0),
+			Parent = sectionholder
+		}
+	)
+	--
+	local color = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0.5,0),
+			BackgroundColor3 = self.library.theme.accent,
+			BorderSizePixel = 0,
+			Size = UDim2.new(1,-2,0,1),
+			Position = UDim2.new(0.5,0,0,0),
+			Parent = outline
+		}
+	)
+	--
+	table.insert(self.library.themeitems["accent"]["BackgroundColor3"],color)
+	--
+	--[[local content = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0.5,1),
+			BackgroundTransparency = 1,
+			BorderSizePixel = 0,
+			Size = UDim2.new(1,-12,1,-25),
+			Position = UDim2.new(0.5,0,1,-5),
+			Parent = outline
+		}
+	)]]
+
+	local content = utility.new(
+		'Frame',
+		{
+			AnchorPoint = Vector2.new(0.5,1),
+			BackgroundTransparency = 1,
+			BorderSizePixel = 0,
+			Size = UDim2.new(1,-12,1,-25),
+			Position = UDim2.new(0.5,0,1,-5),
+			ClipsDescendants = true,
+			Parent = outline
+		}
+	)
+	
+	--
+	local title = utility.new(
+		"TextLabel",
+		{
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,-5,0,20),
+			Position = UDim2.new(0,5,0,0),
+			Font = self.library.font,
+			Text = name,
+			TextColor3 = Color3.fromRGB(255,255,255),
+			TextSize = self.library.textsize,
+			TextStrokeTransparency = 0,
+			TextXAlignment = "Center",
+			Parent = outline
+		}
+	)
+	--
+	utility.new(
+		"UIListLayout",
+		{
+			FillDirection = "Vertical",
+			Padding = UDim.new(0,5),
+			Parent = content
+		}
+	)
+	-- // section tbl
+	section = {
+		["library"] = self.library,
+		["sectionholder"] = sectionholder,
+		["color"] = color,
+		["content"] = content,
+		["pointers"] = {}
+	}
+	--
+	local pointer = props.pointer or props.Pointer or props.pointername or props.Pointername or props.PointerName or props.pointerName or nil
+	--
+	if pointer then
+		if self.pointers then
+			self.pointers[tostring(pointer)] = section.pointers
+		end
+	end
+	--
+	self.library.labels[#self.library.labels+1] = title
+	-- // metatable indexing + return
+	setmetatable(section, sections)
+	return section
+end
+--
+function pages:multisection(props)
+	-- // properties
+	local name = props.name or props.Name or props.page or props.Page or props.pagename or props.Pagename or props.PageName or props.pageName or "new ui"
+	local side = props.side or props.Side or props.sectionside or props.Sectionside or props.SectionSide or props.sectionSide or "left"
+	local size = props.size or props.Size or props.yaxis or props.yAxis or props.YAxis or props.Yaxis or 200
+	side = side:lower()
+	-- // variables
+	local multisection = {}
+	-- // main
+	local sectionholder = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,0,size),
+			Parent = self[side]
+		}
+	)
+	--
+	local outline = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(12, 12, 12),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,1,0),
+			Parent = sectionholder
+		}
+	)
+	--
+	local color = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0.5,0),
+			BackgroundColor3 = self.library.theme.accent,
+			BorderSizePixel = 0,
+			Size = UDim2.new(1,-2,0,1),
+			Position = UDim2.new(0.5,0,0,0),
+			Parent = outline
+		}
+	)
+	--
+	table.insert(self.library.themeitems["accent"]["BackgroundColor3"],color)
+	--
+	local tabsholder = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0,1),
+			BackgroundTransparency = 1,
+			BorderSizePixel = 0,
+			Size = UDim2.new(1,0,1,-15),
+			Position = UDim2.new(0,0,1,0),
+			Parent = outline
+		}
+	)
+	--
+	local title = utility.new(
+		"TextLabel",
+		{
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,-5,0,20),
+			Position = UDim2.new(0,5,0,0),
+			Font = self.library.font,
+			Text = name,
+			TextColor3 = Color3.fromRGB(255,255,255),
+			TextSize = self.library.textsize,
+			TextStrokeTransparency = 0,
+			TextXAlignment = "Left",
+			Parent = outline
+		}
+	)
+	--
+	local buttons = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0.5,0),
+			BackgroundTransparency = 1,
+			BorderSizePixel = 0,
+			Size = UDim2.new(1,-6,0,20),
+			Position = UDim2.new(0.5,0,0,5),
+			Parent = tabsholder
+		}
+	)
+	--
+	local tabs = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0.5,1),
+			BackgroundColor3 = Color3.fromRGB(20, 20, 20),
+			BorderColor3 = Color3.fromRGB(12, 12, 12),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,-6,1,-27),
+			Position = UDim2.new(0.5,0,1,-3),
+			Parent = tabsholder
+		}
+	)
+	--
+	utility.new(
+		"UIListLayout",
+		{
+			FillDirection = "Horizontal",
+			Padding = UDim.new(0,2),
+			Parent = buttons
+		}
+	)
+	--
+	local tabs_outline = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0,0),
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			Parent = tabs
+		}
+	)
+	-- // section tbl
+	multisection = {
+		["library"] = self.library,
+		["sectionholder"] = sectionholder,
+		["color"] = color,
+		["tabsholder"] = tabsholder,
+		["mssections"] = {},
+		["buttons"] = buttons,
+		["tabs"] = tabs,
+		["tabs_outline"] = tabs_outline,
+		["pointers"] = {}
+	}
+	--
+	local pointer = props.pointer or props.Pointer or props.pointername or props.Pointername or props.PointerName or props.pointerName or nil
+	--
+	if pointer then
+		if self.pointers then
+			self.pointers[tostring(pointer)] = multisection.pointers
+		end
+	end
+	--
+	self.library.labels[#self.library.labels+1] = title
+	-- // metatable indexing + return
+	setmetatable(multisection,multisections)
+	return multisection
+end
+--
+function multisections:section(props)
+	local name = props.name or props.Name or props.page or props.Page or props.pagename or props.Pagename or props.PageName or props.pageName or "new ui"
+	-- // variables
+	local mssection = {}
+	-- // main
+	local tabbutton = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(20, 20, 20),
+			BorderColor3 = Color3.fromRGB(12, 12, 12),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(0,60,0,20),
+			Parent = self.buttons
+		}
+	)
+	--
+	local outline = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(20, 20, 20),
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			Parent = tabbutton
+		}
+	)
+	--
+	local button = utility.new(
+		"TextButton",
+		{
+			AnchorPoint = Vector2.new(0,0),
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			Text = "",
+			Parent = tabbutton
+		}
+	)
+	--
+	local r_line = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(56, 56, 56),
+			BorderSizePixel = 0,
+			Size = UDim2.new(0,1,0,1),
+			Position = UDim2.new(1,0,1,1),
+			ZIndex = 2,
+			Parent = outline
+		}
+	)
+	--
+	local l_line = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(1,0),
+			BackgroundColor3 = Color3.fromRGB(56, 56, 56),
+			BorderSizePixel = 0,
+			Size = UDim2.new(0,1,0,1),
+			Position = UDim2.new(0,0,1,1),
+			ZIndex = 2,
+			Parent = outline
+		}
+	)
+	--
+	local line = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(20, 20, 20),
+			BorderSizePixel = 0,
+			Size = UDim2.new(1,0,0,2),
+			Position = UDim2.new(0,0,1,0),
+			ZIndex = 2,
+			Parent = outline
+		}
+	)
+	--
+	local label = utility.new(
+		"TextLabel",
+		{
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,0,20),
+			Position = UDim2.new(0,0,0,0),
+			Font = self.library.font,
+			Text = name,
+			TextColor3 = Color3.fromRGB(255,255,255),
+			TextSize = self.library.textsize,
+			TextStrokeTransparency = 0,
+			Parent = outline
+		}
+	)
+	--
+	local content = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0.5,1),
+			BackgroundTransparency = 1,
+			BorderSizePixel = 0,
+			Size = UDim2.new(1,-6,1,-27),
+			Position = UDim2.new(0.5,0,1,-3),
+			Parent = self.tabs_outline
+		}
+	)
+	--
+	utility.new(
+		"UIListLayout",
+		{
+			FillDirection = "Vertical",
+			Padding = UDim.new(0,5),
+			Parent = content
+		}
+	)
+	-- // mssection tbl
+	mssection = {
+		["library"] = self.library,
+		["outline"] = outline,
+		["r_line"] = r_line,
+		["l_line"] = l_line,
+		["line"] = line,
+		["content"] = content,
+		["open"] = false,
+		["pointers"] = {}
+	}
+	--
+	table.insert(self.mssections,mssection)
+	--
+	button.MouseButton1Down:Connect(function()
+		if mssection.open == false then
+			for i,v in pairs(self.mssections) do
+				if v ~= mssection then
+					if v.open then
+						v.page.Visible = false
+						v.open = false
+						v.outline.BackgroundColor3 = Color3.fromRGB(31, 31 ,31)
+						v.line.Size = UDim2.new(1,0,0,2)
+						v.line.BackgroundColor3 = Color3.fromRGB(31, 31 ,31)
+					end
+				end
+			end
+			--
+			mssection.library:closewindows()
+			--
+			mssection.content.Visible = true
+			mssection.open = true
+			mssection.outline.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+			mssection.line.Size = UDim2.new(1,0,0,3)
+			mssection.line.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+		end
+	end)
+	--
+	local pointer = props.pointer or props.Pointer or props.pointername or props.Pointername or props.PointerName or props.pointerName or nil
+	--
+	if pointer then
+		if self.pointers then
+			self.pointers[tostring(pointer)] = mssection.pointers
+		end
+	end
+	--
+	self.library.labels[#self.library.labels+1] = label
+	-- // metatable indexing + return
+	setmetatable(mssection,mssections)
+	return mssection
+end
+--
+function sections:toggle(props)
+	-- // properties
+	local name = props.name or props.Name or props.page or props.Page or props.pagename or props.Pagename or props.PageName or props.pageName or "new ui"
+	local def = props.def or props.Def or props.default or props.Default or props.toggle or props.Toggle or props.toggled or props.Toggled or false
+	local callback = props.callback or props.callBack or props.CallBack or props.Callback or function()end
+	-- // variables
+	local toggle = {}
+	-- // main
+	local toggleholder = utility.new(
+		"Frame",
+		{
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,0,15),
+			Parent = self.content
+		}
+	)
+	--
+	local outline = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(12, 12, 12),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(0,15,0,15),
+			Parent = toggleholder
+		}
+	)
+	--
+	local button = utility.new(
+		"TextButton",
+		{
+			AnchorPoint = Vector2.new(0,0),
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			Text = "",
+			Parent = toggleholder
+		}
+	)
+	--
+	local title = utility.new(
+		"TextLabel",
+		{
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,-20,1,0),
+			Position = UDim2.new(0,20,0,0),
+			Font = self.library.font,
+			Text = name,
+			TextColor3 = Color3.fromRGB(255,255,255),
+			TextSize = self.library.textsize,
+			TextStrokeTransparency = 0,
+			TextXAlignment = "Left",
+			Parent = toggleholder
+		}
+	)
+	--
+	local col = Color3.fromRGB(20, 20, 20)
+	if def then
+		col = self.library.theme.accent
+	end
+	--
+	local color = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = col,
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,1,0),
+			Parent = outline
+		}
+	)
+	if def then
+		table.insert(self.library.themeitems["accent"]["BackgroundColor3"],color)
+	end
+	--
+	utility.new(
+		"UIGradient",
+		{
+			Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(199, 191, 204)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))},
+			Rotation = 90,
+			Parent = color
+		}
+	)
+	-- // toggle tbl
+	toggle = {
+		["library"] = self.library,
+		["toggleholder"] = toggleholder,
+		["title"] = title,
+		["color"] = color,
+		["callback"] = callback,
+		["current"] = def
+	}
+	--
+	button.MouseButton1Down:Connect(function()
+		if toggle.current then
+			toggle.callback(false)
+			toggle.color.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+			local find = table.find(self.library.themeitems["accent"]["BackgroundColor3"],toggle.color)
+			if find then
+				table.remove(self.library.themeitems["accent"]["BackgroundColor3"],find)
+			end
+			toggle.current = false
+		else
+			toggle.callback(true)
+			toggle.color.BackgroundColor3 = self.library.theme.accent
+			table.insert(self.library.themeitems["accent"]["BackgroundColor3"],toggle.color)
+			toggle.current = true
+		end
+	end)
+	--
+	local pointer = props.pointer or props.Pointer or props.pointername or props.Pointername or props.PointerName or props.pointerName or nil
+	--
+	if pointer then
+		if self.pointers then
+			self.pointers[tostring(pointer)] = toggle
+		end
+	end
+	--
+	self.library.labels[#self.library.labels+1] = title
+	-- // metatable indexing + return
+	setmetatable(toggle, toggles)
+	return toggle
+end
+--
+function toggles:set(bool)
+	if bool ~= nil then
+		local toggle = self
+		toggle.callback(bool)
+		toggle.current = bool
+		if bool then
+			toggle.color.BackgroundColor3 = self.library.theme.accent
+			table.insert(self.library.themeitems["accent"]["BackgroundColor3"],toggle.color)
+		else
+			toggle.color.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+			local find = table.find(self.library.themeitems["accent"]["BackgroundColor3"],toggle.color)
+			if find then
+				table.remove(self.library.themeitems["accent"]["BackgroundColor3"],find)
+			end
+		end
+	end
+end
+--
+function sections:button(props)
+	-- // properties
+	local name = props.name or props.Name or "new button"
+	local callback = props.callback or props.callBack or props.CallBack or props.Callback or function()end
+	-- // variables
+	local button = {}
+	-- // main
+	local buttonholder = utility.new(
+		"Frame",
+		{
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,0,20),
+			Parent = self.content
+		}
+	)
+	--
+	local outline = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(12, 12, 12),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,1,0),
+			Parent = buttonholder
+		}
+	)
+	--
+	local outline2 = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,1,0),
+			Parent = outline
+		}
+	)
+	--
+	local color = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+			BorderSizePixel = 0,
+			Size = UDim2.new(1,0,1,0),
+			Parent = outline2
+		}
+	)
+	--
+	local gradient = utility.new(
+		"UIGradient",
+		{
+			Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(199, 191, 204)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))},
+			Rotation = 90,
+			Parent = color
+		}
+	)
+	--
+	local buttonpress = utility.new(
+		"TextButton",
+		{
+			AnchorPoint = Vector2.new(0,0),
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			Text = name,
+			TextColor3 = Color3.fromRGB(255,255,255),
+			TextSize = self.library.textsize,
+			TextStrokeTransparency = 0,
+			Font = self.library.font,
+			Parent = buttonholder
+		}
+	)
+	--
+	buttonpress.MouseButton1Down:Connect(function()
+		callback()
+		outline.BorderColor3 = self.library.theme.accent
+		table.insert(self.library.themeitems["accent"]["BorderColor3"],outline)
+		wait(0.05)
+		outline.BorderColor3 = Color3.fromRGB(12, 12, 12)
+		local find = table.find(self.library.themeitems["accent"]["BorderColor3"],outline)
+		if find then
+			table.remove(self.library.themeitems["accent"]["BorderColor3"],find)
+		end
+	end)
+	-- // button tbl
+	button = {
+		["library"] = self.library
+	}
+	--
+	self.library.labels[#self.library.labels+1] = buttonpress
+	-- // metatable indexing + return
+	setmetatable(button, buttons)
+	return button
+end
+--
+function sections:slider(props)
+	-- // properties
+	local name = props.name or props.Name or props.page or props.Page or props.pagename or props.Pagename or props.PageName or props.pageName or "new ui"
+	local def = props.def or props.Def or props.default or props.Default or 0
+	local max = props.max or props.Max or props.maximum or props.Maximum or 100
+	local min = props.min or props.Min or props.minimum or props.Minimum or 0
+	local rounding = props.rounding or props.Rounding or props.round or props.Round or props.decimals or props.Decimals or false
+	local ticking = props.tick or props.Tick or props.ticking or props.Ticking or false
+	local measurement = props.measurement or props.Measurement or props.digit or props.Digit or props.calc or props.Calc or ""
+	local callback = props.callback or props.callBack or props.CallBack or props.Callback or function()end
+	def = math.clamp(def,min,max)
+	-- // variables
+	local slider = {}
+	-- // main
+	local sliderholder = utility.new(
+		"Frame",
+		{
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,0,25),
+			Parent = self.content
+		}
+	)
+	--
+	local outline = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(12, 12, 12),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,0,12),
+			Position = UDim2.new(0,0,0,15),
+			Parent = sliderholder
+		}
+	)
+	--
+	local outline2 = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,1,0),
+			Parent = outline
+		}
+	)	
+	--
+	local value = utility.new(
+		"TextLabel",
+		{
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,0,2),
+			Position = UDim2.new(0,0,0.5,0),
+			Font = self.library.font,
+			Text = def..measurement.."/"..max..measurement,
+			TextColor3 = Color3.fromRGB(255,255,255),
+			TextSize = self.library.textsize,
+			TextStrokeTransparency = 0,
+			ZIndex = 3,
+			Parent = outline
+		}
+	)
+	--
+	local color = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+			BorderSizePixel = 0,
+			Size = UDim2.new(1,0,1,0),
+			Parent = outline2
+		}
+	)
+	--
+	utility.new(
+		"UIGradient",
+		{
+			Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(199, 191, 204)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))},
+			Rotation = 90,
+			Parent = color
+		}
+	)
+	--
+	local slide = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = self.library.theme.accent,
+			BorderSizePixel = 0,
+			Size = UDim2.new((1 / color.AbsoluteSize.X) * (color.AbsoluteSize.X / (max - min) * (def - min)),0,1,0),
+			ZIndex = 2,
+			Parent = outline
+		}
+	)
+	table.insert(self.library.themeitems["accent"]["BackgroundColor3"],slide)
+	--
+	utility.new(
+		"UIGradient",
+		{
+			Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(199, 191, 204)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))},
+			Rotation = 90,
+			Parent = slide
+		}
+	)
+	--
+	local sliderbutton = utility.new(
+		"TextButton",
+		{
+			AnchorPoint = Vector2.new(0,0),
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			Text = "",
+			Parent = sliderholder
+		}
+	)
+	--
+	local title = utility.new(
+		"TextLabel",
+		{
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,0,15),
+			Position = UDim2.new(0,0,0,0),
+			Font = self.library.font,
+			Text = name,
+			TextColor3 = Color3.fromRGB(255,255,255),
+			TextSize = self.library.textsize,
+			TextStrokeTransparency = 0,
+			TextXAlignment = "Left",
+			Parent = sliderholder
+		}
+	)
+	-- // slider tbl
+	slider = {
+		["library"] = self.library,
+		["outline"] = outline,
+		["sliderbutton"] = sliderbutton,
+		["title"] = title,
+		["value"] = value,
+		["slide"] = slide,
+		["color"] = color,
+		["max"] = max,
+		["min"] = min,
+		["current"] = def,
+		["measurement"] = measurement,
+		["tick"] = ticking,
+		["rounding"] = rounding,
+		["callback"] = callback
+	}
+	--
+	local function slide()
+		local size = math.clamp(plr:GetMouse().X - slider.color.AbsolutePosition.X ,0 ,slider.color.AbsoluteSize.X)
+		local result = (slider.max - slider.min) / slider.color.AbsoluteSize.X * size + slider.min
+		if slider.rounding then
+			local newres = math.floor(result)
+			value.Text = newres..slider.measurement.."/"..slider.max..slider.measurement
+			slider.current = newres
+			slider.callback(newres)
+			if slider.tick then
+				slider.slide:TweenSize(UDim2.new((1 / slider.color.AbsoluteSize.X) * (slider.color.AbsoluteSize.X / (slider.max - slider.min) * (newres - slider.min)) ,0 ,1 ,0) ,Enum.EasingDirection.Out ,Enum.EasingStyle.Quad ,0.15 ,true)
+			else
+				slider.slide:TweenSize(UDim2.new((1 / slider.color.AbsoluteSize.X) * size ,0 ,1 ,0) ,Enum.EasingDirection.Out ,Enum.EasingStyle.Quad ,0.15 ,true)
+			end
+		else
+			local newres = utility.round(result ,2)
+			value.Text = newres..slider.measurement.."/"..slider.max..slider.measurement
+			slider.current = newres
+			slider.callback(newres)
+			if slider.tick then
+				slider.slide:TweenSize(UDim2.new((1 / slider.color.AbsoluteSize.X) * (slider.color.AbsoluteSize.X / (slider.max - slider.min) * (newres - slider.min)) ,0 ,1 ,0) ,Enum.EasingDirection.Out ,Enum.EasingStyle.Quad ,0.15 ,true)
+			else
+				slider.slide:TweenSize(UDim2.new((1 / slider.color.AbsoluteSize.X) * size ,0 ,1 ,0) ,Enum.EasingDirection.Out ,Enum.EasingStyle.Quad ,0.15 ,true)
+			end
+		end
+	end
+	--
+	sliderbutton.MouseButton1Down:Connect(function()
+		slider.holding = true
+		slide()
+		table.insert(self.library.themeitems["accent"]["BorderColor3"],outline)
+		outline.BorderColor3 = self.library.theme.accent
+	end)
+	--
+	uis.InputChanged:Connect(function()
+		if slider.holding then
+			slide()
+		end
+	end)
+	--
+	uis.InputEnded:Connect(function(Input)
+		if Input.UserInputType.Name == 'MouseButton1' and slider.holding then
+			slider.holding = false
+			outline.BorderColor3 = Color3.fromRGB(12, 12, 12)
+			local find = table.find(self.library.themeitems["accent"]["BorderColor3"],outline)
+			if find then
+				table.remove(self.library.themeitems["accent"]["BorderColor3"],find)
+			end
+		end
+	end)
+	--
+	local pointer = props.pointer or props.Pointer or props.pointername or props.Pointername or props.PointerName or props.pointerName or nil
+	--
+	if pointer then
+		if self.pointers then
+			self.pointers[tostring(pointer)] = slider
+		end
+	end
+	--
+	self.library.labels[#self.library.labels+1] = title
+	self.library.labels[#self.library.labels+1] = value
+	-- // metatable indexing + return
+	setmetatable(slider, sliders)
+	return slider
+end
+--
+function sliders:set(value)
+	local size = math.clamp((self.color.AbsoluteSize.X / (self.max - self.min) * (value - self.min)) ,0 ,self.color.AbsoluteSize.X)
+	local result = value
+	if self.rounding then
+		local newres = math.floor(result)
+		self.value.Text = newres..self.measurement.."/"..self.max..self.measurement
+		self.current = newres
+		self.callback(newres)
+		if self.tick then
+			self.slide:TweenSize(UDim2.new((1 / self.color.AbsoluteSize.X) * (self.color.AbsoluteSize.X / (self.max - self.min) * (newres - self.min)) ,0 ,1 ,0) ,Enum.EasingDirection.Out ,Enum.EasingStyle.Quad ,0.15 ,true)
+		else
+			self.slide:TweenSize(UDim2.new((1 / self.color.AbsoluteSize.X) * size ,0 ,1 ,0) ,Enum.EasingDirection.Out ,Enum.EasingStyle.Quad ,0.15 ,true)
+		end
+	else
+		local newres = utility.round(result ,2)
+		self.value.Text = newres..self.measurement.."/"..self.max..self.measurement
+		self.current = newres
+		self.callback(newres)
+		if self.tick then
+			self.slide:TweenSize(UDim2.new((1 / self.color.AbsoluteSize.X) * (self.color.AbsoluteSize.X / (self.max - self.min) * (newres - self.min)) ,0 ,1 ,0) ,Enum.EasingDirection.Out ,Enum.EasingStyle.Quad ,0.15 ,true)
+		else
+			self.slide:TweenSize(UDim2.new((1 / self.color.AbsoluteSize.X) * size ,0 ,1 ,0) ,Enum.EasingDirection.Out ,Enum.EasingStyle.Quad ,0.15 ,true)
+		end
+	end
+end
+--
+function library:closewindows(ignore)
+	local window = self
+	--
+	for i,v in pairs(window.dropdowns) do
+		if v ~= ignore then
+			if v.open then
+				v.optionsholder.Visible = false
+				v.indicator.Text = "-"
+				v.open = false
+			end
+		end
+	end
+	--
+	for i,v in pairs(window.multiboxes) do
+		if v ~= ignore then
+			if v.open then
+				v.optionsholder.Visible = false
+				v.indicator.Text = "-"
+				v.open = false
+			end
+		end
+	end
+	--
+	for i,v in pairs(window.buttonboxs) do
+		if v ~= ignore then
+			if v.open then
+				v.optionsholder.Visible = false
+				v.indicator.Text = "-"
+				v.open = false
+			end
+		end
+	end
+	--
+	for i,v in pairs(window.colorpickers) do
+		if v ~= ignore then
+			if v.open then
+				v.cpholder.Visible = false
+				v.open = false
+			end
+		end
+	end
+end
+--
+function sections:dropdown(props)
+	-- // properties
+	local name = props.name or props.Name or props.page or props.Page or props.pagename or props.Pagename or props.PageName or props.pageName or "new ui"
+	local def = props.def or props.Def or props.default or props.Default or ""
+	local max = props.max or props.Max or props.maximum or props.Maximum or 4
+	local options = props.options or props.Options or props.Settings or props.settings or {}
+	local callback = props.callback or props.callBack or props.CallBack or props.Callback or function()end
+	-- // variables
+	local dropdown = {}
+	-- // main
+	local dropdownholder = utility.new(
+		"Frame",
+		{
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,0,35),
+			ZIndex = 2,
+			Parent = self.content
+		}
+	)
+	--
+	local outline = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(12, 12, 12),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,0,20),
+			Position = UDim2.new(0,0,0,15),
+			Parent = dropdownholder
+		}
+	)
+	--
+	local outline2 = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			Parent = outline
+		}
+	)
+	--
+	local color = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+			BorderSizePixel = 0,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			Parent = outline2
+		}
+	)
+	--
+	utility.new(
+		"UIGradient",
+		{
+			Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(199, 191, 204)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))},
+			Rotation = 90,
+			Parent = color
+		}
+	)
+	--
+	local value = utility.new(
+		"TextLabel",
+		{
+			AnchorPoint = Vector2.new(0,0),
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,-20,1,0),
+			Position = UDim2.new(0,5,0,0),
+			Font = self.library.font,
+			Text = def,
+			TextColor3 = Color3.fromRGB(255,255,255),
+			TextSize = self.library.textsize,
+			TextStrokeTransparency = 0,
+			TextXAlignment = "Left",
+			ClipsDescendants = true,
+			Parent = outline
+		}
+	)
+	--
+	local indicator = utility.new(
+		"TextLabel",
+		{
+			AnchorPoint = Vector2.new(0.5,0),
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,-10,1,0),
+			Position = UDim2.new(0.5,0,0,0),
+			Font = self.library.font,
+			Text = "+",
+			TextColor3 = Color3.fromRGB(255,255,255),
+			TextSize = self.library.textsize,
+			TextStrokeTransparency = 0,
+			TextXAlignment = "Right",
+			ClipsDescendants = true,
+			Parent = outline
+		}
+	)
+	--
+	local title = utility.new(
+		"TextLabel",
+		{
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,0,15),
+			Position = UDim2.new(0,0,0,0),
+			Font = self.library.font,
+			Text = name,
+			TextColor3 = Color3.fromRGB(255,255,255),
+			TextSize = self.library.textsize,
+			TextStrokeTransparency = 0,
+			TextXAlignment = "Left",
+			Parent = dropdownholder
+		}
+	)
+	--
+	local dropdownbutton = utility.new(
+		"TextButton",
+		{
+			AnchorPoint = Vector2.new(0,0),
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			Text = "",
+			Parent = dropdownholder
+		}
+	)
+	--
+	local optionsholder = utility.new(
+		"Frame",
+		{
+			BackgroundTransparency = 1,
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,0,20),
+			Position = UDim2.new(0,0,0,34),
+			Visible = false,
+			Parent = dropdownholder
+		}
+	)
+	--
+	local size = #options
+	--
+	size = math.clamp(size,1,max)
+	--
+	local optionsoutline = utility.new(
+		"ScrollingFrame",
+		{
+			BackgroundColor3 = Color3.fromRGB(56, 56, 56),
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,size,2),
+			Position = UDim2.new(0,0,0,0),
+			ClipsDescendants = true,
+			CanvasSize = UDim2.new(0,0,0,18*#options),
+			ScrollBarImageTransparency = 0.25,
+			ScrollBarImageColor3 = Color3.fromRGB(0,0,0),
+			ScrollBarThickness = 5,
+			VerticalScrollBarInset = "ScrollBar",
+			VerticalScrollBarPosition = "Right",
+			ZIndex = 5,
+			Parent = optionsholder
+		}
+	)
+	--
+	utility.new(
+		"UIListLayout",
+		{
+			FillDirection = "Vertical",
+			Parent = optionsoutline
+		}
+	)
+	-- // dropdown tbl
+	dropdown = {
+		["library"] = self.library,
+		["optionsholder"] = optionsholder,
+		["indicator"] = indicator,
+		["options"] = options,
+		["title"] = title,
+		["value"] = value,
+		["open"] = false,
+		["titles"] = {},
+		["current"] = def,
+		["callback"] = callback
+	}
+	--
+	table.insert(dropdown.library.dropdowns,dropdown)
+	--
+	for i,v in pairs(options) do
+		local ddoptionbutton = utility.new(
+			"TextButton",
+			{
+				AnchorPoint = Vector2.new(0,0),
+				BackgroundTransparency = 1,
+				Size = UDim2.new(1,0,0,18),
+				Text = "",
+				ZIndex = 6,
+				Parent = optionsoutline
+			}
+		)
+		--
+		local ddoptiontitle = utility.new(
+			"TextLabel",
+			{
+				AnchorPoint = Vector2.new(0.5,0),
+				BackgroundTransparency = 1,
+				Size = UDim2.new(1,-10,1,0),
+				Position = UDim2.new(0.5,0,0,0),
+				Font = self.library.font,
+				Text = v,
+				TextColor3 = Color3.fromRGB(255,255,255),
+				TextSize = self.library.textsize,
+				TextStrokeTransparency = 0,
+				TextXAlignment = "Left",
+				ClipsDescendants = true,
+				ZIndex = 6,
+				Parent = ddoptionbutton
+			}
+		)
+		--
+		self.library.labels[#self.library.labels+1] = ddoptiontitle
+		--
+		table.insert(dropdown.titles,ddoptiontitle)
+		--
+		if v == dropdown.current then ddoptiontitle.TextColor3 = self.library.theme.accent end
+		--
+		ddoptionbutton.MouseButton1Down:Connect(function()
+			optionsholder.Visible = false
+			dropdown.open = false
+			indicator.Text = "+"
+			for z,x in pairs(dropdown.titles) do
+				if x.TextColor3 == self.library.theme.accent then
+					x.TextColor3 = Color3.fromRGB(255,255,255)
+				end
+			end
+			dropdown.current = v
+			dropdown.value.Text = v
+			ddoptiontitle.TextColor3 = self.library.theme.accent
+			table.insert(self.library.themeitems["accent"]["TextColor3"],ddoptiontitle)
+			dropdown.callback(v)
+		end)
+	end
+	--
+	dropdownbutton.MouseButton1Down:Connect(function()
+		dropdown.library:closewindows(dropdown)
+		for i,v in pairs(dropdown.titles) do
+			if v.Text == dropdown.current then
+				v.TextColor3 = dropdown.library.theme.accent
+			else
+				v.TextColor3 = Color3.fromRGB(255,255,255)
+			end
+		end
+		optionsholder.Visible = not dropdown.open
+		dropdown.open = not dropdown.open
+		if dropdown.open then
+			indicator.Text = "-"
+		else
+			indicator.Text = "+"
+		end
+	end)
+	--
+	local pointer = props.pointer or props.Pointer or props.pointername or props.Pointername or props.PointerName or props.pointerName or nil
+	--
+	if pointer then
+		if self.pointers then
+			self.pointers[tostring(pointer)] = dropdown
+		end
+	end
+	--
+	self.library.labels[#self.library.labels+1] = title
+	self.library.labels[#self.library.labels+1] = value
+	-- // metatable indexing + return
+	setmetatable(dropdown, dropdowns)
+	return dropdown
+end
+--
+function sections:buttonbox(props)
+	-- // properties
+	local name = props.name or props.Name or props.page or props.Page or props.pagename or props.Pagename or props.PageName or props.pageName or "new ui"
+	local def = props.def or props.Def or props.default or props.Default or ""
+	local max = props.max or props.Max or props.maximum or props.Maximum or 4
+	local options = props.options or props.Options or props.Settings or props.settings or {}
+	local callback = props.callback or props.callBack or props.CallBack or props.Callback or function()end
+	-- // variables
+	local buttonbox = {}
+	-- // main
+	local buttonboxholder = utility.new(
+		"Frame",
+		{
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,0,35),
+			ZIndex = 2,
+			Parent = self.content
+		}
+	)
+	--
+	local outline = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(12, 12, 12),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,0,20),
+			Position = UDim2.new(0,0,0,15),
+			Parent = buttonboxholder
+		}
+	)
+	--
+	local outline2 = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			Parent = outline
+		}
+	)
+	--
+	local color = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+			BorderSizePixel = 0,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			Parent = outline2
+		}
+	)
+	--
+	utility.new(
+		"UIGradient",
+		{
+			Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(199, 191, 204)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))},
+			Rotation = 90,
+			Parent = color
+		}
+	)
+	--
+	local indicator = utility.new(
+		"TextLabel",
+		{
+			AnchorPoint = Vector2.new(0.5,0),
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,-10,1,0),
+			Position = UDim2.new(0.5,0,0,0),
+			Font = self.library.font,
+			Text = "+",
+			TextColor3 = Color3.fromRGB(255,255,255),
+			TextSize = self.library.textsize,
+			TextStrokeTransparency = 0,
+			TextXAlignment = "Right",
+			ClipsDescendants = true,
+			Parent = outline
+		}
+	)
+	--
+	local title = utility.new(
+		"TextLabel",
+		{
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,0,15),
+			Position = UDim2.new(0,0,0,0),
+			Font = self.library.font,
+			Text = name,
+			TextColor3 = Color3.fromRGB(255,255,255),
+			TextSize = self.library.textsize,
+			TextStrokeTransparency = 0,
+			TextXAlignment = "Left",
+			Parent = buttonboxholder
+		}
+	)
+	--
+	local buttonboxbutton = utility.new(
+		"TextButton",
+		{
+			AnchorPoint = Vector2.new(0,0),
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			Text = "",
+			Parent = buttonboxholder
+		}
+	)
+	--
+	local optionsholder = utility.new(
+		"Frame",
+		{
+			BackgroundTransparency = 1,
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,0,20),
+			Position = UDim2.new(0,0,0,34),
+			Visible = false,
+			Parent = buttonboxholder
+		}
+	)
+	--
+	local size = #options
+	--
+	size = math.clamp(size,1,max)
+	--
+	local optionsoutline = utility.new(
+		"ScrollingFrame",
+		{
+			BackgroundColor3 = Color3.fromRGB(56, 56, 56),
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,size,2),
+			Position = UDim2.new(0,0,0,0),
+			ClipsDescendants = true,
+			CanvasSize = UDim2.new(0,0,0,18*#options),
+			ScrollBarImageTransparency = 0.25,
+			ScrollBarImageColor3 = Color3.fromRGB(0,0,0),
+			ScrollBarThickness = 5,
+			VerticalScrollBarInset = "ScrollBar",
+			VerticalScrollBarPosition = "Right",
+			ZIndex = 5,
+			Parent = optionsholder
+		}
+	)
+	--
+	utility.new(
+		"UIListLayout",
+		{
+			FillDirection = "Vertical",
+			Parent = optionsoutline
+		}
+	)
+	-- // buttonbox tbl
+	buttonbox = {
+		["library"] = self.library,
+		["optionsholder"] = optionsholder,
+		["indicator"] = indicator,
+		["options"] = options,
+		["title"] = title,
+		["open"] = false,
+		["titles"] = {},
+		["current"] = def,
+		["callback"] = callback
+	}
+	--
+	table.insert(buttonbox.library.buttonboxs,buttonbox)
+	--
+	for i,v in pairs(options) do
+		local bboptionbutton = utility.new(
+			"TextButton",
+			{
+				AnchorPoint = Vector2.new(0,0),
+				BackgroundTransparency = 1,
+				Size = UDim2.new(1,0,0,18),
+				Text = "",
+				ZIndex = 6,
+				Parent = optionsoutline
+			}
+		)
+		--
+		local bboptiontitle = utility.new(
+			"TextLabel",
+			{
+				AnchorPoint = Vector2.new(0.5,0),
+				BackgroundTransparency = 1,
+				Size = UDim2.new(1,-10,1,0),
+				Position = UDim2.new(0.5,0,0,0),
+				Font = self.library.font,
+				Text = v,
+				TextColor3 = Color3.fromRGB(255,255,255),
+				TextSize = self.library.textsize,
+				TextStrokeTransparency = 0,
+				TextXAlignment = "Left",
+				ClipsDescendants = true,
+				ZIndex = 6,
+				Parent = bboptionbutton
+			}
+		)
+		--
+		self.library.labels[#self.library.labels+1] = bboptiontitle
+		--
+		table.insert(buttonbox.titles,bboptiontitle)
+		--
+		bboptionbutton.MouseButton1Down:Connect(function()
+			optionsholder.Visible = false
+			buttonbox.open = false
+			indicator.Text = "+"
+			buttonbox.current = v
+			buttonbox.callback(v)
+		end)
+	end
+	--
+	buttonboxbutton.MouseButton1Down:Connect(function()
+		buttonbox.library:closewindows(buttonbox)
+		optionsholder.Visible = not buttonbox.open
+		buttonbox.open = not buttonbox.open
+		if buttonbox.open then
+			indicator.Text = "-"
+		else
+			indicator.Text = "+"
+		end
+	end)
+	--
+	local pointer = props.pointer or props.Pointer or props.pointername or props.Pointername or props.PointerName or props.pointerName or nil
+	--
+	if pointer then
+		if self.pointers then
+			self.pointers[tostring(pointer)] = buttonbox
+		end
+	end
+	--
+	self.library.labels[#self.library.labels+1] = title
+	-- // metatable indexing + return
+	setmetatable(buttonbox, buttonboxs)
+	return buttonbox
+end
+--
+function dropdowns:set(value)
+	if value ~= nil then
+		local dropdown = self
+		if table.find(dropdown.options,value) then
+			self.current = tostring(value)
+			self.value.Text = tostring(value)
+			self.callback(tostring(value))
+			for z,x in pairs(dropdown.titles) do
+				if x.Text == value then
+					x.TextColor3 = dropdown.library.theme.accent
+				else
+					x.TextColor3 = Color3.fromRGB(255,255,255)
+				end
+			end
+		end
+	end
+end
+--
+function sections:multibox(props)
+	-- // properties
+	local name = props.name or props.Name or props.page or props.Page or props.pagename or props.Pagename or props.PageName or props.pageName or "new ui"
+	local def = props.def or props.Def or props.default or props.Default or {}
+	local max = props.max or props.Max or props.maximum or props.Maximum or 4
+	local options = props.options or props.Options or props.Settings or props.settings or {}
+	local callback = props.callback or props.callBack or props.CallBack or props.Callback or function()end
+	local defstr = ""
+	if #def > 1 then
+		for i,v in pairs(def) do
+			if i == #def then
+				defstr = defstr..v
+			else
+				defstr = defstr..v..", "
+			end
+		end
+	else
+		for i,v in pairs(def) do
+			defstr = defstr..v
+		end
+	end
+	-- // variables
+	local multibox = {}
+	-- // main
+	local multiboxholder = utility.new(
+		"Frame",
+		{
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,0,35),
+			ZIndex = 2,
+			Parent = self.content
+		}
+	)
+	--
+	local outline = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(12, 12, 12),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,0,20),
+			Position = UDim2.new(0,0,0,15),
+			Parent = multiboxholder
+		}
+	)
+	--
+	local outline2 = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			Parent = outline
+		}
+	)
+	--
+	local color = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+			BorderSizePixel = 0,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			Parent = outline2
+		}
+	)
+	--
+	utility.new(
+		"UIGradient",
+		{
+			Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(199, 191, 204)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))},
+			Rotation = 90,
+			Parent = color
+		}
+	)
+	--
+	local value = utility.new(
+		"TextLabel",
+		{
+			AnchorPoint = Vector2.new(0,0),
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,-20,1,0),
+			Position = UDim2.new(0,5,0,0),
+			Font = self.library.font,
+			Text = defstr,
+			TextColor3 = Color3.fromRGB(255,255,255),
+			TextSize = self.library.textsize,
+			TextStrokeTransparency = 0,
+			TextXAlignment = "Left",
+			ClipsDescendants = true,
+			Parent = outline
+		}
+	)
+	--
+	local indicator = utility.new(
+		"TextLabel",
+		{
+			AnchorPoint = Vector2.new(0.5,0),
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,-10,1,0),
+			Position = UDim2.new(0.5,0,0,0),
+			Font = self.library.font,
+			Text = "+",
+			TextColor3 = Color3.fromRGB(255,255,255),
+			TextSize = self.library.textsize,
+			TextStrokeTransparency = 0,
+			TextXAlignment = "Right",
+			ClipsDescendants = true,
+			Parent = outline
+		}
+	)
+	--
+	local title = utility.new(
+		"TextLabel",
+		{
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,0,15),
+			Position = UDim2.new(0,0,0,0),
+			Font = self.library.font,
+			Text = name,
+			TextColor3 = Color3.fromRGB(255,255,255),
+			TextSize = self.library.textsize,
+			TextStrokeTransparency = 0,
+			TextXAlignment = "Left",
+			Parent = multiboxholder
+		}
+	)
+	--
+	local dropdownbutton = utility.new(
+		"TextButton",
+		{
+			AnchorPoint = Vector2.new(0,0),
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			Text = "",
+			Parent = multiboxholder
+		}
+	)
+	--
+	local optionsholder = utility.new(
+		"Frame",
+		{
+			BackgroundTransparency = 1,
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,0,20),
+			Position = UDim2.new(0,0,0,34),
+			Visible = false,
+			Parent = multiboxholder
+		}
+	)
+	--
+	local size = #options
+	--
+	size = math.clamp(size,1,max)
+	--
+	local optionsoutline = utility.new(
+		"ScrollingFrame",
+		{
+			BackgroundColor3 = Color3.fromRGB(56, 56, 56),
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,size,2),
+			Position = UDim2.new(0,0,0,0),
+			ClipsDescendants = true,
+			CanvasSize = UDim2.new(0,0,0,18*#options),
+			ScrollBarImageTransparency = 0.25,
+			ScrollBarImageColor3 = Color3.fromRGB(0,0,0),
+			ScrollBarThickness = 5,
+			VerticalScrollBarInset = "ScrollBar",
+			VerticalScrollBarPosition = "Right",
+			ZIndex = 5,
+			Parent = optionsholder
+		}
+	)
+	--
+	utility.new(
+		"UIListLayout",
+		{
+			FillDirection = "Vertical",
+			Parent = optionsoutline
+		}
+	)
+	-- // dropdown tbl
+	multibox = {
+		["library"] = self.library,
+		["indicator"] = indicator,
+		["optionsholder"] = optionsholder,
+		["options"] = options,
+		["value"] = value,
+		["open"] = false,
+		["titles"] = {},
+		["current"] = def,
+		["callback"] = callback
+	}
+	--
+	table.insert(multibox.library.multiboxes,multibox)
+	--
+	for i,v in pairs(options) do
+		local ddoptionbutton = utility.new(
+			"TextButton",
+			{
+				AnchorPoint = Vector2.new(0,0),
+				BackgroundTransparency = 1,
+				Size = UDim2.new(1,0,0,18),
+				Text = "",
+				ZIndex = 6,
+				Parent = optionsoutline
+			}
+		)
+		--
+		local ddoptiontitle = utility.new(
+			"TextLabel",
+			{
+				AnchorPoint = Vector2.new(0.5,0),
+				BackgroundTransparency = 1,
+				Size = UDim2.new(1,-10,1,0),
+				Position = UDim2.new(0.5,0,0,0),
+				Font = self.library.font,
+				Text = v,
+				TextColor3 = Color3.fromRGB(255,255,255),
+				TextSize = self.library.textsize,
+				TextStrokeTransparency = 0,
+				TextXAlignment = "Left",
+				ClipsDescendants = true,
+				ZIndex = 6,
+				Parent = ddoptionbutton
+			}
+		)
+		--
+		self.library.labels[#self.library.labels+1] = ddoptiontitle
+		--
+		table.insert(multibox.titles,ddoptiontitle)
+		--
+		for c,b in pairs(def) do if v == b then ddoptiontitle.TextColor3 = self.library.theme.accent end end
+		--
+		ddoptionbutton.MouseButton1Down:Connect(function()
+			local find = table.find(multibox.current,v)
+			if find == nil then
+				table.insert(multibox.current,v)
+				local str = ""
+				if #multibox.current > 1 then
+					for i,v in pairs(multibox.current) do
+						if i == #multibox.current then
+							str = str..v
+						else
+							str = str..v..", "
+						end
+					end
+				else
+					for i,v in pairs(multibox.current) do
+						str = str..v
+					end
+				end
+				value.Text = str
+				ddoptiontitle.TextColor3 = self.library.theme.accent
+				table.insert(self.library.themeitems["accent"]["TextColor3"],ddoptiontitle)
+				multibox.callback(multibox.current)
+			else
+				table.remove(multibox.current,find)
+				local str = ""
+				if #multibox.current > 1 then
+					for i,v in pairs(multibox.current) do
+						if i == #multibox.current then
+							str = str..v
+						else
+							str = str..v..", "
+						end
+					end
+				else
+					for i,v in pairs(multibox.current) do
+						str = str..v
+					end
+				end
+				value.Text = str
+				ddoptiontitle.TextColor3 = Color3.fromRGB(255,255,255)
+				multibox.callback(multibox.current)
+			end
+		end)
+	end
+	--
+	dropdownbutton.MouseButton1Down:Connect(function()
+		multibox.library:closewindows(multibox)
+		for i,v in pairs(multibox.titles) do
+			if v.TextColor3 ~= Color3.fromRGB(255,255,255) then
+				v.TextColor3 = self.library.theme.accent
+			end
+		end
+		optionsholder.Visible = not multibox.open
+		multibox.open = not multibox.open
+		if multibox.open then
+			indicator.Text = "-"
+		else
+			indicator.Text = "+"
+		end
+	end)
+	--
+	local pointer = props.pointer or props.Pointer or props.pointername or props.Pointername or props.PointerName or props.pointerName or nil
+	--
+	if pointer then
+		if self.pointers then
+			self.pointers[tostring(pointer)] = multibox
+		end
+	end
+	--
+	self.library.labels[#self.library.labels+1] = value
+	self.library.labels[#self.library.labels+1] = title
+	-- // metatable indexing + return
+	setmetatable(multibox, multiboxs)
+	return multibox
+end
+--
+function buttonboxs:set(value)
+	if value ~= nil then
+		local dropdown = self
+		if table.find(dropdown.options,value) then
+			self.current = tostring(value)
+			self.callback(tostring(value))
+		end
+	end
+end
+--
+function multiboxs:set(tbl)
+	if tbl then
+		local multibox = self
+		if typeof(tbl) == "table" then
+			multibox.current = {}
+			for i,v in pairs(tbl) do
+				if table.find(multibox.options,v) then
+					table.insert(multibox.current,v)
+				end
+			end
+			--
+			for i,v in pairs(multibox.titles) do
+				if v.TextColor3 == multibox.library.theme.accent then
+					v.TextColor3 = Color3.fromRGB(255,255,255)
+				end
+				if table.find(tbl,v.Text) then
+					v.TextColor3 = multibox.library.theme.accent
+				end
+			end
+			--
+			local str = ""
+			if #multibox.current > 1 then
+				for i,v in pairs(multibox.current) do
+					if i == #multibox.current then
+						str = str..v
+					else
+						str = str..v..", "
+					end
+				end
+			else
+				for i,v in pairs(multibox.current) do
+					str = str..v
+				end
+			end
+			--
+			multibox.value.Text = str
+		end
+	end
+end
+--
+function sections:textbox(props)
+	-- // properties
+	local name = props.name or props.Name or props.page or props.Page or props.pagename or props.Pagename or props.PageName or props.pageName or "new ui"
+	local def = props.def or props.Def or props.default or props.Default or ""
+	local placeholder = props.placeholder or props.Placeholder or props.placeHolder or props.PlaceHolder or props.placeholdertext or props.PlaceHolderText or props.PlaceHoldertext or props.placeHolderText or props.placeHoldertext or props.Placeholdertext or props.PlaceholderText or props.placeholderText or ""
+	local callback = props.callback or props.callBack or props.CallBack or props.Callback or function()end
+	-- // variables
+	local textbox = {}
+	-- // main
+	local textboxholder = utility.new(
+		"Frame",
+		{
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,0,35),
+			ZIndex = 2,
+			Parent = self.content
+		}
+	)
+	--
+	local outline = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(12, 12, 12),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,0,20),
+			Position = UDim2.new(0,0,0,15),
+			Parent = textboxholder
+		}
+	)
+	--
+	local outline2 = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,1,0),
+			Parent = outline
+		}
+	)
+	--
+	local color = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+			BorderSizePixel = 0,
+			Size = UDim2.new(1,0,1,0),
+			Parent = outline2
+		}
+	)
+	--
+	local gradient = utility.new(
+		"UIGradient",
+		{
+			Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(199, 191, 204)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))},
+			Rotation = 90,
+			Parent = color
+		}
+	)
+	--
+	local button = utility.new(
+		"TextButton",
+		{
+			AnchorPoint = Vector2.new(0,0),
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			Text = "",
+			TextColor3 = Color3.fromRGB(255,255,255),
+			TextSize = self.library.textsize,
+			TextStrokeTransparency = 0,
+			Font = self.library.font,
+			Parent = textboxholder
+		}
+	)
+	--
+	local title = utility.new(
+		"TextLabel",
+		{
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,0,15),
+			Position = UDim2.new(0,0,0,0),
+			Font = self.library.font,
+			Text = name,
+			TextColor3 = Color3.fromRGB(255,255,255),
+			TextSize = self.library.textsize,
+			TextStrokeTransparency = 0,
+			TextXAlignment = "Left",
+			Parent = textboxholder
+		}
+	)
+	--
+	local tbox = utility.new(
+		"TextBox",
+		{
+			AnchorPoint = Vector2.new(0.5,0),
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,-10,0,20),
+			Position = UDim2.new(0.5,0,0,15),
+			PlaceholderText = placeholder,
+			Text = def,
+			TextColor3 = Color3.fromRGB(255,255,255),
+			TextSize = self.library.textsize,
+			TextStrokeTransparency = 0,
+			TextTruncate = "AtEnd",
+			Font = self.library.font,
+			Parent = textboxholder
+		}
+	)
+	-- // textbox tbl
+	textbox = {
+		["library"] = self.library,
+		["tbox"] = tbox,
+		["current"] = def,
+		["callback"] = callback
+	}
+	--
+	button.MouseButton1Down:Connect(function()
+		tbox:CaptureFocus()
+	end)
+	--
+	tbox.Focused:Connect(function()
+		outline.BorderColor3 = self.library.theme.accent
+		table.insert(self.library.themeitems["accent"]["BorderColor3"],outline)
+	end)
+	--
+	tbox.FocusLost:Connect(function(enterPressed)
+		textbox.current = tbox.Text
+		callback(tbox.Text)
+		outline.BorderColor3 = Color3.fromRGB(12, 12, 12)
+		local find = table.find(self.library.themeitems["accent"]["BorderColor3"],outline)
+		if find then
+			table.remove(self.library.themeitems["accent"]["BorderColor3"],find)
+		end
+	end)
+	--
+	local pointer = props.pointer or props.Pointer or props.pointername or props.Pointername or props.PointerName or props.pointerName or nil
+	--
+	if pointer then
+		if self.pointers then
+			self.pointers[tostring(pointer)] = textbox
+		end
+	end
+	--
+	self.library.labels[#self.library.labels+1] = title
+	self.library.labels[#self.library.labels+1] = tbox
+	-- // metatable indexing + return
+	setmetatable(textbox, textboxs)
+	return textbox
+end
+--
+function textboxs:set(value)
+	self.tbox.Text = value
+	self.current = value
+	self.callback(value)
+end
+--
+function sections:keybind(props)
+	-- // properties
+	local name = props.name or props.Name or props.page or props.Page or props.pagename or props.Pagename or props.PageName or props.pageName or "new ui"
+	local def = props.def or props.Def or props.default or props.Default or nil
+	local callback = props.callback or props.callBack or props.CallBack or props.Callback or function()end
+	local allowed = props.allowed or props.Allowed or 1
+	--
+	local default = ".."
+	local typeis = nil
+	--
+	if typeof(def) == "EnumItem" then
+		if def == Enum.UserInputType.MouseButton1 then
+			if allowed == 1 then
+				default = "MB1"
+				typeis = "UserInputType"
+			end
+		elseif def == Enum.UserInputType.MouseButton2 then
+			if allowed == 1 then
+				default = "MB2"
+				typeis = "UserInputType"
+			end
+		elseif def == Enum.UserInputType.MouseButton3 then
+			if allowed == 1 then
+				default = "MB3"
+				typeis = "UserInputType"
+			end
+		else
+			local capd = utility.capatalize(def.Name)
+			if #capd > 1 then
+				default = capd
+			else
+				default = def.Name
+			end
+			typeis = "KeyCode"
+		end
+	end
+	-- // variables
+	local keybind = {}
+	-- // main
+	local keybindholder = utility.new(
+		"Frame",
+		{
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,0,17),
+			Parent = self.content
+		}
+	)
+	--
+	local outline = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(1,0),
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(12, 12, 12),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(0,40,1,0),
+			Position = UDim2.new(1,0,0,0),
+			Parent = keybindholder
+		}
+	)
+	--
+	local outline2 = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			Parent = outline
+		}
+	)
+	--
+	local value = utility.new(
+		"TextLabel",
+		{
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			Font = self.library.font,
+			Text = default,
+			TextColor3 = Color3.fromRGB(255,255,255),
+			TextSize = self.library.textsize,
+			TextStrokeTransparency = 0,
+			TextXAlignment = "Center",
+			Parent = outline
+		}
+	)
+	--
+	outline.Size = UDim2.new(0,value.TextBounds.X+20,1,0)
+	--
+	local color = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+			BorderSizePixel = 0,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			Parent = outline2
+		}
+	)
+	--
+	utility.new(
+		"UIGradient",
+		{
+			Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(199, 191, 204)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))},
+			Rotation = 90,
+			Parent = color
+		}
+	)
+	--
+	local button = utility.new(
+		"TextButton",
+		{
+			AnchorPoint = Vector2.new(0,0),
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			Text = "",
+			TextColor3 = Color3.fromRGB(255,255,255),
+			TextSize = self.library.textsize,
+			TextStrokeTransparency = 0,
+			Font = self.library.font,
+			Parent = keybindholder
+		}
+	)
+	--
+	local title = utility.new(
+		"TextLabel",
+		{
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			Font = self.library.font,
+			Text = name,
+			TextColor3 = Color3.fromRGB(255,255,255),
+			TextSize = self.library.textsize,
+			TextStrokeTransparency = 0,
+			TextXAlignment = "Left",
+			Parent = keybindholder
+		}
+	)
+	-- // keybind tbl
+	keybind = {
+		["library"] = self.library,
+		["down"] = false,
+		["outline"] = outline,
+		["value"] = value,
+		["allowed"] = allowed,
+		["current"] = {typeis,utility.splitenum(def)},
+		["pressed"] = false,
+		["callback"] = callback
+	}
+	--
+	button.MouseButton1Down:Connect(function()
+		if keybind.down == false then
+			outline.BorderColor3 = self.library.theme.accent
+			table.insert(self.library.themeitems["accent"]["BorderColor3"],outline)
+			wait()
+			keybind.down = true
+		end
+	end)
+	--
+	button.MouseButton2Down:Connect(function()
+		keybind.down = false
+		keybind.current = {nil,nil}
+		outline.BorderColor3 = Color3.fromRGB(12, 12, 12)
+		local find = table.find(self.library.themeitems["accent"]["BorderColor3"],outline)
+		if find then
+			table.remove(self.library.themeitems["accent"]["BorderColor3"],find)
+		end
+		value.Text = ".."
+		outline.Size = UDim2.new(0,value.TextBounds.X+20,1,0)
+	end)
+	--
+	local function turn(typeis,current)
+		outline.Size = UDim2.new(0,value.TextBounds.X+20,1,0)
+		keybind.down = false
+		keybind.current = {typeis,utility.splitenum(current)}
+		outline.BorderColor3 = Color3.fromRGB(12, 12, 12)
+		local find = table.find(self.library.themeitems["accent"]["BorderColor3"],outline)
+		if find then
+			table.remove(self.library.themeitems["accent"]["BorderColor3"],find)
+		end
+	end
+	--
+	uis.InputBegan:Connect(function(Input)
+		if keybind.down then
+			if Input.UserInputType == Enum.UserInputType.Keyboard then
+				local capd = utility.capatalize(Input.KeyCode.Name)
+				if #capd > 1 then
+					value.Text = capd
+				else
+					value.Text = Input.KeyCode.Name
+				end
+				turn("KeyCode",Input.KeyCode)
+				callback(Input.KeyCode)
+			end
+			if allowed == 1 then
+				if Input.UserInputType == Enum.UserInputType.MouseButton1 then
+					value.Text = "MB1"
+					turn("UserInputType",Input)
+					callback(Input)
+				elseif Input.UserInputType == Enum.UserInputType.MouseButton2 then
+					value.Text = "MB2"
+					turn("UserInputType",Input)
+					callback(Input)
+				elseif Input.UserInputType == Enum.UserInputType.MouseButton3 then
+					value.Text = "MB3"
+					turn("UserInputType",Input)
+					callback(Input)
+				end
+			end
+		end
+	end)
+	--
+	local pointer = props.pointer or props.Pointer or props.pointername or props.Pointername or props.PointerName or props.pointerName or nil
+	--
+	if pointer then
+		if self.pointers then
+			self.pointers[tostring(pointer)] = keybind
+		end
+	end
+	--
+	self.library.labels[#self.library.labels+1] = title
+	self.library.labels[#self.library.labels+1] = value
+	-- // metatable indexing + return
+	setmetatable(keybind, keybinds)
+	return keybind
+end
+--
+function keybinds:set(key)
+	if key then
+		if typeof(key) == "EnumItem" or typeof(key) == "table" then
+			if typeof(key) == "table" then
+				if key[1] and key[2] then
+					key = Enum[key[1]][key[2]]
+				else
+					return
+				end
+			end
+			local keybind = self
+			local typeis = ""
+			--
+			local default = ".."
+			--
+			if key == Enum.UserInputType.MouseButton1 then
+				if keybind.allowed == 1 then
+					default = "MB1"
+					typeis = "UserInputType"
+				end
+			elseif key == Enum.UserInputType.MouseButton2 then
+				if keybind.allowed == 1 then
+					default = "MB2"
+					typeis = "UserInputType"
+				end
+			elseif key == Enum.UserInputType.MouseButton3 then
+				if keybind.allowed == 1 then
+					default = "MB3"
+					typeis = "UserInputType"
+				end
+			else
+				local capd = utility.capatalize(key.Name)
+				if #capd > 1 then
+					default = capd
+				else
+					default = key.Name
+				end
+				typeis = "KeyCode"
+			end
+			--
+			keybind.value.Text = default
+			keybind.current = {typeis,utility.splitenum(key)}
+			keybind.callback(keybind.current)
+			keybind.outline.Size = UDim2.new(0,keybind.value.TextBounds.X+20,1,0)
+			--
+			if keybind.down then
+				keybind.down = false
+				keybind.outline.BorderColor3 = Color3.fromRGB(12, 12, 12)
+				local find = table.find(self.library.themeitems["accent"]["BorderColor3"],keybind.outline)
+				if find then
+					table.remove(self.library.themeitems["accent"]["BorderColor3"],find)
+				end
+			end
+		end
+	end
+end
+--
+function sections:colorpicker(props)
+	-- // properties
+	local name = props.name or props.Name or "new colorpicker"
+	local cpname = props.cpname or props.Cpname or props.CPname or props.CPName or props.cPname or props.cpName or props.colorpickername or nil
+	local def = props.def or props.Def or props.default or props.Default or Color3.fromRGB(255,255,255)
+	local callback = props.callback or props.callBack or props.CallBack or props.Callback or function()end
+	--
+	local h,s,v = def:ToHSV()
+	-- // variables
+	local colorpicker = {}
+	-- // main
+	local colorpickerholder = utility.new(
+		"Frame",
+		{
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,0,15),
+			ZIndex = 2,
+			Parent = self.content
+		}
+	)
+	--
+	local outline = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(1,0),
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(12, 12, 12),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(0,30,1,0),
+			Position = UDim2.new(1,0,0,0),
+			Parent = colorpickerholder
+		}
+	)
+	--
+	local outline2 = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,1,0),
+			Parent = outline
+		}
+	)
+	--
+	local cpcolor = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = def,
+			BorderSizePixel = 0,
+			Size = UDim2.new(1,0,1,0),
+			Parent = outline2
+		}
+	)
+	--
+	utility.new(
+		"UIGradient",
+		{
+			Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(199, 191, 204)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))},
+			Rotation = 90,
+			Parent = cpcolor
+		}
+	)
+	--
+	local title = utility.new(
+		"TextLabel",
+		{
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			Font = self.library.font,
+			Text = name,
+			TextColor3 = Color3.fromRGB(255,255,255),
+			TextSize = self.library.textsize,
+			TextStrokeTransparency = 0,
+			TextXAlignment = "Left",
+			Parent = colorpickerholder
+		}
+	)
+	--
+	local button = utility.new(
+		"TextButton",
+		{
+			AnchorPoint = Vector2.new(0,0),
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			Text = "",
+			TextColor3 = Color3.fromRGB(255,255,255),
+			TextSize = self.library.textsize,
+			TextStrokeTransparency = 0,
+			Font = self.library.font,
+			Parent = colorpickerholder
+		}
+	)
+	--
+	local cpholder = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0,0),
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(12, 12, 12),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,0,230),
+			Position = UDim2.new(0,0,1,5),
+			Visible = false,
+			ZIndex = 5,
+			Parent = colorpickerholder
+		}
+	)
+	--
+	local outline2 = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,1,0),
+			ZIndex = 5,
+			Parent = cpholder
+		}
+	)
+	--
+	local color = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0.5,0),
+			BackgroundColor3 = self.library.theme.accent,
+			BorderSizePixel = 0,
+			Size = UDim2.new(1,-2,0,1),
+			Position = UDim2.new(0.5,0,0,0),
+			ZIndex = 5,
+			Parent = outline2
+		}
+	)
+	--
+	table.insert(self.library.themeitems["accent"]["BackgroundColor3"],color)
+	--
+	local cptitle = utility.new(
+		"TextLabel",
+		{
+			AnchorPoint = Vector2.new(0.5,0),
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,-10,0,20),
+			Position = UDim2.new(0.5,0,0,0),
+			Font = self.library.font,
+			Text = cpname or name,
+			TextColor3 = Color3.fromRGB(255,255,255),
+			TextSize = self.library.textsize,
+			TextStrokeTransparency = 0,
+			TextXAlignment = "Left",
+			ZIndex = 5,
+			Parent = outline2
+		}
+	)
+	--
+	local cpholder2 = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0,0),
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(12, 12, 12),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(0.875,0,0,150),
+			Position = UDim2.new(0,5,0,20),
+			ZIndex = 5,
+			Parent = outline2
+		}
+	)
+	--
+	local outline3 = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromHSV(h,1,1),
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,1,0),
+			ZIndex = 5,
+			Parent = cpholder2
+		}
+	)
+	--
+	local cpimage = utility.new(
+		"ImageButton",
+		{
+			AutoButtonColor = false,
+			BackgroundTransparency = 1,
+			BorderSizePixel = 0,
+			Size = UDim2.new(1,0,1,0),
+			ZIndex = 5,
+			Image = "rbxassetid://7074305282",
+			Parent = outline3
+		}
+	)
+	--
+	local cpcursor = utility.new(
+		"ImageLabel",
+		{
+			AnchorPoint = Vector2.new(0.5,0.5),
+			BackgroundTransparency = 1,
+			BorderSizePixel = 0,
+			Size = UDim2.new(0,6,0,6),
+			Position = UDim2.new(s,0,1-v,0),
+			ZIndex = 5,
+			Image = "rbxassetid://7074391319",
+			Parent = cpimage
+		}
+	)
+	--
+	local huepicker = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(1,0),
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(12, 12, 12),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(0.05,0,0,150),
+			Position = UDim2.new(1,-5,0,20),
+			ZIndex = 5,
+			Parent = outline2
+		}
+	)
+	--
+	local outline4 = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,1,0),
+			ZIndex = 5,
+			Parent = huepicker
+		}
+	)
+	--
+	local huebutton = utility.new(
+		"TextButton",
+		{
+			AnchorPoint = Vector2.new(0,0),
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			Text = "",
+			TextColor3 = Color3.fromRGB(255,255,255),
+			TextSize = self.library.textsize,
+			TextStrokeTransparency = 0,
+			Font = self.library.font,
+			ZIndex = 5,
+			Parent = huepicker
+		}
+	)
+	--
+	utility.new(
+		"UIGradient",
+		{
+			Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 0, 4)), ColorSequenceKeypoint.new(0.10, Color3.fromRGB(255, 153, 0)), ColorSequenceKeypoint.new(0.20, Color3.fromRGB(209, 255, 0)), ColorSequenceKeypoint.new(0.30, Color3.fromRGB(55, 255, 0)), ColorSequenceKeypoint.new(0.40, Color3.fromRGB(0, 255, 102)), ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 255, 255)), ColorSequenceKeypoint.new(0.60, Color3.fromRGB(0, 102, 255)), ColorSequenceKeypoint.new(0.70, Color3.fromRGB(51, 0, 255)), ColorSequenceKeypoint.new(0.80, Color3.fromRGB(204, 0, 255)), ColorSequenceKeypoint.new(0.90, Color3.fromRGB(255, 0, 153)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 0, 4))},
+			Rotation = 90,
+			Parent = outline4
+		}
+	)
+	--
+	local huecursor = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0.5,0.5),
+			BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+			BorderColor3 = Color3.fromRGB(12, 12, 12),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(0,12,0,6),
+			Position = UDim2.new(0.5,0,h,0),
+			ZIndex = 5,
+			Parent = outline4
+		}
+	)
+	--
+	local huecursor_inline = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromHSV(h,1,1),
+			BorderColor3 = Color3.fromRGB(255, 255, 255),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			ZIndex = 5,
+			Parent = huecursor
+		}
+	)
+	--
+	local function textbox(parent,size,position)
+		local textbox_holder = utility.new(
+			"Frame",
+			{
+				BackgroundTransparency = 1,
+				BorderSizePixel = 0,
+				Position = position,
+				Size = size,
+				ZIndex = 5,
+				Parent = parent
+			}
+		)
+		--
+		local outline5 = utility.new(
+			"Frame",
+			{
+				BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+				BorderColor3 = Color3.fromRGB(12, 12, 12),
+				BorderMode = "Inset",
+				BorderSizePixel = 1,
+				Position = UDim2.new(0,0,0,0),
+				Size = UDim2.new(1,0,1,0),
+				ZIndex = 5,
+				Parent = textbox_holder
+			}
+		)
+		--
+		local outline6 = utility.new(
+			"Frame",
+			{
+				BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+				BorderColor3 = Color3.fromRGB(56, 56, 56),
+				BorderMode = "Inset",
+				BorderSizePixel = 1,
+				Position = UDim2.new(0,0,0,0),
+				Size = UDim2.new(1,0,1,0),
+				ZIndex = 5,
+				Parent = outline5
+			}
+		)
+		--
+		local color2 = utility.new(
+			"Frame",
+			{
+				AnchorPoint = Vector2.new(0,0),
+				BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+				BorderSizePixel = 0,
+				Size = UDim2.new(1,0,0,0),
+				Position = UDim2.new(0,0,0,0),
+				ZIndex = 5,
+				Parent = outline6
+			}
+		)
+		--
+		utility.new(
+			"UIGradient",
+			{
+				Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(199, 191, 204)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))},
+				Rotation = 90,
+				Parent = color2
+			}
+		)
+		--
+		local tbox = utility.new(
+			"TextBox",
+			{
+				AnchorPoint = Vector2.new(0.5,0),
+				BackgroundTransparency = 1,
+				Size = UDim2.new(1,0,1,0),
+				Position = UDim2.new(0.5,0,0,0),
+				PlaceholderColor3 = Color3.fromRGB(255,255,255),
+				PlaceholderText = "",
+				Text = "",
+				TextColor3 = Color3.fromRGB(255,255,255),
+				TextSize = self.library.textsize,
+				TextStrokeTransparency = 0,
+				Font = self.library.font,
+				ZIndex = 5,
+				Parent = textbox_holder
+			}
+		)
+		--
+		local tbox_button = utility.new(
+			"TextButton",
+			{
+				AnchorPoint = Vector2.new(0,0),
+				BackgroundTransparency = 1,
+				Size = UDim2.new(1,0,1,0),
+				Position = UDim2.new(0,0,0,0),
+				Text = "",
+				TextColor3 = Color3.fromRGB(255,255,255),
+				TextSize = self.library.textsize,
+				TextStrokeTransparency = 0,
+				Font = self.library.font,
+				ZIndex = 5,
+				Parent = textbox_holder
+			}
+		)
+		--
+		tbox_button.MouseButton1Down:Connect(function()
+			tbox:CaptureFocus()
+		end)
+		--
+		return {textbox_holder,tbox,outline5}
+	end
+	--
+	local red = textbox(outline2,UDim2.new(0,62,0,20),UDim2.new(0,5,0,175))
+	local green = textbox(outline2,UDim2.new(0,62,0,20),UDim2.new(0,5,0,175))
+	green[1].AnchorPoint = Vector2.new(0.5,0)
+	green[1].Position = UDim2.new(0.5,0,0,175)
+	local blue = textbox(outline2,UDim2.new(0,62,0,20),UDim2.new(0,5,0,175))
+	blue[1].AnchorPoint = Vector2.new(1,0)
+	blue[1].Position = UDim2.new(1,-5,0,175)
+	local hex = textbox(outline2,UDim2.new(1,-10,0,20),UDim2.new(0,5,0,200))
+	hex[2].Size = UDim2.new(1,-12,1,0)
+	hex[2].TextXAlignment = "Left"
+	-- // colorpicker tbl
+	colorpicker = {
+		["library"] = self.library,
+		["cpholder"] = cpholder,
+		["cpcolor"] = cpcolor,
+		["huecursor"] = huecursor,
+		["outline3"] = outline3,
+		["huecursor_inline"] = huecursor_inline,
+		["cpcursor"] = cpcursor,
+		["current"] = def,
+		["open"] = false,
+		["cp"] = false,
+		["hue"] = false,
+		["hsv"] = {h,s,v},
+		["red"] = red[2],
+		["green"] = green[2],
+		["blue"] = blue[2],
+		["hex"] = hex[2],
+		["callback"] = callback
+	}
+	--
+	table.insert(self.library.colorpickers,colorpicker)
+	--
+	local function updateboxes()
+		colorpicker.red.PlaceholderText = "R: "..tostring(math.floor(colorpicker.current.R*255))
+		colorpicker.green.PlaceholderText = "G: "..tostring(math.floor(colorpicker.current.G*255))
+		colorpicker.blue.PlaceholderText = "B: "..tostring(math.floor(colorpicker.current.B*255))
+		colorpicker.hex.PlaceholderText = "Hex: "..utility.to_hex(colorpicker.current)
+	end
+	--
+	updateboxes()
+	--
+	local function movehue()
+		local posy = math.clamp(plr:GetMouse().Y-outline3.AbsolutePosition.Y,0,outline3.AbsoluteSize.Y)
+		local resy = (1/outline3.AbsoluteSize.Y)*posy
+		outline3.BackgroundColor3 = Color3.fromHSV(resy,1,1)
+		huecursor_inline.BackgroundColor3 = Color3.fromHSV(resy,1,1)
+		colorpicker.hsv[1] = resy
+		colorpicker.current = Color3.fromHSV(colorpicker.hsv[1],colorpicker.hsv[2],colorpicker.hsv[3])
+		cpcolor.BackgroundColor3 = colorpicker.current
+		updateboxes()
+		colorpicker.callback(colorpicker.current)
+		huecursor:TweenPosition(UDim2.new(0.5,0,resy,0),Enum.EasingDirection.Out,Enum.EasingStyle.Quad,0.15,true)
+	end
+	--
+	local function movecp()
+		local posx,posy = math.clamp(plr:GetMouse().X-outline3.AbsolutePosition.X,0,outline3.AbsoluteSize.X),math.clamp(plr:GetMouse().Y-outline3.AbsolutePosition.Y,0,outline3.AbsoluteSize.Y)
+		local resx,resy = (1/outline3.AbsoluteSize.X)*posx,(1/outline3.AbsoluteSize.Y)*posy
+		colorpicker.hsv[2] = resx
+		colorpicker.hsv[3] = 1-resy
+		colorpicker.current = Color3.fromHSV(colorpicker.hsv[1],colorpicker.hsv[2],colorpicker.hsv[3])
+		cpcolor.BackgroundColor3 = colorpicker.current
+		updateboxes()
+		colorpicker.callback(colorpicker.current)
+		cpcursor:TweenPosition(UDim2.new(resx,0,resy,0),Enum.EasingDirection.Out,Enum.EasingStyle.Quad,0.15,true)
+	end
+	--
+	button.MouseButton1Down:Connect(function()
+		self.library:closewindows(colorpicker)
+		cpholder.Visible = not colorpicker.open
+		colorpicker.open = not colorpicker.open
+	end)
+	--
+	huebutton.MouseButton1Down:Connect(function()
+		colorpicker.hue = true
+		movehue()
+	end)
+	--
+	cpimage.MouseButton1Down:Connect(function()
+		colorpicker.cp = true
+		movecp()
+	end)
+	--
+	uis.InputChanged:Connect(function()
+		if colorpicker.cp then
+			movecp()
+		end
+		if colorpicker.hue then
+			movehue()
+		end
+	end)
+	--
+	uis.InputEnded:Connect(function(Input)
+		if Input.UserInputType.Name == 'MouseButton1'  then
+			if colorpicker.cp then
+				colorpicker.cp = false
+			end
+			if colorpicker.hue then
+				colorpicker.hue = false
+			end
+		end
+	end)
+	--
+	red[2].Focused:Connect(function()
+		red[3].BorderColor3 = self.library.theme.accent
+	end)
+	--
+	red[2].FocusLost:Connect(function()
+		local saved = red[2].Text
+		local num = tonumber(saved)
+		if num then
+			saved = tostring(math.clamp(tonumber(saved),0,255))
+			red[2].Text = ""
+			if saved then
+				if #saved >= 1 and #saved <= 3 then
+					red[2].PlaceholderText = "R: "..tostring(saved)
+				end
+				colorpicker:set(Color3.fromRGB(tonumber(saved),colorpicker.current.G*255,colorpicker.current.B*255))
+				red[3].BorderColor3 = Color3.fromRGB(12,12,12)
+			else
+				red[3].BorderColor3 = Color3.fromRGB(12,12,12)
+			end
+		else
+			red[2].Text = ""
+			red[3].BorderColor3 = Color3.fromRGB(12,12,12)
+		end
+	end)
+	--
+	green[2].Focused:Connect(function()
+		green[3].BorderColor3 = self.library.theme.accent
+	end)
+	--
+	green[2].FocusLost:Connect(function()
+		local saved = green[2].Text
+		local num = tonumber(saved)
+		if num then
+			saved = tostring(math.clamp(tonumber(saved),0,255))
+			green[2].Text = ""
+			if saved then
+				if #saved >= 1 and #saved <= 3 then
+					green[2].PlaceholderText = "G: "..tostring(saved)
+				end
+				colorpicker:set(Color3.fromRGB(colorpicker.current.R*255,tonumber(saved),colorpicker.current.B*255))
+				green[3].BorderColor3 = Color3.fromRGB(12,12,12)
+			else
+				green[3].BorderColor3 = Color3.fromRGB(12,12,12)
+			end
+		else
+			green[2].Text = ""
+			green[3].BorderColor3 = Color3.fromRGB(12,12,12)
+		end
+	end)
+	--
+	blue[2].Focused:Connect(function()
+		blue[3].BorderColor3 = self.library.theme.accent
+	end)
+	--
+	blue[2].FocusLost:Connect(function()
+		local saved = blue[2].Text
+		local num = tonumber(saved)
+		if num then
+			saved = tostring(math.clamp(tonumber(saved),0,255))
+			blue[2].Text = ""
+			if saved then
+				if #saved >= 1 and #saved <= 3 then
+					blue[2].PlaceholderText = "B: "..tostring(saved)
+				end
+				colorpicker:set(Color3.fromRGB(colorpicker.current.R*255,colorpicker.current.G*255,tonumber(saved)))
+				blue[3].BorderColor3 = Color3.fromRGB(12,12,12)
+			else
+				blue[3].BorderColor3 = Color3.fromRGB(12,12,12)
+			end
+		else
+			blue[2].Text = ""
+			blue[3].BorderColor3 = Color3.fromRGB(12,12,12)
+		end
+	end)
+	--
+	hex[2].Focused:Connect(function()
+		hex[3].BorderColor3 = self.library.theme.accent
+	end)
+	--
+	hex[2].FocusLost:Connect(function()
+		local saved = hex[2].Text
+		if #saved >= 6 and #saved <= 7 then
+			local e,s = pcall(function()
+				utility.from_hex(saved)
+			end)
+			if e == true then
+				local hexcolor = utility.from_hex(saved)
+				if hexcolor then
+					colorpicker:set(hexcolor)
+					hex[2].Text = ""
+					hex[3].BorderColor3 = Color3.fromRGB(12,12,12)
+				else
+					hex[2].Text = ""
+					hex[3].BorderColor3 = Color3.fromRGB(12,12,12)
+				end
+			else
+				hex[2].Text = ""
+				hex[3].BorderColor3 = Color3.fromRGB(12,12,12)
+			end
+		else
+			hex[2].Text = ""
+			hex[3].BorderColor3 = Color3.fromRGB(12,12,12)
+		end
+	end)
+	--
+	local pointer = props.pointer or props.Pointer or props.pointername or props.Pointername or props.PointerName or props.pointerName or nil
+	--
+	if pointer then
+		if self.pointers then
+			self.pointers[tostring(pointer)] = colorpicker
+		end
+	end
+	--
+	self.library.labels[#self.library.labels+1] = title
+	self.library.labels[#self.library.labels+1] = hex[2]
+	self.library.labels[#self.library.labels+1] = red[2]
+	self.library.labels[#self.library.labels+1] = green[2]
+	self.library.labels[#self.library.labels+1] = blue[2]
+	self.library.labels[#self.library.labels+1] = cptitle
+	-- // metatable indexing + return
+	setmetatable(colorpicker, colorpickers)
+	return colorpicker
+end
+--
+function colorpickers:set(color)
+	if color then
+		if typeof(color) == "table" then
+			color = Color3.fromRGB(color[1]*255,color[2]*255,color[3]*255)
+		end
+		local colorpicker = self
+		local h,s,v = color:ToHSV()
+		--
+		local function updateboxes()
+			colorpicker.red.PlaceholderText = "R: "..tostring(math.floor(colorpicker.current.R*255))
+			colorpicker.green.PlaceholderText = "G: "..tostring(math.floor(colorpicker.current.G*255))
+			colorpicker.blue.PlaceholderText = "B: "..tostring(math.floor(colorpicker.current.B*255))
+			colorpicker.hex.PlaceholderText = "Hex: "..utility.to_hex(colorpicker.current)
+		end
+		--
+		local function movehue()
+			colorpicker.outline3.BackgroundColor3 = Color3.fromHSV(h,1,1)
+			colorpicker.huecursor_inline.BackgroundColor3 = Color3.fromHSV(h,1,1)
+			colorpicker.hsv[1] = h
+			colorpicker.current = Color3.fromHSV(colorpicker.hsv[1],colorpicker.hsv[2],colorpicker.hsv[3])
+			colorpicker.cpcolor.BackgroundColor3 = colorpicker.current
+			colorpicker.huecursor:TweenPosition(UDim2.new(0.5,0,h,0),Enum.EasingDirection.Out,Enum.EasingStyle.Quad,0.15,true)
+		end
+		--
+		local function movecp()
+			colorpicker.hsv[2] = s
+			colorpicker.hsv[3] = v
+			colorpicker.current = Color3.fromHSV(colorpicker.hsv[1],colorpicker.hsv[2],colorpicker.hsv[3])
+			colorpicker.cpcolor.BackgroundColor3 = colorpicker.current
+			colorpicker.cpcursor:TweenPosition(UDim2.new(s,0,1-v,0),Enum.EasingDirection.Out,Enum.EasingStyle.Quad,0.15,true)
+		end
+		--
+		movehue()
+		movecp()
+		updateboxes()
+		colorpicker.callback(colorpicker.current)
+	end
+end
+--
+function sections:configloader(props)
+	-- // properties
+	local folder = props.folder or props.Folder
+	-- // variables
+	local configloader = {}
+	-- // main
+	local clholder = utility.new(
+		"Frame",
+		{
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,0,222),
+			Parent = self.content
+		}
+	)
+	--
+	local outline = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(12, 12, 12),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,1,0),
+			Parent = clholder
+		}
+	)
+	--
+	local outline2 = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,1,0),
+			Parent = outline
+		}
+	)
+	--
+	local title = utility.new(
+		"TextLabel",
+		{
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1,0,0,15),
+			Position = UDim2.new(0,0,0,3),
+			Font = self.library.font,
+			Text = "configs",
+			TextColor3 = Color3.fromRGB(255,255,255),
+			TextSize = self.library.textsize,
+			TextStrokeTransparency = 0,
+			TextXAlignment = "Center",
+			Parent = outline
+		}
+	)
+	--
+	self.library.labels[#self.library.labels+1] = title
+	--
+	local color = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0.5,0),
+			BackgroundColor3 = self.library.theme.accent,
+			BorderColor3 = Color3.fromRGB(12, 12, 12),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,-6,0,1),
+			Position = UDim2.new(0.5,0,0,19),
+			Parent = outline
+		}
+	)
+	--
+	table.insert(self.library.themeitems["accent"]["BackgroundColor3"],color)
+	--
+	local buttonsholder = utility.new(
+		"Frame",
+		{
+			BackgroundTransparency = 1,
+			BorderSizePixel = 0,
+			Size = UDim2.new(1,0,0,64),
+			Position = UDim2.new(0,0,0,150),
+			Parent = outline
+		}
+	)
+	--
+	local configsholder = utility.new(
+		"Frame",
+		{
+			AnchorPoint = Vector2.new(0.5,0),
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(12, 12, 12),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,-10,0,120),
+			Position = UDim2.new(0.5,0,0,25),
+			Parent = outline
+		}
+	)
+	--
+	local outline3 = utility.new(
+		"Frame",
+		{
+			BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+			BorderColor3 = Color3.fromRGB(56, 56, 56),
+			BorderMode = "Inset",
+			BorderSizePixel = 1,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			Parent = configsholder
+		}
+	)
+	--
+	local outline4 = utility.new(
+		"ScrollingFrame",
+		{
+			BackgroundColor3 = Color3.fromRGB(56, 56, 56),
+			BackgroundTransparency = 1,
+			BorderSizePixel = 0,
+			Size = UDim2.new(1,0,1,0),
+			Position = UDim2.new(0,0,0,0),
+			ClipsDescendants = true,
+			AutomaticCanvasSize = "Y",
+			CanvasSize = UDim2.new(0,0,0,0),
+			ScrollBarImageTransparency = 0.25,
+			ScrollBarImageColor3 = Color3.fromRGB(0,0,0),
+			ScrollBarThickness = 5,
+			VerticalScrollBarInset = "ScrollBar",
+			VerticalScrollBarPosition = "Right",
+			Parent = outline3
+		}
+	)
+	--
+	utility.new(
+		"UIListLayout",
+		{
+			FillDirection = "Vertical",
+			Padding = UDim.new(0,0),
+			Parent = outline4
+		}
+	)
+	--
+	local createdbuttons = {}
+	local selected
+	--
+	local makebutton = function(name,toggled)
+		local createdbutton = utility.new(
+			"TextButton",
+			{
+				AnchorPoint = Vector2.new(0,0),
+				BackgroundTransparency = 1,
+				Size = UDim2.new(1,0,0,18),
+				Position = UDim2.new(0,0,0,0),
+				Text = "",
+				Parent = outline4
+			}
+		)
+		--
+		local grey = utility.new(
+			"Frame",
+			{
+				AnchorPoint = Vector2.new(0.5,0),
+				BackgroundColor3 = Color3.fromRGB(125, 125, 125),
+				BackgroundTransparency = 0.9,
+				BorderSizePixel = 0,
+				Size = UDim2.new(1,-4,1,0),
+				Position = UDim2.new(0.5,0,0,0),
+				Visible = false,
+				Parent = createdbutton
+			}
+		)
+		--
+		local createdtitle = utility.new(
+			"TextLabel",
+			{
+				AnchorPoint = Vector2.new(0.5,0),
+				BackgroundTransparency = 1,
+				Size = UDim2.new(1,-10,1,0),
+				Position = UDim2.new(0.5,0,0,0),
+				Font = self.library.font,	
+				Text = name,
+				TextColor3 = Color3.fromRGB(255,255,255),
+				TextSize = self.library.textsize,
+				TextStrokeTransparency = 0,
+				TextXAlignment = "Left",
+				Parent = createdbutton
+			}
+		)
+		--
+		self.library.labels[#self.library.labels+1] = createdtitle
+		--
+		local createdb = {
+			["button"] = createdbutton,
+			["grey"] = grey,
+			["title"] = createdtitle,
+			["name"] = name
+		}
+		--
+		table.insert(createdbuttons,createdb)
+		--
+		if toggled then
+			createdb.grey.Visible = true
+			createdb.title.TextColor3 = self.library.theme.accent
+			table.insert(self.library.themeitems["accent"]["TextColor3"],createdb.title)
+			selected = createdb
+		end
+		--
+		createdbutton.MouseButton1Down:Connect(function()
+			for i,v in pairs(createdbuttons) do
+				if v ~= createdb then
+					v.grey.Visible = false
+					v.title.TextColor3 = Color3.fromRGB(255,255,255)
+					local find = table.find(self.library.themeitems["accent"]["TextColor3"],v.title)
+					if find then
+						table.remove(self.library.themeitems["accent"]["TextColor3"],find)
+					end
+				end
+			end
+			--
+			createdb.grey.Visible = true
+			createdb.title.TextColor3 = self.library.theme.accent
+			table.insert(self.library.themeitems["accent"]["TextColor3"],createdb.title)
+			selected = createdb
+		end)
+	end
+	--
+	local newbutton = function(parent,name)
+		local button_holder = utility.new(
+			"Frame",
+			{
+				BackgroundTransparency = 1,
+				BorderSizePixel = 0,
+				ZIndex = 5,
+				Parent = parent
+			}
+		)
+		--
+		local button_outline = utility.new(
+			"Frame",
+			{
+				BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+				BorderColor3 = Color3.fromRGB(12, 12, 12),
+				BorderMode = "Inset",
+				BorderSizePixel = 1,
+				Position = UDim2.new(0,0,0,0),
+				Size = UDim2.new(1,0,1,0),
+				ZIndex = 5,
+				Parent = button_holder
+			}
+		)
+		--
+		local button_outline2 = utility.new(
+			"Frame",
+			{
+				BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+				BorderColor3 = Color3.fromRGB(56, 56, 56),
+				BorderMode = "Inset",
+				BorderSizePixel = 1,
+				Position = UDim2.new(0,0,0,0),
+				Size = UDim2.new(1,0,1,0),
+				ZIndex = 5,
+				Parent = button_outline
+			}
+		)
+		--
+		local button_color = utility.new(
+			"Frame",
+			{
+				AnchorPoint = Vector2.new(0,0),
+				BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+				BorderSizePixel = 0,
+				Size = UDim2.new(1,0,0,0),
+				Position = UDim2.new(0,0,0,0),
+				ZIndex = 5,
+				Parent = button_outline2
+			}
+		)
+		--
+		utility.new(
+			"UIGradient",
+			{
+				Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(199, 191, 204)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))},
+				Rotation = 90,
+				Parent = button_color
+			}
+		)
+		--
+		local button_button = utility.new(
+			"TextButton",
+			{
+				AnchorPoint = Vector2.new(0,0),
+				BackgroundTransparency = 1,
+				Size = UDim2.new(1,0,1,0),
+				Position = UDim2.new(0,0,0,0),
+				Text = name,
+				TextColor3 = Color3.fromRGB(255,255,255),
+				TextSize = self.library.textsize,
+				TextStrokeTransparency = 0,
+				Font = self.library.font,
+				ZIndex = 5,
+				Parent = button_holder
+			}
+		)
+		--
+		self.library.labels[#self.library.labels+1] = button_button
+		--
+		return {button_holder,button_outline,button_button}
+	end
+	--
+	local function textbox(parent)
+		local textbox_holder = utility.new(
+			"Frame",
+			{
+				BackgroundTransparency = 1,
+				BorderSizePixel = 0,
+				ZIndex = 5,
+				Parent = parent
+			}
+		)
+		--
+		local outline5 = utility.new(
+			"Frame",
+			{
+				BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+				BorderColor3 = Color3.fromRGB(12, 12, 12),
+				BorderMode = "Inset",
+				BorderSizePixel = 1,
+				Position = UDim2.new(0,0,0,0),
+				Size = UDim2.new(1,0,1,0),
+				ZIndex = 5,
+				Parent = textbox_holder
+			}
+		)
+		--
+		local outline6 = utility.new(
+			"Frame",
+			{
+				BackgroundColor3 = Color3.fromRGB(24, 24, 24),
+				BorderColor3 = Color3.fromRGB(56, 56, 56),
+				BorderMode = "Inset",
+				BorderSizePixel = 1,
+				Position = UDim2.new(0,0,0,0),
+				Size = UDim2.new(1,0,1,0),
+				ZIndex = 5,
+				Parent = outline5
+			}
+		)
+		--
+		local color2 = utility.new(
+			"Frame",
+			{
+				AnchorPoint = Vector2.new(0,0),
+				BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+				BorderSizePixel = 0,
+				Size = UDim2.new(1,0,0,0),
+				Position = UDim2.new(0,0,0,0),
+				ZIndex = 5,
+				Parent = outline6
+			}
+		)
+		--
+		utility.new(
+			"UIGradient",
+			{
+				Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(199, 191, 204)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))},
+				Rotation = 90,
+				Parent = color2
+			}
+		)
+		--
+		local tbox = utility.new(
+			"TextBox",
+			{
+				AnchorPoint = Vector2.new(0.5,0),
+				BackgroundTransparency = 1,
+				Size = UDim2.new(1,0,1,0),
+				Position = UDim2.new(0.5,0,0,0),
+				PlaceholderColor3 = Color3.fromRGB(178, 178, 178),
+				PlaceholderText = "",
+				Text = "",
+				TextColor3 = Color3.fromRGB(255,255,255),
+				TextSize = self.library.textsize,
+				TextStrokeTransparency = 0,
+				Font = self.library.font,
+				ZIndex = 5,
+				Parent = textbox_holder
+			}
+		)
+		--
+		local tbox_button = utility.new(
+			"TextButton",
+			{
+				AnchorPoint = Vector2.new(0,0),
+				BackgroundTransparency = 1,
+				Size = UDim2.new(1,0,1,0),
+				Position = UDim2.new(0,0,0,0),
+				Text = "",
+				TextColor3 = Color3.fromRGB(255,255,255),
+				TextSize = self.library.textsize,
+				TextStrokeTransparency = 0,
+				Font = self.library.font,
+				ZIndex = 5,
+				Parent = textbox_holder
+			}
+		)
+		--
+		tbox_button.MouseButton1Down:Connect(function()
+			tbox:CaptureFocus()
+		end)
+		--
+		return {textbox_holder,tbox,outline5}
+	end
+	--
+	local refresh = function()
+		for i,v in pairs(createdbuttons) do
+			v.button:Remove()
+			v.grey:Remove()
+			v.title:Remove()
+		end
+		createdbuttons = {}
+		for i,v in pairs(listfiles(folder)) do
+			if v:sub(-4) == ".cfg" then
+				if i == 1 then 
+					makebutton(v:sub(#tostring(folder)+2, -5),true)
+				else
+					makebutton(v:sub(#tostring(folder)+2, -5),false)
+				end
+			end
+		end
+	end
+	--
+	refresh()
+	--
+	local name = textbox(buttonsholder)
+	local load = newbutton(buttonsholder,"Load")
+	local delete = newbutton(buttonsholder,"Delete")
+	local save = newbutton(buttonsholder,"Save")
+	local create = newbutton(buttonsholder,"Create")
+	--
+	name[1].Size = UDim2.new(1,-10,0,20)
+	load[1].Size = UDim2.new(0.5,-6,0,20)
+	delete[1].Size = UDim2.new(0.5,-6,0,20)
+	save[1].Size = UDim2.new(0.5,-6,0,20)
+	create[1].Size = UDim2.new(0.5,-6,0,20)
+	--
+	name[1].Position = UDim2.new(0.5,0,0,0)
+	name[1].AnchorPoint = Vector2.new(0.5,0)
+	--
+	load[1].Position = UDim2.new(0,5,0,22)
+	load[1].AnchorPoint = Vector2.new(0,0)
+	--
+	delete[1].Position = UDim2.new(1,-5,0,22)
+	delete[1].AnchorPoint = Vector2.new(1,0)
+	--
+	save[1].Position = UDim2.new(0,5,0,44)
+	save[1].AnchorPoint = Vector2.new(0,0)
+	--
+	create[1].Position = UDim2.new(1,-5,0,44)
+	create[1].AnchorPoint = Vector2.new(1,0)
+	--
+	name[2].PlaceholderText = "Name"
+	--
+	local currentname = nil
+	--
+	name[2].Focused:Connect(function()
+		name[3].BorderColor3 = self.library.theme.accent
+	end)
+	--
+	name[2].FocusLost:Connect(function()
+		local saved = name[2].Text
+		if #saved >= 3 and #saved <= 15 then
+			currentname = saved
+		else
+			name[2].Text = ""
+			currentname = nil
+		end
+		name[3].BorderColor3 = Color3.fromRGB(12,12,12)
+	end)
+	--
+	load[3].MouseButton1Down:Connect(function()
+		self.library:loadconfig(folder..selected.name..".cfg")
+		load[2].BorderColor3 = self.library.theme.accent
+		wait(0.05)
+		load[2].BorderColor3 = Color3.fromRGB(12,12,12)
+	end)
+	--
+	delete[3].MouseButton1Down:Connect(function()
+		delfile(folder..selected.name..".cfg")
+		delete[2].BorderColor3 = self.library.theme.accent
+		wait(0.05)
+		delete[2].BorderColor3 = Color3.fromRGB(12,12,12)
+		wait()
+		refresh()
+	end)
+	--
+	save[3].MouseButton1Down:Connect(function()
+		writefile(folder..selected.name..".cfg", self.library:saveconfig())
+		save[2].BorderColor3 = self.library.theme.accent
+		wait(0.05)
+		save[2].BorderColor3 = Color3.fromRGB(12,12,12)
+		wait()
+		refresh()
+	end)
+	--
+	create[3].MouseButton1Down:Connect(function()
+		writefile(folder..currentname..".cfg", self.library:saveconfig())
+		create[2].BorderColor3 = self.library.theme.accent
+		wait(0.05)
+		create[2].BorderColor3 = Color3.fromRGB(12,12,12)
+		wait()
+		refresh()
+	end)
+	-- // button tbl
+	configloader = {
+		["library"] = self.library
+	}
+	-- // metatable indexing + return
+	setmetatable(configloader, configloaders)
+	return configloader 
+end
+
+
+local window = library:new({textsize = 18,font = Enum.Font.RobotoMono,name = "Batman Script",color = Color3.fromRGB(0,255,255)})
+
+local Main_1_Page = window:page({name = "Main"})
+local Main_2_Page = window:page({name = "Misc"})
+local Main_3_Page = window:page({name = "Teleport"})
+
+local Main_1_left = Main_1_Page:section({name = "General",side = "left",size = 500})
+
+local Main_2_left = Main_2_Page:section({name = "Misc",side = "left",size = 500})
+
+local Main_3_left = Main_3_Page:section({name = "Teleport",side = "left",size = 2000})
+local Main_3_right = Main_3_Page:section({name = "Totem",side = "right",size = 1000})
+
+Main_1_left:button({name = "Autofish Stackperfect (Key:F)",def = false,callback = function()
+
+
+function ShowNotification(String)
+    CoreGui:SetCore(
+        "SendNotification",
+        {
+            Title = "Notification",
+            Text = String,
+            Duration = 1
+        }
+    )
+end
+
+-- Configuration variables
+local config = {
+    fpsCap = 9999,
+    disableChat = false,            -- Set to true to hide the chat
+    enableBigButton = true,        -- Set to true to enlarge the button in the shake UI
+    bigButtonScaleFactor = 2,      -- Scale factor for big button size
+    shakeSpeed = 0.05,             -- Lower value means faster shake (e.g., 0.05 for fast, 0.1 for normal)
+    FreezeWhileFishing = false      -- Set to true to freeze your character while fishing
 }
 
-local Options = Fluent.Options
+-- Set FPS cap
+setfpscap(config.fpsCap)
 
-local teleportSpots = {
-    altar = CFrame.new(1296.320068359375, -808.5519409179688, -298.93817138671875),
-    arch = CFrame.new(998.966796875, 126.6849365234375, -1237.1434326171875),
-    birch = CFrame.new(1742.3203125, 138.25787353515625, -2502.23779296875),
-    brine = CFrame.new(-1794.10596, -145.849701, -3302.92358, -5.16176224e-05, 3.10316682e-06, 0.99999994, 0.119907647, 0.992785037, 3.10316682e-06, -0.992785037, 0.119907647, -5.16176224e-05),
-    deep = CFrame.new(-1510.88672, -237.695053, -2852.90674, 0.573604643, 0.000580655003, 0.81913209, -0.000340352941, 0.999999762, -0.000470530824, -0.819132209, -8.89541116e-06, 0.573604763),
-    deepshop = CFrame.new(-979.196411, -247.910156, -2699.87207, 0.587748766, 0, 0.809043527, 0, 1, 0, -0.809043527, 0, 0.587748766),
-    enchant = CFrame.new(1296.320068359375, -808.5519409179688, -298.93817138671875),
-    executive = CFrame.new(-29.836761474609375, -250.48486328125, 199.11614990234375),
-    keepers = CFrame.new(1296.320068359375, -808.5519409179688, -298.93817138671875),
-    mod_house = CFrame.new(-30.205902099609375, -249.40594482421875, 204.0529022216797),
-    moosewood = CFrame.new(383.10113525390625, 131.2406005859375, 243.93385314941406),
-    mushgrove = CFrame.new(2501.48583984375, 127.7583236694336, -720.699462890625),
-    roslit = CFrame.new(-1476.511474609375, 130.16842651367188, 671.685302734375),
-    snow = CFrame.new(2648.67578125, 139.06605529785156, 2521.29736328125),
-    snowcap = CFrame.new(2648.67578125, 139.06605529785156, 2521.29736328125),
-    spike = CFrame.new(-1254.800537109375, 133.88555908203125, 1554.2021484375),
-    statue = CFrame.new(72.8836669921875, 138.6964874267578, -1028.4193115234375),
-    sunstone = CFrame.new(-933.259705, 128.143951, -1119.52063, -0.342042685, 0, -0.939684391, 0, 1, 0, 0.939684391, 0, -0.342042685),
-    swamp = CFrame.new(2501.48583984375, 127.7583236694336, -720.699462890625),
-    terrapin = CFrame.new(-143.875244140625, 141.1676025390625, 1909.6070556640625),
-    trident = CFrame.new(-1479.48987, -228.710632, -2391.39307, 0.0435845852, 0, 0.999049723, 0, 1, 0, -0.999049723, 0, 0.0435845852),
-    vertigo = CFrame.new(-112.007278, -492.901093, 1040.32788, -1, 0, 0, 0, 1, 0, 0, 0, -1),
-    volcano = CFrame.new(-1888.52319, 163.847565, 329.238281, 1, 0, 0, 0, 1, 0, 0, 0, 1),
-    wilson = CFrame.new(2938.80591, 277.474762, 2567.13379, 0.4648332, 0, 0.885398269, 0, 1, 0, -0.885398269, 0, 0.4648332),
-    wilsons_rod = CFrame.new(2879.2085, 135.07663, 2723.64233, 0.970463336, -0.168695927, -0.172460333, 0.141582936, -0.180552125, 0.973321974, -0.195333466, -0.968990743, -0.151334763)
-}
-local FishAreas = {
-    Goldfish = CFrame.new(-2695.64478, 158.695389, 1751.96741, -0.999547541, 0.00041958809, 0.0300764795, 0.000829327677, 0.999907017, 0.0136120766, -0.030067971, 0.0136308614, -0.999454916),
-    Roslit_Bay = CFrame.new(-1663.73889, 149.234116, 495.498016, 0.0380855016, 4.08820178e-08, -0.999274492, 5.74658472e-08, 1, 4.3101906e-08, 0.999274492, -5.90657123e-08, 0.0380855016),
-    Ocean = CFrame.new(7665.104, 125.444443, 2601.59351, 0.999966085, -0.000609769544, -0.00821684115, 0.000612694537, 0.999999762, 0.000353460142, 0.00821662322, -0.000358482561, 0.999966204),
-    Snowcap_Pond = CFrame.new(2778.09009, 283.283783, 2580.323, 1, 7.17688531e-09, -2.22843701e-05, -7.17796267e-09, 1, -4.83369114e-08, 2.22843701e-05, 4.83370712e-08, 1),
-    Moosewood_Docks = CFrame.new(343.2359924316406, 133.61595153808594, 267.0580139160156),
-    Deep_Ocean = CFrame.new(3569.07153, 125.480949, 6697.12695, 0.999980748, -0.00188910461, -0.00591362361, 0.00193980196, 0.999961317, 0.00857902411, 0.00589718809, -0.00859032944, 0.9999457),
-    Vertigo = CFrame.new(-137.697098, -736.86377, 1233.15271, 1, -1.61821543e-08, -2.01375751e-05, 1.6184277e-08, 1, 1.05423091e-07, 2.01375751e-05, -1.0542341e-07, 1),
-    Snowcap_Ocean = CFrame.new(3088.66699, 131.534332, 2587.11304, 1, 4.30694858e-09, -1.19097813e-14, -4.30694858e-09, 1, -2.80603398e-08, 1.17889275e-14, 2.80603398e-08, 1),
-    Harvesters_Spike = CFrame.new(-1234.61523, 125.228767, 1748.57166, 0.999991536, -0.000663080777, -0.00405627443, 0.000725277001, 0.999881923, 0.0153511297, 0.00404561637, -0.0153539423, 0.999873936),
-    SunStone = CFrame.new(-845.903992, 133.172211, -1163.57776, 1, -7.93465915e-09, -2.09446498e-05, 7.93544608e-09, 1, 3.75741536e-08, 2.09446498e-05, -3.75743205e-08, 1),
-    Roslit_Bay_Ocean = CFrame.new(-1708.09302, 155.000015, 384.928009, 1, -9.84460868e-09, -3.24939563e-15, 9.84460868e-09, 1, 4.66220271e-08, 2.79042003e-15, -4.66220271e-08, 1),
-    Moosewood_Pond = CFrame.new(509.735992, 152.000031, 302.173004, 1, -1.78487678e-08, -8.1329488e-14, 1.78487678e-08, 1, 8.45405168e-08, 7.98205428e-14, -8.45405168e-08, 1),
-    Terrapin_Ocean = CFrame.new(58.6469994, 135.499985, 2147.41699, 1, 2.09643041e-08, -5.6023784e-15, -2.09643041e-08, 1, -9.92988376e-08, 3.52064755e-15, 9.92988376e-08, 1),
-    Isonade = CFrame.new(-1060.99902, 121.164787, 953.996033, 0.999958456, 0.000633197487, -0.00909138657, -0.000568434712, 0.999974489, 0.00712434994, 0.00909566507, -0.00711888634, 0.999933302),
-    Moosewood_Ocean = CFrame.new(-167.642715, 125.19548, 248.009521, 0.999997199, -0.000432743778, -0.0023210498, 0.000467110571, 0.99988997, 0.0148265222, 0.00231437827, -0.0148275653, 0.999887407),
-    Roslit_Pond = CFrame.new(-1811.96997, 148.047089, 592.642517, 1, 1.12983072e-08, -2.16573972e-05, -1.12998171e-08, 1, -6.97014357e-08, 2.16573972e-05, 6.97016844e-08, 1),
-    Moosewood_Ocean_Mythical = CFrame.new(252.802994, 135.849625, 36.8839989, 1, -1.98115071e-08, -4.50667564e-15, 1.98115071e-08, 1, 1.22230617e-07, 2.08510289e-15, -1.22230617e-07, 1),
-    Terrapin_Olm = CFrame.new(22.0639992, 182.000015, 1944.36804, 1, 1.14953362e-08, -2.7011112e-15, -1.14953362e-08, 1, -7.09263972e-08, 1.88578841e-15, 7.09263972e-08, 1),
-    The_Arch = CFrame.new(1283.30896, 130.923569, -1165.29602, 1, -5.89772364e-09, -3.3183043e-15, 5.89772364e-09, 1, 3.63913486e-08, 3.10367822e-15, -3.63913486e-08, 1),
-    Scallop_Ocean = CFrame.new(23.2255898, 125.236847, 738.952271, 0.999990165, -0.00109633175, -0.00429760758, 0.00115595153, 0.999902785, 0.0138949333, 0.00428195624, -0.013899764, 0.999894202),
-    SunStone_Hidden = CFrame.new(-1139.55701, 134.62204, -1076.94324, 1, 3.9719481e-09, -1.6278158e-05, -3.97231048e-09, 1, -2.22651142e-08, 1.6278158e-05, 2.22651781e-08, 1),
-    Mushgrove_Stone = CFrame.new(2525.36011, 131.000015, -776.184021, 1, 1.90145943e-08, -3.24206519e-15, -1.90145943e-08, 1, -1.06596836e-07, 1.21516956e-15, 1.06596836e-07, 1),
-    Keepers_Altar = CFrame.new(1307.13599, -805.292236, -161.363998, 1, 2.40881981e-10, -3.25609947e-15, -2.40881981e-10, 1, -1.35044154e-09, 3.255774e-15, 1.35044154e-09, 1),
-    Lava = CFrame.new(-1959.86206, 193.144821, 271.960999, 1, -6.02453598e-09, -2.97388313e-15, 6.02453598e-09, 1, 3.37767716e-08, 2.77039384e-15, -3.37767716e-08, 1),
-    Roslit_Pond_Seaweed = CFrame.new(-1785.2869873046875, 148.15780639648438, 639.9299926757812),    
-}
-local racistPeople = {
-    Witch = CFrame.new(409.638092, 134.451523, 311.403687, -0.74079144, 0, 0.671735108, 0, 1, 0, -0.671735108, 0, -0.74079144),
-    Quiet_Synph = CFrame.new(566.263245, 152.000031, 353.872101, -0.753558397, 0, -0.657381535, 0, 1, 0, 0.657381535, 0, -0.753558397),
-    Pierre = CFrame.new(391.38855, 135.348389, 196.712387, -1, 0, 0, 0, 1, 0, 0, 0, -1),
-    Phineas = CFrame.new(469.912292, 150.69342, 277.954987, 0.886104584, -0, -0.46348536, 0, 1, -0, 0.46348536, 0, 0.886104584),
-    Paul = CFrame.new(381.741882, 136.500031, 341.891022, -1, 0, 0, 0, 1, 0, 0, 0, -1),
-    Shipwright = CFrame.new(357.972595, 133.615967, 258.154541, 0, 0, -1, 0, 1, 0, 1, 0, 0),
-    Angler = CFrame.new(480.102478, 150.501053, 302.226898, 1, 0, 0, 0, 1, 0, 0, 0, 1),
-    Marc = CFrame.new(466.160034, 151.00206, 224.497086, -0.996853352, 0, -0.0792675018, 0, 1, 0, 0.0792675018, 0, -0.996853352),
-    Lucas = CFrame.new(449.33963, 181.999893, 180.689072, 0, 0, 1, 0, 1, -0, -1, 0, 0),
-    Latern_Keeper = CFrame.new(-39.0456772, -246.599976, 195.644363, -1, 0, 0, 0, 1, 0, 0, 0, -1),
-    Latern_Keeper2 = CFrame.new(-17.4230175, -304.970276, -14.529892, -1, 0, 0, 0, 1, 0, 0, 0, -1),
-    Inn_Keeper = CFrame.new(487.458466, 150.800034, 231.498932, -0.564704418, 0, -0.825293183, 0, 1, 0, 0.825293183, 0, -0.564704418),
-    Roslit_Keeper = CFrame.new(-1512.37891, 134.500031, 631.24353, 0.738236904, 0, -0.674541533, 0, 1, 0, 0.674541533, 0, 0.738236904),
-    FishingNpc_1 = CFrame.new(-1429.04138, 134.371552, 686.034424, 0, 0.0168599077, -0.999857903, 0, 0.999857903, 0.0168599077, 1, 0, 0),
-    FishingNpc_2 = CFrame.new(-1778.55408, 149.791779, 648.097107, 0.183140755, 0.0223737024, -0.982832015, 0, 0.999741018, 0.0227586292, 0.983086705, -0.00416803267, 0.183093324),
-    FishingNpc_3 = CFrame.new(-1778.26807, 147.83165, 653.258606, -0.129575253, 0.501478612, 0.855411887, -2.44146213e-05, 0.862683058, -0.505744994, -0.991569638, -0.0655529201, -0.111770131),
-    Henry = CFrame.new(483.539307, 152.383057, 236.296143, -0.789363742, 0, 0.613925934, 0, 1, 0, -0.613925934, 0, -0.789363742),
-    Daisy = CFrame.new(581.550049, 165.490753, 213.499969, -0.964885235, 0, -0.262671858, 0, 1, 0, 0.262671858, 0, -0.964885235),
-    Appraiser = CFrame.new(453.182373, 150.500031, 206.908783, 0, 0, 1, 0, 1, -0, -1, 0, 0),
-    Merchant = CFrame.new(416.690521, 130.302628, 342.765289, -0.249025017, -0.0326484665, 0.967946589, -0.0040341015, 0.999457955, 0.0326734781, -0.968488574, 0.00423171744, -0.249021754),
-    Mod_Keeper = CFrame.new(-39.0905838, -245.141144, 195.837891, -0.948549569, -0.0898146331, -0.303623199, -0.197293222, 0.91766715, 0.34490931, 0.247647122, 0.387066364, -0.888172567),
-    Ashe = CFrame.new(-1709.94055, 149.862411, 729.399536, -0.92290163, 0.0273250472, -0.384064913, 0, 0.997478604, 0.0709675401, 0.385035753, 0.0654960647, -0.920574605),
-    Alfredrickus = CFrame.new(-1520.60632, 142.923264, 764.522034, 0.301733732, 0.390740901, -0.869642735, 0.0273988936, 0.908225596, 0.417582989, 0.952998459, -0.149826124, 0.26333645),
-}
-local itemSpots = {
-    Training_Rod = CFrame.new(457.693848, 148.357529, 230.414307, 1, -0, 0, 0, 0.975410998, 0.220393807, -0, -0.220393807, 0.975410998),
-    Plastic_Rod = CFrame.new(454.425385, 148.169739, 229.172424, 0.951755166, 0.0709736273, -0.298537821, -3.42726707e-07, 0.972884834, 0.231290117, 0.306858391, -0.220131472, 0.925948203),
-    Lucky_Rod = CFrame.new(446.085999, 148.253006, 222.160004, 0.974526405, -0.22305499, 0.0233404674, 0.196993902, 0.901088715, 0.386306256, -0.107199371, -0.371867687, 0.922075212),
-    Kings_Rod = CFrame.new(1375.57642, -810.201721, -303.509247, -0.7490201, 0.662445903, -0.0116144121, -0.0837960541, -0.0773290396, 0.993478119, 0.657227278, 0.745108068, 0.113431036),
-    Flimsy_Rod = CFrame.new(471.107697, 148.36171, 229.642441, 0.841614008, 0.0774728209, -0.534493923, 0.00678436086, 0.988063335, 0.153898612, 0.540036798, -0.13314943, 0.831042409),
-    Nocturnal_Rod = CFrame.new(-141.874237, -515.313538, 1139.04529, 0.161644459, -0.98684907, 1.87754631e-05, 1.87754631e-05, 2.21133232e-05, 1, -0.98684907, -0.161644459, 2.21133232e-05),
-    Fast_Rod = CFrame.new(447.183563, 148.225739, 220.187454, 0.981104493, 1.26492232e-05, 0.193478703, -0.0522461236, 0.962867677, 0.264870107, -0.186291039, -0.269973755, 0.944674432),
-    Carbon_Rod = CFrame.new(454.083618, 150.590073, 225.328827, 0.985374212, -0.170404434, 1.41561031e-07, 1.41561031e-07, 1.7285347e-06, 1, -0.170404434, -0.985374212, 1.7285347e-06),
-    Long_Rod = CFrame.new(485.695038, 171.656326, 145.746109, -0.630167365, -0.776459217, -5.33461571e-06, 5.33461571e-06, -1.12056732e-05, 1, -0.776459217, 0.630167365, 1.12056732e-05),
-    Mythical_Rod = CFrame.new(389.716705, 132.588821, 314.042847, 0, 1, 0, 0, 0, -1, -1, 0, 0),
-    Midas_Rod = CFrame.new(401.981659, 133.258316, 326.325745, 0.16456604, 0.986365497, 0.00103566051, 0.00017541647, 0.00102066994, -0.999999464, -0.986366034, 0.1645661, -5.00679016e-06),
-    Trident_Rod = CFrame.new(-1484.34192, -222.325562, -2194.77002, -0.466092706, -0.536795318, 0.703284025, -0.319611132, 0.843386114, 0.43191275, -0.824988723, -0.0234660208, -0.56466186),
-    Enchated_Altar = CFrame.new(1310.54651, -799.469604, -82.7303467, 0.999973059, 0, 0.00733732153, 0, 1, 0, -0.00733732153, 0, 0.999973059),
-    Bait_Crate = CFrame.new(384.57513427734375, 135.3519287109375, 337.5340270996094),
-    Quality_Bait_Crate = CFrame.new(-177.876, 144.472, 1932.844),
-    Crab_Cage = CFrame.new(474.803589, 149.664566, 229.49469, -0.721874595, 0, 0.692023814, 0, 1, 0, -0.692023814, 0, -0.721874595),
-    GPS = CFrame.new(517.896729, 149.217636, 284.856842, 7.39097595e-06, -0.719539165, -0.694451928, -1, -7.39097595e-06, -3.01003456e-06, -3.01003456e-06, 0.694451928, -0.719539165),
-    Basic_Diving_Gear = CFrame.new(369.174774, 132.508835, 248.705368, 0.228398502, -0.158300221, -0.96061182, 1.58026814e-05, 0.986692965, -0.162594408, 0.973567724, 0.037121132, 0.225361705),
-    Fish_Radar = CFrame.new(365.75177, 134.50499, 274.105804, 0.704499543, -0.111681774, -0.70086211, 1.32396817e-05, 0.987542748, -0.157350808, 0.709704578, 0.110844307, 0.695724905)
-}
+-- Toggle autofarm variable
+local autofarmEnabled = false
 
--- Locals
-local LocalPlayer = Players.LocalPlayer
-local LocalCharacter = LocalPlayer.Character
-local HumanoidRootPart = LocalCharacter:FindFirstChild("HumanoidRootPart")
-local ActiveFolder = Workspace:FindFirstChild("active")
-local PlayerGUI = LocalPlayer:FindFirstChildOfClass("PlayerGui")
+-- Services
+local players = game:GetService("Players")
+local vim = game:GetService("VirtualInputManager")
+local run_service = game:GetService("RunService")
+local replicated_storage = game:GetService("ReplicatedStorage")
+local localplayer = players.LocalPlayer
+local playergui = localplayer.PlayerGui
+local StarterGui = game:GetService("StarterGui")
 
--- Varbiables
+-- Disable chat if the option is enabled in config
+if config.disableChat then
+    StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Chat, false)
+end
 
-local AutoFreeze = false
-local autoShake = false
-local AutoFish = false
-local autoShake2 = false
-local autoShake3 = false
-local AutoZoneCast = false
-local autoShakeDelay = 0.3
-local autoReel = false
-local AutoCast = false
-local Noclip = false
-local AntiDrown = false
-local WebhookLog = false
-local AutoSell = false
-local AntiAfk = false
-local AutoAppraiser = false
+-- Utility functions
+local utility = {blacklisted_attachments = {"bob", "bodyweld"}}; do
+    function utility.simulate_click(x, y, mb)
+        vim:SendMouseButtonEvent(x, y, (mb - 1), true, game, 1)
+        vim:SendMouseButtonEvent(x, y, (mb - 1), false, game, 1)
+    end
 
-local Keybind = Enum.KeyCode.F
+    function utility.move_fix(bobber)
+        for index, value in bobber:GetDescendants() do
+            if (value.ClassName == "Attachment" and table.find(utility.blacklisted_attachments, value.Name)) then
+                value:Destroy()
+            end
+        end
+    end
+end
 
--- Rest
+local farm = {reel_tick = nil, cast_tick = nil}; do
 
-PlayerGUI.ChildAdded:Connect(function(GUI)
-    if GUI:IsA("ScreenGui") then
-        if GUI.Name == "reel" and autoReel then
-            local reelfinishedEvent = ReplicatedStorage:WaitForChild("events"):WaitForChild("reelfinished")
-            if reelfinishedEvent then
-                while GUI do
-                    task.wait(2)
-                    reelfinishedEvent:FireServer(100, false)
+    function farm.find_rod()
+        local character = localplayer.Character
+        if not character then return nil end
+
+        for _, tool in ipairs(character:GetChildren()) do
+            if tool:IsA("Tool") and (tool.Name:find("rod") or tool.Name:find("Rod")) then
+                return tool
+            end
+        end
+        return nil
+    end
+
+    function farm.freeze_character(freeze)
+        local character = localplayer.Character
+        if character then
+            local humanoid = character:FindFirstChildOfClass("Humanoid")
+            if humanoid then
+                if freeze then
+                    humanoid.WalkSpeed = 0
+                    humanoid.JumpPower = 0
+                else
+                    humanoid.WalkSpeed = 16  -- Default WalkSpeed
+                    humanoid.JumpPower = 50  -- Default JumpPower
                 end
             end
         end
     end
-end)
-function AutoFish5()
-    if autoShake3 then
-        task.spawn(function()
-            while AutoFish do
-                local PlayerGUI = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
-                local shakeUI = PlayerGUI:FindFirstChild("shakeui")
-                if shakeUI and shakeUI.Enabled then
-                    local safezone = shakeUI:FindFirstChild("safezone")
-                    if safezone then
-                        local button = safezone:FindFirstChild("button")
-                        if button and button:IsA("ImageButton") and button.Visible then
-                            if autoShake then
-                                local pos = button.AbsolutePosition
-                                local size = button.AbsoluteSize
-                                VirtualInputManager:SendMouseButtonEvent(pos.X + size.X / 2, pos.Y + size.Y / 2, 0, true, game:GetService("Players").LocalPlayer, 0)
-                                VirtualInputManager:SendMouseButtonEvent(pos.X + size.X / 2, pos.Y + size.Y / 2, 0, false, game:GetService("Players").LocalPlayer, 0)
-                            elseif autoShake2 then
-                                GuiService.SelectedObject = button
-                                VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.Return, false, game)
-                                VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.Return, false, game)
-                            end
-                        end
-                    end
+
+    function farm.cast()
+        local character = localplayer.Character
+        if not character then return end
+
+        local rod = farm.find_rod()
+        if not rod then return end
+
+        -- Instantly cast without cooldown
+        local args = { [1] = 100, [2] = 1 }
+        rod.events.cast:FireServer(unpack(args))
+        farm.cast_tick = 0  -- Reset last cast time
+    end
+
+    function farm.shake()
+        local shake_ui = playergui:FindFirstChild("shakeui")
+        if shake_ui then
+            local safezone = shake_ui:FindFirstChild("safezone")
+            local button = safezone and safezone:FindFirstChild("button")
+
+            if button then
+                -- Apply big button option from config
+                if config.enableBigButton then
+                    button.Size = UDim2.new(config.bigButtonScaleFactor, 0, config.bigButtonScaleFactor, 0)
+                else
+                    button.Size = UDim2.new(1, 0, 1, 0)  -- Reset to default size if disabled
                 end
-                task.wait()
+
+                if button.Visible then
+                    utility.simulate_click(
+                        button.AbsolutePosition.X + button.AbsoluteSize.X / 2,
+                        button.AbsolutePosition.Y + button.AbsoluteSize.Y / 2,
+                        1
+                    )
+                end
             end
-        end)
+        end
+    end
+
+    function farm.reel()
+        local reel_ui = playergui:FindFirstChild("reel")
+        if not reel_ui then return end
+
+        local reel_bar = reel_ui:FindFirstChild("bar")
+        if not reel_bar then return end
+      
+        local reel_client = reel_bar:FindFirstChild("reel")
+        if not reel_client then return end
+
+        if reel_client.Disabled == true then
+            reel_client.Disabled = false
+        end
+
+        local update_colors = getsenv(reel_client).UpdateColors
+
+        -- Instant reel without waiting
+        if update_colors then
+            setupvalue(update_colors, 1, 100)
+            replicated_storage.events.reelfinished:FireServer(getupvalue(update_colors, 1), true)
+        end
+    end
+  
+end
+
+-- Toggle function to start or stop the autofarm
+local function toggleAutofarm()
+    autofarmEnabled = not autofarmEnabled
+    if autofarmEnabled then
+        print("Autofarm Enabled")
     else
-        task.spawn(function()
-            while AutoFish do
-                task.wait(autoShakeDelay)
-                local PlayerGUI = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
-                local shakeUI = PlayerGUI:FindFirstChild("shakeui")
-                if shakeUI and shakeUI.Enabled then
-                    local safezone = shakeUI:FindFirstChild("safezone")
-                    if safezone then
-                        local button = safezone:FindFirstChild("button")
-                        if button and button:IsA("ImageButton") and button.Visible then
-                            if autoShake then
-                                local pos = button.AbsolutePosition
-                                local size = button.AbsoluteSize
-                                VirtualInputManager:SendMouseButtonEvent(pos.X + size.X / 2, pos.Y + size.Y / 2, 0, true, game:GetService("Players").LocalPlayer, 0)
-                                VirtualInputManager:SendMouseButtonEvent(pos.X + size.X / 2, pos.Y + size.Y / 2, 0, false, game:GetService("Players").LocalPlayer, 0)
-                            elseif autoShake2 then
-                                GuiService.SelectedObject = button
-                                VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.Return, false, game)
-                                VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.Return, false, game)
-                            end
-                        end
-                    end
-                end
-            end
-        end)
+        print("Autofarm Disabled")
+        farm.freeze_character(false)  -- Unfreeze character when autofarm stops
     end
 end
-function ZoneCasting()
-    if not ProtectPremium then
-        return
-    end
-    spawn(function()
-        while AutoZoneCast do
-            local player = game.Players.LocalPlayer
-            local character = player.Character
-            if character then
-                local tool = character:FindFirstChildOfClass("Tool")
-                if tool then
-                    local hasBobber = tool:FindFirstChild("bobber")
-                    if hasBobber then
-                        local ropeConstraint = hasBobber:FindFirstChild("RopeConstraint")
-                        if ropeConstraint then
-                            ropeConstraint.Length = 200000
-                        end
 
-                        local platformSize = Vector3.new(10, 1, 10)
-                        local platformPositionOffset = Vector3.new(0, -4, 0)
-
-                        -- Custom Zones
-                        if selectedZoneCast == "Bluefin Tuna Abundance" then
-                            local selectedZone = Workspace.zones.fishing:FindFirstChild("Deep Ocean")
-                            if selectedZone then
-                                local abundanceValue = selectedZone:FindFirstChild("Abundance")
-                                if abundanceValue and abundanceValue.Value == "Bluefin Tuna" then
-                                    local bobberPosition = CFrame.new(selectedZone.Position.X, 126.564, selectedZone.Position.Z)
-                                    hasBobber.CFrame = bobberPosition
-                                    
-                                    local platform = Instance.new("Part")
-                                    platform.Size = platformSize
-                                    platform.Position = hasBobber.Position + platformPositionOffset
-                                    platform.Anchored = true
-                                    platform.Parent = hasBobber
-                                    platform.BrickColor = BrickColor.new("Bright blue")
-                                    platform.Transparency = 1.000
-                                end
-                            end
-                        elseif selectedZoneCast == "Swordfish Abundance" then
-                            local selectedZone = Workspace.zones.fishing:FindFirstChild("Deep Ocean")
-                            if selectedZone then
-                                local abundanceValue = selectedZone:FindFirstChild("Abundance")
-                                if abundanceValue and abundanceValue.Value == "Swordfish" then
-                                    local bobberPosition = CFrame.new(selectedZone.Position.X, 126.564, selectedZone.Position.Z)
-                                    hasBobber.CFrame = bobberPosition
-                                    
-                                    local platform = Instance.new("Part")
-                                    platform.Size = platformSize
-                                    platform.Position = hasBobber.Position + platformPositionOffset
-                                    platform.Anchored = true
-                                    platform.Parent = hasBobber
-                                    platform.BrickColor = BrickColor.new("Bright blue")
-                                    platform.Transparency = 1.000
-                                end
-                            end
-                        else
-                            -- Default Zones
-                            local selectedZone = Workspace.zones.fishing:FindFirstChild(selectedZoneCast)
-                            if selectedZone then
-                                local bobberPosition
-                                if selectedZoneCast == "FischFright24" then
-                                    bobberPosition = CFrame.new(selectedZone.Position.X, 126, selectedZone.Position.Z)
-                                elseif selectedZoneCast == "Isonade" then
-                                    bobberPosition = CFrame.new(selectedZone.Position.X, 126, selectedZone.Position.Z)
-                                elseif selectedZoneCast == "Gold fish" then
-                                    bobberPosition = CFrame.new(-2696, 159, 1752)
-                                elseif selectedZoneCast == "Deep Ocean" then
-                                    bobberPosition = CFrame.new(1521, 126, -3543)
-                                elseif selectedZoneCast == "Desolate Deep" then
-                                    bobberPosition = CFrame.new(-1068, 126, -3108)
-                                elseif selectedZoneCast == "Harvesters Spike" then
-                                    bobberPosition = CFrame.new(-1234, 126, 1748)
-                                elseif selectedZoneCast == "Moosewood Docks" then
-                                    bobberPosition = CFrame.new(345, 126, 214)
-                                elseif selectedZoneCast == "Moosewood Ocean" then
-                                    bobberPosition = CFrame.new(890, 126, 465)
-                                elseif selectedZoneCast == "Moosewood Ocean Mythical" then
-                                    bobberPosition = CFrame.new(270, 126, 52)
-                                elseif selectedZoneCast == "Moosewood Pond" then
-                                    bobberPosition = CFrame.new(526, 126, 305)
-                                elseif selectedZoneCast == "Mushgrove Water" then
-                                    bobberPosition = CFrame.new(2541, 126, -792)
-                                elseif selectedZoneCast == "Ocean" then
-                                    bobberPosition = CFrame.new(-5712, 126, 4059)
-                                elseif selectedZoneCast == "Roslit Bay" then
-                                    bobberPosition = CFrame.new(-1650, 126, 504)
-                                elseif selectedZoneCast == "Roslit Bay Ocean" then
-                                    bobberPosition = CFrame.new(-1825, 126, 946)
-                                elseif selectedZoneCast == "Roslit Pond" then
-                                    bobberPosition = CFrame.new(-1807, 141, 599)
-                                elseif selectedZoneCast == "Roslit Pond Seaweed" then
-                                    bobberPosition = CFrame.new(-1804, 141, 625)
-                                elseif selectedZoneCast == "Scallop Ocean" then
-                                    bobberPosition = CFrame.new(16, 126, 730)
-                                elseif selectedZoneCast == "Snowcap Ocean" then
-                                    bobberPosition = CFrame.new(2308, 126, 2200)
-                                elseif selectedZoneCast == "Snowcap Pond" then
-                                    bobberPosition = CFrame.new(-2812, 221, 1697) ---2777, 275, 2605
-                                elseif selectedZoneCast == "Sunstone" then
-                                    bobberPosition = CFrame.new(-645, 126, -955)
-                                elseif selectedZoneCast == "Terrapin Ocean" then
-                                    bobberPosition = CFrame.new(-57, 126, 2011)
-                                elseif selectedZoneCast == "The Arch" then
-                                    bobberPosition = CFrame.new(1076, 126, -1202)
-                                elseif selectedZoneCast == "Vertigo" then
-                                    bobberPosition = CFrame.new(-75, -740, 1200)
-                                end
-
-                                hasBobber.CFrame = bobberPosition
-                                
-                                local platform = Instance.new("Part")
-                                platform.Size = platformSize
-                                platform.Position = hasBobber.Position + platformPositionOffset
-                                platform.Anchored = true
-                                platform.Parent = hasBobber
-                                platform.BrickColor = BrickColor.new("Bright blue")
-                                platform.Transparency = 1.000
-                            end
-                        end
-                    else
-                        print("Bobber not found in the tool.")
-                    end
-                end
-            end
-            task.wait(0.01)
-        end
-    end)
-end
-
-function AntiAfk2()
-    spawn(function()
-        while AntiAfk do
-            game:GetService("ReplicatedStorage"):WaitForChild("events"):WaitForChild("afk"):FireServer(false)
-            task.wait(0.01)
-        end
-    end)
-end           
-PlayerGUI.ChildAdded:Connect(function(GUI)
-    if GUI:IsA("ScreenGui") then
-    elseif GUI.Name == "reel" and autoReel then
-        local reelfinishedEvent = ReplicatedStorage:WaitForChild("events"):WaitForChild("reelfinished")
-        if reelfinishedEvent then
-            while GUI do
-                task.wait(2)
-                reelfinishedEvent:FireServer(100, false)
-            end
-        end
+-- Bind the toggle to a key (e.g., "F")
+local UserInputService = game:GetService("UserInputService")
+UserInputService.InputBegan:Connect(function(input)
+    if input.KeyCode == Enum.KeyCode.F then  -- Change 'P' to any preferred key
+        toggleAutofarm()
     end
 end)
-function Pidoras()
-    spawn(function()
-        while AutoCast do
-            local player = game.Players.LocalPlayer
-            local character = player.Character
 
-            if character then
-                local tool = character:FindFirstChildOfClass("Tool")
-
-                if tool then
-                    local hasBobber = tool:FindFirstChild("bobber")
-
-                    if not hasBobber then
-                        local castEvent = tool:FindFirstChild("events") and tool.events:FindFirstChild("cast")
-
-                        if castEvent then
-                            local Random = math.random() * (99 - 90) + 90
-                            local FRandom = string.format("%.4f", Random)
-                            print(FRandom)
-                            
-                            local Random2 = math.random(90, 99)
-                            castEvent:FireServer(Random2)
-
-                            local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
-                            if humanoidRootPart then
-                                humanoidRootPart.Anchored = false
-                            end
-                        end
-                    end
-                end
-                task.wait(1)
+-- Main loop with rod check, configurable shake speed, and freeze feature
+run_service.Heartbeat:Connect(function()
+    if autofarmEnabled then
+        local rod = farm.find_rod() -- Check if player is holding a rod
+        if rod then
+            -- Freeze character if enabled in config
+            if config.FreezeWhileFishing then
+                farm.freeze_character(true)
             end
-        end
-    end)
-end
-NoclipConnection = RunService.Stepped:Connect(function()
-    if Noclip == true then
-        if LocalCharacter ~= nil then
-            for i, v in pairs(LocalCharacter:GetDescendants()) do
-                if v:IsA("BasePart") and v.CanCollide == true then
-                    v.CanCollide = false
-                end
-            end
+            farm.cast()
+            farm.shake()
+            farm.reel()
+        else
+            -- Unfreeze character when not fishing
+            farm.freeze_character(false)
         end
     end
 end)
 
-local initialPosition
 
-function rememberPosition()
-    spawn(function()
-        local baseplate = Instance.new("Part")
-        baseplate.Parent = workspace
-        baseplate.Size = Vector3.new(50, 0, 50)
-        baseplate.Anchored = true
-        baseplate.Name = "Baseplate"
-        local desiredCFrame = CFrame.new(-2823, 217, 1689)
-        baseplate.Position = desiredCFrame.Position
-        wait(0.1)
-        local Players = game:GetService("Players")
-        Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-2823, 220, 1689))
-        wait(0.1)
-        local Players = game:GetService("Players")
-        Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-2823, 220, 1689))
-        
-        local player = game.Players.LocalPlayer
-        local character = player.Character or player.CharacterAdded:Wait()
-        local humanoid = character:FindFirstChildOfClass("Humanoid")
-        local rootPart = character:WaitForChild("HumanoidRootPart")
- 
-        local initialCFrame = rootPart.CFrame
- 
-        local bodyVelocity = Instance.new("BodyVelocity")
-        bodyVelocity.Velocity = Vector3.new(0, 0, 0)
-        bodyVelocity.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-        bodyVelocity.Parent = rootPart
- 
-        local bodyGyro = Instance.new("BodyGyro")
-        bodyGyro.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
-        bodyGyro.D = 100
-        bodyGyro.P = 10000
-        bodyGyro.CFrame = initialCFrame
-        bodyGyro.Parent = rootPart
- 
-        while AutoFreeze do
-            rootPart.CFrame = initialCFrame
-            task.wait(0.01)
-        end
- 
-        if bodyVelocity then
-            bodyVelocity:Destroy()
-        end
-        if bodyGyro then
-            bodyGyro:Destroy()
-        end
-    end)
-end
-function WebhookManager()
-    spawn(function()
-        while WebhookLog do
-            task.wait(WebhookDelay)
-            local OSTime = os.time()
-            local playerLocalTime = os.date('*t', OSTime)
-            local formattedLocalTime = string.format('%02d:%02d:%02d',
-                                             playerLocalTime.hour,
-                                             playerLocalTime.min,
-                                             playerLocalTime.sec)
-            
-            local player = game.Players.LocalPlayer
-            local playerUserId = player.UserId
-            local playerProfileUrl = "https://www.roblox.com/users/" .. playerUserId .. "/profile"
+end})
 
-            local MoneyPlayer = game:GetService("Players").LocalPlayer.leaderstats["C$"].Value
-            local LvlPlayer = game:GetService("Players").LocalPlayer.leaderstats.Level.Value
 
-            local Embed = {
-                title = 'Sea Hub',
-                color = 0x8B26BB,
-                fields = {
-                    { name = 'Player Profile', value = playerProfileUrl },
-                    { name = '', value = '', },
-                    { name = 'C$ - Money💸', value = '```' .. MoneyPlayer .. '```', inline = true },
-                    { name = 'Fishing Level🎣', value = '```' .. LvlPlayer .. '```', inline = true },
-                    { name = '', value = '', },
-                    { name = 'Current Local Time', value = formattedLocalTime },
-                },
-                timestamp = os.date('!%Y-%m-%dT%H:%M:%SZ', OSTime),
-            }
-            local success, response = pcall(function()
-                return (syn and syn.request or http_request) {
-                    Url = WebhookUrl,
-                    Method = 'POST',
-                    Headers = { ['Content-Type'] = 'application/json' },
-                    Body = game:GetService('HttpService'):JSONEncode({
-                        username = 'Sea Hub | Fisch',
-                        avatar_url = 'https://cdn.discordapp.com/icons/1241045437884923965/6e134ec00e5adf7fc7f82fcabce45e8a.webp?size=4096',
-                        embeds = { Embed }
-                    }),
-                }
-            end)
-        end
-    end)
-end
-function AutoSellz()
-    spawn(function()
-        while AutoSell do
-            SellFishAndReturnAll()
-            task.wait(AutoSellDelay)
-        end
-    end)
-end
-function Appraise()
-    spawn(function()
-        while AutoAppraiser do
-            workspace:WaitForChild("world"):WaitForChild("npcs"):WaitForChild("Appraiser"):WaitForChild("appraiser"):WaitForChild("appraise"):InvokeServer()
-            task.wait(0.1)
-        end
-    end)
+
+Main_1_left:button({name = "Press F (mobile)",def = false,callback = function()
+    local VirtualInputManager = game:GetService("VirtualInputManager")
+
+-- Simulate pressing the F key once
+VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.F, false, game)  -- Key down
+task.wait(0.1)  -- Wait a short time to simulate key press duration
+VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.F, false, game)  -- Key up
+end})
+
+Main_1_left:button({name = "Freeze (Key:X)",def = false,callback = function()
+	local Players = game:GetService("Players")
+	local UserInputService = game:GetService("UserInputService")
+	local LocalPlayer = Players.LocalPlayer
+	local toggleKey = Enum.KeyCode.X
+	
+	local isFrozen = false
+	local freezeCFrame
+	
+	-- Function to save the player's current CFrame
+	local function savePosition()
+		local character = LocalPlayer.Character
+		if character and character:FindFirstChild("HumanoidRootPart") then
+			freezeCFrame = character.HumanoidRootPart.CFrame
+		end
+	end
+	
+	-- Function to keep teleporting the player back to the saved CFrame
+	local function freezePlayer()
+		while isFrozen do
+			local character = LocalPlayer.Character
+			if character and character:FindFirstChild("HumanoidRootPart") and freezeCFrame then
+				character.HumanoidRootPart.CFrame = freezeCFrame
+			end
+			task.wait(0.1)  -- Adjust delay for smoother or stricter freezing
+		end
+	end
+	
+	-- Toggle freeze on or off with the key press
+	UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
+		if not gameProcessedEvent and input.KeyCode == toggleKey then
+			isFrozen = not isFrozen
+			if isFrozen then
+				savePosition()
+				freezePlayer()
+				print("Freeze enabled.")
+			else
+				print("Freeze disabled.")
+			end
+		end
+	end)	
+end})
+
+Main_1_left:button({name = "Press X (mobile)",def = false,callback = function()
+    local VirtualInputManager = game:GetService("VirtualInputManager")
+
+-- Simulate pressing the F key once
+VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.X, false, game)  -- Key down
+task.wait(0.1)  -- Wait a short time to simulate key press duration
+VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.X, false, game)  -- Key up
+end})
+
+Main_1_left:button({name = "insta coin",def = false,callback = function()
+	local args = {
+		[1] = 100,
+		[2] = true
+	}
+	
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	
+	local function fireEvent()
+		ReplicatedStorage:WaitForChild("events"):WaitForChild("reelfinished"):FireServer(unpack(args))
+	end
+	
+	task.spawn(function()
+		while true do
+			fireEvent()
+			task.wait(0.00001)
+		end
+	end)
+end})
+
+Main_1_left:keybind({name = "set ui keybind",def = nil,callback = function(key)
+   window.key = key
+end})
+
+
+Main_2_left:button({name = "Inf Oxygen",callback = function()
+    local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+-- Find the LocalPlayer's character in workspace
+local playerFolder = workspace:FindFirstChild(LocalPlayer.Name)
+local oxygenScript = playerFolder and playerFolder:FindFirstChild("client") and playerFolder.client:FindFirstChild("oxygen")
+
+-- Check if the script exists and is a LocalScript, then disable it
+if oxygenScript and oxygenScript:IsA("LocalScript") then
+    oxygenScript.Disabled = true
 end
 
-function SellFishAndReturnAll()
-    local player = game.Players.LocalPlayer
-    local character = player.Character or player.CharacterAdded:Wait()
-    local rootPart = character:WaitForChild("HumanoidRootPart")
-    local currentPosition = rootPart.CFrame
-    local sellPosition = CFrame.new(464, 151, 232)
-    local wasAutoFreezeActive = false
-    if AutoFreeze then
-        wasAutoFreezeActive = true
-        AutoFreeze = false
-    end
-    rootPart.CFrame = sellPosition
-    task.wait(0.5)
+end})
+
+Main_2_left:button({name = "Equip tool",callback = function()
+		local Players = game:GetService("Players")
+		local player = Players.LocalPlayer
+		local character = player.Character or player.CharacterAdded:Wait()
+		local backpack = player:WaitForChild("Backpack")
+		
+		-- Function to equip a tool
+		local function equipTool(toolName)
+			local tool = backpack:FindFirstChild(toolName) or character:FindFirstChild(toolName)
+			if tool and tool:IsA("Tool") then
+				tool.Parent = character
+			end
+		end
+		
+		-- Example usage
+		equipTool("No-Life Rod")
+		equipTool("Rapid Rod")
+		equipTool("Nocturnal Rod")
+		equipTool("Lucky Rod")
+		equipTool("Destiny Rod")
+		equipTool("Aurora Rod")
+		equipTool("Fast Rod")
+		equipTool("Training Rod")
+		equipTool("Buddy Bond Rod")
+		equipTool("Reinforced Rod")
+		equipTool("Rod Of The Depths")
+		equipTool("Scurvy Rod")
+		equipTool("Steady Rod")
+		equipTool("Trident Rod")
+		equipTool("Ultratech Rod")
+		equipTool("Tetra Rod")
+		equipTool("Mythical Rod")
+		equipTool("Magma Rod")
+		equipTool("Magnet Rod")
+		equipTool("Mystic Staff")
+		equipTool("Midas Rod")
+		equipTool("Executive Rod")
+		equipTool("Haunted Rod")
+		equipTool("Fischer's Rod")
+		equipTool("Kings Rod")
+end})
+
+Main_2_left:button({name = "Sell All",callback = function()
     workspace:WaitForChild("world"):WaitForChild("npcs"):WaitForChild("Marc Merchant"):WaitForChild("merchant"):WaitForChild("sellall"):InvokeServer()
-    task.wait(3)
+end})
 
-    rootPart.CFrame = currentPosition
+Main_2_left:button({name = "Sell Held Item",callback = function()
+    workspace:WaitForChild("world"):WaitForChild("npcs"):WaitForChild("Marc Merchant"):WaitForChild("merchant"):WaitForChild("sell"):InvokeServer()
+end})
 
-    if wasAutoFreezeActive then
-        AutoFreeze = true
-        rememberPosition()
+Main_2_left:button({name = "Appraise Held Item",callback = function()
+    workspace:WaitForChild("world"):WaitForChild("npcs"):WaitForChild("Appraiser"):WaitForChild("appraiser"):WaitForChild("appraise"):InvokeServer()
+end})
+
+Main_2_left:button({name = "TP To Seller",callback = function()
+    local player = game.Players.LocalPlayer
+player.Character.HumanoidRootPart.CFrame = CFrame.new(476, 151, 232)
+end})
+
+Main_2_left:button({name = "Auto fix map",callback = function()
+	for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do 
+        if v.Name == "Treasure Map" then
+            game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+            workspace.world.npcs["Jack Marrow"].treasure.repairmap:InvokeServer()
+        end
     end
+end})
+
+Main_2_left:button({name = "Auto Press E",callback = function()
+	local VirtualInputManager = game:GetService("VirtualInputManager")
+
+for i = 1, 50 do
+    VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.E, false, game)
+    VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.E, false, game)
+    wait(0.3) -- Small delay to avoid overwhelming the game
 end
-function SellFishAndReturnOne()
+
+end})
+
+Main_2_left:button({name = "White Screen (Key:P)",callback = function()
+	local enabled = true
+
+local function toggle3DRendering()
+    enabled = not enabled
+    game:GetService("RunService"):Set3dRenderingEnabled(enabled)
+    print("3D rendering enabled:", enabled)
+end
+
+game:GetService("UserInputService").InputBegan:Connect(function(input)
+    if input.KeyCode == Enum.KeyCode.P then
+        toggle3DRendering()
+    end
+end)
+end})
+
+Main_3_left:button({name = "Frightful Pool",callback = function()
+    local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local Workspace = game:GetService("Workspace")
+
+-- Target CFrame with Y offset
+local targetPart = Workspace.zones.fishing.FischFright24
+
+if targetPart then
+    -- Get the current position of the target part and add 100 to the Y coordinate
+    local newPosition = targetPart.Position + Vector3.new(0, 100, 0)
+
+    -- Teleport the LocalPlayer's character to the new position
+    local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+    character:SetPrimaryPartCFrame(CFrame.new(newPosition))
+else
+    print("Not Spawn Yet.")
+end
+end})
+
+Main_3_left:button({name = "Merchant Boat",callback = function()
     local player = game.Players.LocalPlayer
     local character = player.Character or player.CharacterAdded:Wait()
-    local rootPart = character:WaitForChild("HumanoidRootPart")
-    local currentPosition = rootPart.CFrame
-    local sellPosition = CFrame.new(464, 151, 232)
-    local wasAutoFreezeActive = false
-    if AutoFreeze then
-        wasAutoFreezeActive = true
-        AutoFreeze = false
+    local targetObject = workspace.active:FindFirstChild("Merchant Boat") and workspace.active["Merchant Boat"]:FindFirstChild("1")
+    
+    if character and targetObject then
+        local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+        if humanoidRootPart then
+            -- Teleport the player to the target object's CFrame
+            humanoidRootPart.CFrame = targetObject.CFrame
+        else
+            warn("HumanoidRootPart not found.")
+        end
+    else
+        warn("Merchant Boat 1")
     end
-    rootPart.CFrame = sellPosition
-    task.wait(0.5)
+    
+end})
+
+Main_2_left:button({name = "Buy Relic",callback = function()
+	while wait(0.2) do
+		workspace:WaitForChild("world"):WaitForChild("npcs"):WaitForChild("Merlin"):WaitForChild("Merlin"):WaitForChild("power"):InvokeServer()
+	end 
+end})
+
+Main_2_left:button({name = "Go To Witch",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(405, 135, 318))
+end})
+
+Main_2_left:button({name = "Sell Held Item",callback = function()
     workspace:WaitForChild("world"):WaitForChild("npcs"):WaitForChild("Marc Merchant"):WaitForChild("merchant"):WaitForChild("sell"):InvokeServer()
-    task.wait(3)
+end})
 
-    rootPart.CFrame = currentPosition
+Main_2_left:button({name = "Deploy Crab Cage",callback = function()
+    local args = {
+		[1] = {
+			["CFrame"] = CFrame.new(2814.69384765625, 126.5, -646.474365234375, 0.6434483528137207, 7.951216574042519e-09, -0.7654895186424255, -4.285541521653613e-08, 1, -2.563592182980301e-08, 0.7654895186424255, 4.9300762583470714e-08, 0.6434483528137207)
+		}
+	}
+	
+	game:GetService("Players").LocalPlayer.Character:FindFirstChild("Crab Cage").Deploy:FireServer(unpack(args))
+end})
 
-    if wasAutoFreezeActive then
-        AutoFreeze = true
-        rememberPosition()
+Main_2_left:button({name = "Deploy 5000 Cages",callback = function()
+	for i = 1, 5000 do
+		local args = {
+			[1] = {
+				["CFrame"] = CFrame.new(2814.69384765625, 126.5, -646.474365234375, 0.6434483528137207, 7.951216574042519e-09, -0.7654895186424255, -4.285541521653613e-08, 1, -2.563592182980301e-08, 0.7654895186424255, 4.9300762583470714e-08, 0.6434483528137207)
+			}
+		}
+	
+		game:GetService("Players").LocalPlayer.Character:FindFirstChild("Crab Cage").Deploy:FireServer(unpack(args))
+	end
+
+end})
+
+Main_2_left:button({name = "Fps Boost",callback = function()
+    local ToDisable = {
+        Textures = true,
+        VisualEffects = true,
+        Parts = true,
+        Particles = true,
+        Sky = true
+    }
+    
+    local ToEnable = {
+        FullBright = false
+    }
+    
+    local Stuff = {}
+    
+    for _, v in next, game:GetDescendants() do
+        if ToDisable.Parts then
+            if v:IsA("Part") or v:IsA("Union") or v:IsA("BasePart") then
+                v.Material = Enum.Material.SmoothPlastic
+                table.insert(Stuff, 1, v)
+            end
+        end
+        
+        if ToDisable.Particles then
+            if v:IsA("ParticleEmitter") or v:IsA("Smoke") or v:IsA("Explosion") or v:IsA("Sparkles") or v:IsA("Fire") then
+                v.Enabled = false
+                table.insert(Stuff, 1, v)
+            end
+        end
+        
+        if ToDisable.VisualEffects then
+            if v:IsA("BloomEffect") or v:IsA("BlurEffect") or v:IsA("DepthOfFieldEffect") or v:IsA("SunRaysEffect") then
+                v.Enabled = false
+                table.insert(Stuff, 1, v)
+            end
+        end
+        
+        if ToDisable.Textures then
+            if v:IsA("Decal") or v:IsA("Texture") then
+                v.Texture = ""
+                table.insert(Stuff, 1, v)
+            end
+        end
+        
+        if ToDisable.Sky then
+            if v:IsA("Sky") then
+                v.Parent = nil
+                table.insert(Stuff, 1, v)
+            end
+        end
     end
+    
+    game:GetService("TestService"):Message("Effects Disabler Script : Successfully disabled "..#Stuff.." assets / effects. Settings :")
+    
+    for i, v in next, ToDisable do
+        print(tostring(i)..": "..tostring(v))
+    end
+    
+    if ToEnable.FullBright then
+        local Lighting = game:GetService("Lighting")
+        
+        Lighting.FogColor = Color3.fromRGB(255, 255, 255)
+        Lighting.FogEnd = math.huge
+        Lighting.FogStart = math.huge
+        Lighting.Ambient = Color3.fromRGB(255, 255, 255)
+        Lighting.Brightness = 5
+        Lighting.ColorShift_Bottom = Color3.fromRGB(255, 255, 255)
+        Lighting.ColorShift_Top = Color3.fromRGB(255, 255, 255)
+        Lighting.OutdoorAmbient = Color3.fromRGB(255, 255, 255)
+        Lighting.Outlines = true
+    end
+end})
+
+Main_2_left:button({name = "infinteyield",callback = function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end})
+
+Main_3_left:button({name = "Moosewood",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(386, 135, 252))
+end})
+
+Main_3_left:button({name = "Statue",callback = function()
+    local Players = game:GetService("Players")
+    Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(73, 142, -1028))
+end})
+
+Main_3_left:button({name = "Lava",callback = function()
+    local Players = game:GetService("Players")
+    Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-1889, 168, 329))
+end})
+
+Main_3_left:button({name = "Arch",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(999, 131, -1237))
+end})
+
+Main_3_left:button({name = "spike",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-1255, 138, 1554))
+end})
+
+Main_3_left:button({name = "Birch",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1742, 142, -2502))
+end})
+
+Main_3_left:button({name = "Mushgrove",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(2501, 131, -721))
+end})
+
+Main_3_left:button({name = "Keepers",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1296, -805, -299))
+end})
+
+Main_3_left:button({name = "Executive",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-30, -247, 199))
+end})
+
+Main_3_left:button({name = "Swamp",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(2501, 131, -721))
+end})
+
+Main_3_left:button({name = "Snowcap",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(2649, 142, 2521))
+end})
+
+Main_3_left:button({name = "Wilson",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(2939, 281, 2567))
+end})
+
+Main_3_left:button({name = "Roslit",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-1477, 134, 672))
+end})
+
+Main_3_left:button({name = "Vertigo",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-112, -515, 1040))
+end})
+
+Main_3_left:button({name = "Sunstone",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-933, 132, -1120))
+end})
+
+Main_3_left:button({name = "Terrapin",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-144, 145, 1910))
+end})
+
+Main_3_left:button({name = "Birch",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1739, 141, -2486))
+end})
+
+Main_3_left:button({name = "Deepshop",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-984, -245, -2704))
+end})
+
+Main_3_left:button({name = "Deepshop2",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-1659, -214, -2846))
+end})
+
+Main_3_left:button({name = "Trident",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-1484, -224, -2198))
+end})
+
+Main_3_left:button({name = "Brine Pool",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-1788, -143, -3418))
+end})
+
+Main_3_left:button({name = "Deep Ocean (safeplace)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-508, -62, -7688))
+end})
+
+Main_3_left:button({name = "Buy luck",callback = function()
+	local Players = game:GetService("Players")
+	Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-931, 226, -995))
+end})
+
+Main_3_left:button({name = "Forsaken shore",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-2504, 136, 1573))
+end})
+
+Main_3_left:button({name = "Captain goldenfish",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-2753, 217, 1729))
+end})
+
+Main_3_left:button({name = "Priate",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-2823, 214, 1521))
+end})
+
+Main_3_left:button({name = "Chest",callback = function()
+	local chests = workspace.world.chests:GetChildren()
+local player = game.Players.LocalPlayer
+local lastChest = 0  -- Keeps track of the last teleported chest
+
+-- Teleport to the next chest
+lastChest = (lastChest % #chests) + 1  -- Cycle through each chest
+player.Character.HumanoidRootPart.CFrame = chests[lastChest].CFrame
+
+end})
+
+Main_3_left:button({name = "Shipwreck",callback = function()
+	local Players = game:GetService("Players")
+	Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-3596, 141, 1605))
+end})
+
+Main_3_left:button({name = "Snowcap inside",callback = function()
+	local Players = game:GetService("Players")
+	Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(2848, 135, 2615))
+end})
+
+Main_3_left:button({name = "upper deepsolate",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-791, 142, -3103))
+end})
+
+Main_3_left:button({name = "Vertigo outside",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-7, -706, 1229))
+end})
+
+Main_3_left:button({name = "Vertigo inside",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(95, -701, 1225))
+end})
+
+Main_3_left:button({name = "Depth",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(574, -704, 1225))
+end})
+
+Main_3_left:button({name = "Depth merchant",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(949, -712, 1255))
+end})
+
+Main_3_left:button({name = "Abyssal",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1208.90796, -716.287781, 1316.12476, -0.258864403, 0, 0.965913713, 0, 1, 0, -0.965913713, 0, -0.258864403))
+end})
+
+Main_3_left:button({name = "Hexed",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1051.00208, -632.073181, 1316.28882, -0.998992562, 0, -0.0448761396, 0, 1, 0, 0.0448761396, 0, -0.998992562))
+end})
+
+Main_3_left:button({name = "Best Farm Zone",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1047, -782, 1056))
+end})
+
+Main_3_left:button({name = "The Depths Serpent Zone",callback = function()
+-- Script to teleport to "The Depths - Serpent" or show a notification
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
+
+-- Pathway to the target zone
+local zonePath = workspace.zones.fishing:FindFirstChild("The Depths - Serpent")
+
+-- Function to notify player
+local function notifyPlayer(message)
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Notification";
+        Text = message;
+        Duration = 5; -- Duration of notification
+    })
 end
 
-do
-    local _25ms=Tabs.Home:AddButton({
-        Title = "Copy Discord Invite",
-        Description = "discord.gg/z99ydt7zQT, Sea hub | We do sell acc & fishes",
-        Callback = function()
-            setclipboard("https://discord.gg/z99ydt7zQT")
-        end
-    })
-    local section = Tabs.Home:AddSection("Change Log:")
-    Tabs.Home:AddParagraph({
-        Title = "Information",
-        Content = "[🟩] - Added\n[🟧] - Changed\n[🟥] - Removed\n[⭐] - Premium Feature"
-    })
+-- Check if the zone exists
+if zonePath then
+    -- Teleport to the zone
+    HumanoidRootPart.CFrame = zonePath.CFrame
+    notifyPlayer("Teleported to The Depths - Serpent!")
+else
+    -- Notify if the zone does not exist
+    notifyPlayer("The Depths - Serpent has not spawned yet!")
+end
+end})
 
-    Tabs.Home:AddParagraph({
-        Title = "v1.6 - Fixes!",
-        Content = "[⭐] - Zone Casting Fix\n[⭐] - Auto Shake No Delay fix speed\n[🟩] - Teleport to Midas Rod\n[🟧] - Better sell buttons\n[🟧] - Auto Shake Dropdown\n[🟧] - Auto Cast & Reel & Shake in one toggle now"
-    })
-    Tabs.Home:AddParagraph({
-        Title = "v1.5 - Meow!",
-        Content = "[⭐] - Zone Casting\n[🟩] - Player Move Speed\n[🟩] - Player Jump Power\n[🟩] - Fly\n[🟩] - Roblox Radio\n[🟩] - Auto Appraiser\n[🟧] - Better Freeze\n[🟧] - Auto Shake (mouse)\n[🟧] - Auto Cast & Reel (one button)"
-    })
-    Tabs.Home:AddParagraph({
-        Title = "v1.4 - Buttons!",
-        Content = "[🟩] - 4 buttons in teleport\n[🟩] - Button to enable fps cap"
-    })
-    Tabs.Home:AddParagraph({
-        Title = "v1.3 - FpS",
-        Content = "[🟩] - Fps Cap"
-    })
-    Tabs.Home:AddParagraph({
-        Title = "v1.2 - Fishing",
-        Content = "[⭐] - No Shake Delay all\n[🟩] - AntiAFK added\n[🟩] - Auto Bait\n[🟩] - Remove all flags (fps)\n[🟩] - Fish Area teleport\n[🟩] - Auto Cast more safest\n[🟧] - Better Freeze\n[🟧] - Shake Delay minimum 0.2\n[🟧] - Auto Shake v1 and v2 better"
-    })
-    Tabs.Home:AddParagraph({
-        Title = "v1.1 - Fixes",
-        Content = "[🟧] Phantom Clicks - fixed\n[🟧] Better Freeze\n[⭐] - No Shake Delay (Mouse Clicks)"
-    })
-    Tabs.Home:AddParagraph({
-        Title = "v1 - Meow",
-        Content = "[🟧] Auto Shake Speed 0.3-1\n[🟧] Webhook Loger fixed\n[🟩] Black Screen\n[🟩] White Screen\n[🟩] FpS Booster\n[⭐] No Shake Delay (Premium)"
-    })
-    Tabs.Home:AddParagraph({
-        Title = "v0.9 - Fixes",
-        Content = "[🟩] ChangeLog information\n[🟧] Auto Freeze fix\n[🟥] Auto Cast Chance (because bugs ~solara)\n[🟩] Auto Cast - Random Chance from 90 to 99"
-    })
-    Tabs.Home:AddParagraph({
-        Title = "v0.8 - Webhook & Fishing",
-        Content = "[🟩] Webhook fixed bugs\n[🟧] Fixed Auto Freeze\n[🟩] Auto Cast chance\n[🟩] Auto sell fish"
-    })
-    Tabs.Home:AddParagraph({
-        Title = "v0.7 - Webhook",
-        Content = "[🟩] Webhook URL\n[🟩] Webhook Delay messages\n[🟩] Webhook On/Off"
-    })
-    Tabs.Home:AddParagraph({
-        Title = "v0.6 - Items",
-        Content = "[🟧] Teleport Items - +2 rods"
-    })
-    Tabs.Home:AddParagraph({
-        Title = "v0.5 - Fixes",
-        Content = "[🟧] Bigger UI\n[🟩] Auto Shake V2\n[🟧] Auto Shake more information\n[🟩] Teleports Place - New Location\n[🟩] Teleport NPCs - Updated\n[🟩] Ui Toggle (Mobile)"
-    })
-    Tabs.Home:AddParagraph({
-        Title = "v0.4 - Fixes",
-        Content = "[🟩] Freeze Character\n[🟩] Auto Cast Fix Bugs (v0.3)"
-    })
-    Tabs.Home:AddParagraph({
-        Title = "v0.3 - Teleports",
-        Content = "[🟧] Fixed NPCs teleport\n[🟧] Fixed Item Grabber (🎃)\n[🟩] Teleport Fish Radar\n[🟩] Teleport Basic Diving Gear"
-    })
-    Tabs.Home:AddParagraph({
-        Title = "v0.2 - Bug Fixes",
-        Content = "[🟧] Auto Shake\n[🟩] Auto Shake Delay\n[🟧] Auto Reel\n[🟧] Auto Cast\n[🟩] Teleport Place\n[🟩] Teleport NPCs\n[🟩] Teleport Items\n[🟩] Item Graber (🎃)\n[🟩] Noclip\n[🟩] Infinity Oxygen"
-    })
-    Tabs.Home:AddParagraph({
-        Title = "v0.1 - Release",
-        Content = "[🟩] Auto Fish\n[🟩] Auto Sell All"
-    })
+Main_3_left:button({name = "Rod of the Depths",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1703, -903, 1444))
+end})
 
-    local section = Tabs.Premium:AddSection("Fishing⭐")
-    local AutoShakeT3 = Tabs.Premium:AddToggle("MyAutoShake3", {Title = "No Shake Delay | Best", Default = true })
-    AutoShakeT3:OnChanged(function(Value)
-        if ProtectPremium == true then
-            autoShake3 = AutoShakeT3.Value
-        else
-            warn("No Premium")
-        end
-    end)
-    local DropdownZoneCast = Tabs.Premium:AddDropdown("DropdownZoneCast", {
-        Title = "Select zone to cast anywhere",
-        Values = {"Snowcap Pond"},
-        Multi = false,
-    })
-    DropdownZoneCast:OnChanged(function(Value)
-        print("Dropdown changed:", Value)
-        selectedZoneCast = "Snowcap Pond"
-    end)
-    Tabs.Premium:AddParagraph({
-        Title = "Zone Helper",
-        Content = "First 3 - Event zones\nFischFright24 - Fright Pool"
-    })
-    
-    local ToggleZoneCast1214 = Tabs.Premium:AddToggle("ToggleZoneCast1214", {Title = "Enable cast selected zone", Default = true })
-    ToggleZoneCast1214:OnChanged(function(Value)
-        AutoZoneCast = Value
-        if ProtectPremium == true then
-            if AutoZoneCast then
-                ZoneCasting()
-            end
-        else
-            print("No Premium")
-        end
-    end)
+Main_3_left:button({name = "Scurvy Rod (new)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-2826, 215, 1513))
+end})
 
-    local section = Tabs.Main:AddSection("Fishing")
+Main_3_left:button({name = "Secert elevator",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(2232, -803, 1014))
+end})
 
-    local DropdownShake = Tabs.Main:AddDropdown("DropdownShake", {
-        Title = "Select Auto Shake Mode:",
-        Description = "Mouse - Make sure to hide UI and toggle chat off in order for Auto Shake to work!",
-        Values = {"Phantom", "Mouse"},
-        Multi = false,
-        Default = 1,
-    })
-    DropdownShake:OnChanged(function(Value)
-        ShakeMode = Value
-        print("Auto Shake Mode:", Value)
-    end)   
+Main_3_left:button({name = "AncientIslesMini (new)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(4040, 131, 78))
+end})
 
-    local Slider = Tabs.Main:AddSlider("Slider", {
-        Title = "AutoShake Delay",
-        Description = "Change the delay between every shake",
-        Default = 2,
-        Min = 0.2,
-        Max = 1,
-        Rounding = 1,
-        Callback = function(Value)
-            autoShakeDelay = Value
-        end
-    })
-    Slider:OnChanged(function(Value)
-        autoShakeDelay = Value
-    end)
-    Slider:SetValue(0.2)
-    
-    local autoReelCastShakeT = Tabs.Main:AddToggle("autoReelCastShakeT", {Title = "Auto Fish", Default = true })
-    autoReelCastShakeT:OnChanged(function(Value)
-        autoReel = Value
-        AutoCast = Value
-        if AutoCast then
-            Pidoras()
-        end
-        if ShakeMode == "Mouse" then
-            autoShake = Value
-        elseif ShakeMode == "Phantom" then
-            autoShake2 = Value
-        end
-        AutoFish = Value
-        AutoFish5()
-        if AutoCast == true and LocalCharacter:FindFirstChildOfClass("Tool") ~= nil then
-            local Tool = LocalCharacter:FindFirstChildOfClass("Tool")
-            if Tool:FindFirstChild("events"):WaitForChild("cast") ~= nil then
-                local Random = math.random() * (99 - 90) + 90
-                local FRandom = string.format("%.4f", Random)
-                print(FRandom)
-                local Random2 = math.random(90, 99)
-                Tool.events.cast:FireServer(Random2)
-            end
-        end
-    end)
-    
-    local AutoFreezeT = Tabs.Main:AddToggle("MyFreeze", {
-        Title = "Freeze Position",
-        Description = "Freezes player position and rotation",
-        Default = true
-    })
-    AutoFreezeT:OnChanged(function()
-        AutoFreeze = AutoFreezeT.Value
-        if AutoFreeze then
-            rememberPosition()
-        end
-    end)
+Main_3_left:button({name = "Relic Rod (new)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(4098, 40, 28))
+end})
 
-    local AntiAfk3 = Tabs.Main:AddToggle("AntiAfk3", {Title = "Anti-AFK", Description = "Prevents the player from being marked as AFK", Default = true })
-    AntiAfk3:OnChanged(function(Value)
-        AntiAfk = AntiAfk3.Value
-        AntiAfk2()
-    end)
+Main_3_left:button({name = "Boat Tp To Spawn",callback = function()
+	local targetCFrame = CFrame.new(220, 128, 220) -- Set your target CFrame here
 
-    local section = Tabs.Main:AddSection("Additional")
+-- List of boat names to check
+local boatNames = {
+    "Surfboard",
+    "Bass Boat",
+    "Hovercraft",
+    "Speedboat",
+    "Fishing Boat",
+    "Pontoon",
+    "Pirate Ship",
+    "Quack Cruiser",
+    "Titan",
+    "Luxury Speedboat",
+    "Jetski",
+    "Flying Dutchman",
+    "Rowboat"
+}
 
-    local AutoSellF = Tabs.Main:AddToggle("AutoSellF", {Title = "Auto Sell Fish", Default = false })
-    AutoSellF:OnChanged(function()
-        AutoSell = AutoSellF.Value
-        AutoSellz()
-    end)
+local function teleportBoatBase(playerName)
+    local boatsFolder = game:GetService("Workspace"):FindFirstChild("active")
+        and game:GetService("Workspace").active:FindFirstChild("boats")
+        and game:GetService("Workspace").active.boats:FindFirstChild(playerName)
 
-    local SliderSell = Tabs.Main:AddSlider("SliderSell", {
-        Title = "Selling All fish every ? seconds",
-        Description = "",
-        Default = 300,
-        Min = 1,
-        Max = 600,
-        Rounding = 1,
-        Callback = function(Value)
-            AutoSellDelay = Value
-        end
-    })
-
-    Tabs.Main:AddButton({
-        Title = "Sell one fish",
-        Description = "Need to hold fish",
-        Callback = function()
-            SellFishAndReturnOne()
-        end
-    })
-    Tabs.Main:AddButton({
-        Title = "Sell All fishs",
-        Description = "Selling all fish anywhere!",
-        Callback = function()
-            Window:Dialog({
-                Title = "You sure want sell all fish?",
-                Content = "",
-                Buttons = {
-                    {
-                        Title = "Confirm",
-                        Callback = function()
-                            SellFishAndReturnAll()
-                            print("Fish Sold.")
-                        end
-                    },
-                    {
-                        Title = "Cancel",
-                        Callback = function()
-                            print("Pidr.")
-                        end
-                    }
-                }
-            })
-        end
-    })
-
-    local DropdownPlace = Tabs.Teleports:AddDropdown("DropdownPlace", {
-        Title = "Place teleport",
-        Values = {"altar", "arch", "birch", "brine", "deep", "deepshop", "enchant", "keepers", "mod_house", "moosewood", "mushgrove", "roslit", "snow", "snowcap", "spike", "statue", "sunstone", "swamp", "terrapin", "trident", "vertigo", "volcano", "wilson", "wilsons_rod"},
-        Multi = false,
-    })
-    DropdownPlace:OnChanged(function(Value)
-        if teleportSpots ~= nil and HumanoidRootPart ~= nil then
-            local teleportCFrame = teleportSpots[Value]
-            if teleportCFrame then
-                HumanoidRootPart.CFrame = teleportCFrame
-            else
-                print("1")
-            end
-        end
-    end)
-
-    local DropdownArea = Tabs.Teleports:AddDropdown("DropdownArea", {
-        Title = "Fish Area teleport",
-        Values = {"Goldfish", "Roslit_Bay", "Ocean", "Snowcap_Pond", "Moosewood_Docks", "Deep_Ocean", "Vertigo", "Snowcap_Ocean", "Harvesters_Spike", "SunStone", "Roslit_Bay_Ocean", "Moosewood_Pond", "Terrapin_Ocean", "Isonade", "Moosewood_Ocean", "Roslit_Pond", "Moosewood_Ocean_Mythical", "Terrapin_Olm", "The_Arch", "Scallop_Ocean", "SunStone_Hidden", "Mushgrove_Stone", "Keepers_Altar", "Lava", "Roslit_Pond_Seaweed"},
-        Multi = false,
-    })
-    DropdownArea:OnChanged(function(Value)
-        if FishAreas ~= nil and HumanoidRootPart ~= nil then
-            if FishAreas[Value] and typeof(FishAreas[Value]) == "CFrame" then
-                HumanoidRootPart.CFrame = FishAreas[Value]
-            else
-                print("1")
-            end
-        else
-            print("1")
-        end
-    end)    
-
-    local DropdownNPC = Tabs.Teleports:AddDropdown("DropdownNPC", {
-        Title = "Teleport to Npc",
-        Values = {"Witch", "Quiet_Synph", "Pierre", "Phineas", "Paul", "Shipwright", "Angler", "Marc", "Lucas", "Latern_Keeper", "Inn_Keeper", "Roslit_Keeper", "FishingNpc_1", "FishingNpc_2", "FishingNpc_3", "Henry", "Daisy", "Appraiser", "Merchant", "Mod_Keeper", "Ashe", "Alfredrickus"},
-        Multi = false,
-    })
-    DropdownNPC:OnChanged(function(Value)
-        if racistPeople ~= nil and HumanoidRootPart ~= nil then
-            local npcPosition = racistPeople[Value]
-            if npcPosition then
-                if typeof(npcPosition) == "Vector3" then
-                    HumanoidRootPart.CFrame = CFrame.new(npcPosition)
-                elseif typeof(npcPosition) == "CFrame" then
-                    HumanoidRootPart.CFrame = npcPosition
-                else
-                    print("1")
+    if boatsFolder then
+        for _, boatName in ipairs(boatNames) do
+            local boatModel = boatsFolder:FindFirstChild(boatName)
+            if boatModel then
+                local basePart = boatModel:FindFirstChild("Base")
+                if basePart and basePart:IsA("BasePart") then
+                    basePart.CFrame = targetCFrame
+                    print("Teleported " .. boatName .. " of " .. playerName .. " to target CFrame.")
                 end
             end
-        else
-            print("No valid teleport spot found.")
         end
-    end)
-    
+    else
+        warn("Boats folder for " .. playerName .. " not found")
+    end
+end
 
-    local DropdownItems = Tabs.Teleports:AddDropdown("Dropdown3", {
-        Title = "Teleport to Items",
-        Values = {"Training_Rod", "Plastic_Rod", "Lucky_Rod", "Nocturnal_Rod", "Kings_Rod", "Flimsy_Rod", "Fast_Rod", "Carbon_Rod", "Long_Rod", "Mythical_Rod", "Midas_Rod", "Trident_Rod", "Basic_Diving_Gear", "Fish_Radar", "Enchated_Altar", "Bait_Crate", "Quality_Bait_Crate", "Crab_Cage", "GPS"},
-        Multi = false,
-    })
-    DropdownItems:OnChanged(function(Value)
-        if itemSpots ~= nil and HumanoidRootPart ~= nil then
-            local spot = itemSpots[Value]
-            
-            print("Value:", Value, "Spot:", spot, "IsCFrame:", typeof(spot) == "CFrame")
-            
-            if typeof(spot) == "CFrame" then
-                HumanoidRootPart.CFrame = spot
-            else
-                print("1")
-            end
-        end
-    end)
-    local section = Tabs.Misc:AddSection("Appraiser")
-    local ToggleAutoApprari = Tabs.Misc:AddToggle("ToggleAutoApprari", {Title = "Auto Appraiser", Description = "Need to hold fish and be in / near moosewood", Default = false })
-    ToggleAutoApprari:OnChanged(function()
-        AutoAppraiser = ToggleAutoApprari.Value
-        Appraise()
-    end)
+-- Loop through all players and teleport their boats
+local players = game:GetService("Players"):GetPlayers()
+for _, player in ipairs(players) do
+    teleportBoatBase(player.Name)
+end
+end})
 
-    local section = Tabs.Misc:AddSection("Halloween🎃")
+Main_3_left:button({name = "Boat Tp To Frightful Pool",callback = function()
+	local targetPart = game:GetService("Workspace").zones.fishing.FischFright24
+local targetCFrame = targetPart and targetPart.CFrame or CFrame.new(0, 10, 0) -- Use FischFright24's CFrame or default if not found
 
-    local DropdownH = Tabs.Misc:AddDropdown("Dropdown4", {
-        Title = "Item Grabber",
-        Values = {'Gaint Mushroom', 'Spiders Eye', 'Strange Root', 'Candy Corn', 'Dark Art Skull'},
-        Multi = false,
-    })
-    DropdownH:OnChanged(function(Value)
-        if Value == nil then
-            return
-        end
-        if HumanoidRootPart ~= nil and ActiveFolder ~= nil then
-            local oldpos = HumanoidRootPart.CFrame
-            local EventItem = ActiveFolder:FindFirstChild(Value)
+-- List of boat names to check
+local boatNames = {
+    "Surfboard",
+    "Bass Boat",
+    "Hovercraft",
+    "Speedboat",
+    "Fishing Boat",
+    "Pontoon",
+    "Pirate Ship",
+    "Quack Cruiser",
+    "Titan",
+    "Luxury Speedboat",
+    "Jetski",
+    "Flying Dutchman",
+    "Rowboat"
+}
 
-            if EventItem ~= nil and EventItem:FindFirstChild("PickupPrompt") ~= nil then
-                HumanoidRootPart.CFrame = EventItem:FindFirstChildOfClass("MeshPart").CFrame + Vector3.new(3, 2, 0)
-                Noclip = true
-                task.wait(0.05)
-                HumanoidRootPart.Anchored = true
-                task.wait(0.5)
-                fireproximityprompt(EventItem.PickupPrompt)
-                task.wait(1)
-                if Toggles.Noclip.Value == false then
-                    Noclip = false
-                else
-                    Noclip = true
+local function teleportBoatBase(playerName)
+    local boatsFolder = game:GetService("Workspace"):FindFirstChild("active")
+        and game:GetService("Workspace").active:FindFirstChild("boats")
+        and game:GetService("Workspace").active.boats:FindFirstChild(playerName)
+
+    if boatsFolder then
+        for _, boatName in ipairs(boatNames) do
+            local boatModel = boatsFolder:FindFirstChild(boatName)
+            if boatModel and boatModel:IsA("Model") then
+                local basePart = boatModel:FindFirstChild("Base")
+                if basePart and basePart:IsA("BasePart") then
+                    basePart.CFrame = targetCFrame
+                    print("Teleported " .. boatName .. " of " .. playerName .. " to the CFrame of FischFright24.")
                 end
-                HumanoidRootPart.Anchored = false
-                HumanoidRootPart.CFrame = oldpos
-            else
-                Fluent:Notify({
-                    Title = "WARNING",
-                    Content = string.format('There is no "%s" in workspace', Value),
-                    Duration = 8
-                })                
             end
         end
-    end)
-
-    local section = Tabs.Misc:AddSection("Player")
-
-    local ToggleNoclip = Tabs.Misc:AddToggle("ToggleNoclip", {Title = "Noclip", Default = false })
-    ToggleNoclip:OnChanged(function()
-        Noclip = ToggleNoclip.Value
-    end)
-
-    local ToggleAntiDrown = Tabs.Misc:AddToggle("ToggleAntiDrown", {Title = "Infinity Oxygen", Default = true })
-    ToggleAntiDrown:OnChanged(function()
-        AntiDrown = ToggleAntiDrown.Value
-        if AntiDrown == true then
-            if LocalCharacter ~= nil and LocalCharacter:FindFirstChild("client"):WaitForChild("oxygen") ~= nil and LocalCharacter:FindFirstChild("client"):WaitForChild("oxygen").Enabled == true then	
-                LocalCharacter.client.oxygen.Enabled = false	
-            end	
-            CharAddedAntiDrownCon = LocalPlayer.CharacterAdded:Connect(function()	
-                if LocalCharacter ~= nil and LocalCharacter:FindFirstChild("client"):WaitForChild("oxygen") ~= nil and LocalCharacter:FindFirstChild("client"):WaitForChild("oxygen").Enabled == true and AntiDrown == true then	
-                    LocalCharacter.client.oxygen.Enabled = false	
-                end	
-            end)
-        else	
-            if LocalCharacter ~= nil and LocalCharacter:FindFirstChild("client"):WaitForChild("oxygen") ~= nil and LocalCharacter:FindFirstChild("client"):WaitForChild("oxygen").Enabled == false then	
-                LocalCharacter.client.oxygen.Enabled = true	
-            end	
-        end
-    end)
-
-    local section = Tabs.Misc:AddSection("Fps Services")
-
-    local Slider512 = Tabs.Misc:AddSlider("Slider512", {
-        Title = "FPS Cap",
-        Default = 90,
-        Min = 1,
-        Max = 240,
-        Rounding = 1,
-        Callback = function(Value)
-            FpsCap = Value
-            print(Value)
-        end
-    })
-    Slider512:OnChanged(function(Value)
-        FpsCap = Value
-        print(Value)
-    end)
-    Slider512:SetValue(90)
-
-    Tabs.Misc:AddButton({
-        Title = "Button to enable fps cap value",
-        Description = "🐟",
-        Callback = function()
-            setfpscap(FpsCap)
-        end
-    })
-
-    local BlackGui = Instance.new("ScreenGui")
-    BlackGui.Name = "BlackGui"
-    BlackGui.ResetOnSpawn = false
-    local blackFrame = Instance.new("Frame")
-    blackFrame.Name = "BlackFrame"
-    blackFrame.Size = UDim2.new(1, 0, 1, 0)
-    blackFrame.BackgroundColor3 = Color3.new(0, 0, 0)
-    blackFrame.BackgroundTransparency = 1
-    blackFrame.Parent = BlackGui
-    BlackGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-
-    local WhiteGui = Instance.new("ScreenGui")
-    WhiteGui.Name = "WhiteGui"  -- Изменено здесь
-    WhiteGui.ResetOnSpawn = false
-    local whiteFrame = Instance.new("Frame") -- Изменено здесь
-    whiteFrame.Name = "WhiteFrame" -- Изменено здесь
-    whiteFrame.Size = UDim2.new(1, 0, 1, 0)
-    whiteFrame.BackgroundColor3 = Color3.new(1, 1, 1)  -- Цвет белого фрейма
-    whiteFrame.BackgroundTransparency = 1
-    whiteFrame.Parent = WhiteGui
-    WhiteGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-
-    local BlackGui5 = Tabs.Misc:AddToggle("BlackGui5", {Title = "Black Screen", Default = false })
-    BlackGui5:OnChanged(function()
-        local Black123 = BlackGui5.Value
-        if Black123 then
-            blackFrame.BackgroundTransparency = 0
-        else
-            blackFrame.BackgroundTransparency = 1
-        end
-    end)
-
-    local WhiteGui5 = Tabs.Misc:AddToggle("WhiteGui5", {Title = "White Screen", Default = false })
-    WhiteGui5:OnChanged(function()
-        local White123 = WhiteGui5.Value
-        if White123 then
-            whiteFrame.BackgroundTransparency = 0  -- Изменено здесь
-        else
-            whiteFrame.BackgroundTransparency = 1  -- Изменено здесь
-        end
-    end)
-
-    Tabs.Misc:AddButton({
-        Title = "Delete flags",
-        Callback = function()
-            local flags = workspace.active.flags
-            if flags then
-                flags:Destroy()
-            end
-        end
-    })
-    Tabs.Misc:AddButton({
-        Title = "Remove Textures",
-        Description = "Very sus button",
-        Callback = function()
-            Window:Dialog({
-                Title = "activate fps booster?",
-                Content = "Pro",
-                Buttons = {
-                    {
-                        Title = "Confirm",
-                        Callback = function()
-                            loadstring(game:HttpGet('https://raw.githubusercontent.com/ago106/ScriptsRoblox/refs/heads/main/FpS'))()
-                        end
-                    },
-                    {
-                        Title = "Cancel",
-                        Callback = function()
-                            print("Cancelled the dialog.")
-                        end
-                    }
-                }
-            })
-        end
-    })
-
-    Tabs.Fun:AddButton({
-        Title = "Radio UI",
-        Description = "Chill😎",
-        Callback = function()
-            loadstring(game:HttpGet('https://pastebin.com/raw/zv94NGMc'))()
-        end
-    })
-
-    local section = Tabs.Fun:AddSection("Player")
-
-    local ToggleWalkspeed = Tabs.Fun:AddToggle("Walk Speed", {Title = "Walk Speed", Default = false })
-    local defaultWalkSpeed = game.Players.LocalPlayer.Character.Humanoid.WalkSpeed
-    
-    local Input = Tabs.Fun:AddInput("Speed", {
-        Title = "Speed",
-        Default = "16",
-        Placeholder = "Enter walk speed",
-        Numeric = true,
-        Finished = false,
-        Callback = function(Value)
-        end
-    })
-    
-    Input.OnChanged = function()
-        if ToggleWalkspeed:Get() then
-            local speedValue = Input.Value
-            if tonumber(speedValue) then
-                game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = tonumber(speedValue)
-            end
-        end
+    else
+        warn("Boats folder for " .. playerName .. " not found")
     end
-    
-    ToggleWalkspeed:OnChanged(function(State)
-        if State then
-            local speedValue = Input.Value
-            if speedValue and tonumber(speedValue) then
-                game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = tonumber(speedValue)
-            else
-                game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
-            end
-        else
-            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = defaultWalkSpeed
-        end
-    end)
-    
-    local ToggleJumpPower = Tabs.Fun:AddToggle("Jump Power", {Title = "Jump Power", Default = false })
-    local defaultJumpPower = game.Players.LocalPlayer.Character.Humanoid.JumpPower
-    
-    local InputJump = Tabs.Fun:AddInput("Power", {
-        Title = "Power",
-        Default = "50",
-        Placeholder = "Enter jump power",
-        Numeric = true,
-        Finished = false,
-        Callback = function(Value)
-        end
-    })
-    
-    InputJump.OnChanged = function()
-        if ToggleJumpPower:Get() then
-            local jumpValue = InputJump.Value
-            if tonumber(jumpValue) then
-                game.Players.LocalPlayer.Character.Humanoid.JumpPower = tonumber(jumpValue)
-            end
-        end
-    end
-    
-    ToggleJumpPower:OnChanged(function(State)
-        if State then
-            local jumpValue = InputJump.Value
-            if jumpValue and tonumber(jumpValue) then
-                game.Players.LocalPlayer.Character.Humanoid.JumpPower = tonumber(jumpValue)
-            else
-                game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
-            end
-        else
-            game.Players.LocalPlayer.Character.Humanoid.JumpPower = defaultJumpPower
-        end
-    end)
-
-    local section = Tabs.Webhook:AddSection("Webhook Stats Messages")
-    local InputWebhook = Tabs.Webhook:AddInput("InputWebhook", {
-        Title = "Webhook Url",
-        Default = "",
-        Placeholder = "URL",
-        Numeric = false,
-        Finished = false,
-        Callback = function(Value)
-            WebhookUrl = Value
-        end
-    })
-    InputWebhook:OnChanged(function()
-        print("Url Changed:", InputWebhook.Value)
-    end)
-    local SliderWebhook = Tabs.Webhook:AddSlider("SliderWebhook", {
-        Title = "Send Messages every ? seconds",
-        Description = "Prefer 60 seconds",
-        Default = 60,
-        Min = 1,
-        Max = 600,
-        Rounding = 1,
-        Callback = function(Value)
-            WebhookDelay = Value
-        end
-    })
-    SliderWebhook:OnChanged(function(Value)
-        print("Delay changed:", Value)
-    end)
-
-    local ToggleWebhook = Tabs.Webhook:AddToggle("ToggleWebhook", {Title = "Webhook On/Off", Default = true })
-    ToggleWebhook:OnChanged(function()
-        WebhookLog = ToggleWebhook.Value
-        WebhookManager()
-    end)
 end
 
--- Addons:
-SaveManager:SetLibrary(Fluent)
-InterfaceManager:SetLibrary(Fluent)
-
--- SaveManager:IgnoreThemeSettings()
-SaveManager:SetIgnoreIndexes({})
-
-InterfaceManager:SetFolder("SpaceHub")
-SaveManager:SetFolder("SpaceHub/Fisch")
-
-InterfaceManager:BuildInterfaceSection(Tabs.Settings)
-SaveManager:BuildConfigSection(Tabs.Settings)
-
-
-Window:SelectTab(1)
-
-Fluent:Notify({
-    Title = "Sea Hub",
-    Content = "The script has been loaded.",
-    Duration = 8
-})
-Fluent:Notify({
-    Title = "Anti Afk - ON",
-    Content = "meow",
-    Duration = 30
-})
-
-SaveManager:LoadAutoloadConfig()
-
-local deviceType = game:GetService("UserInputService").TouchEnabled and "Mobile" or "PC"
-
-if deviceType == "Mobile" then
-    local A = Instance.new("ScreenGui")
-    local B = Instance.new("TextButton")
-    local C = Instance.new("UICorner")
-
-    A.Name = "SpaceToggle"
-    A.Parent = game.CoreGui
-    A.ResetOnSpawn = false
-
-    B.Size = UDim2.new(0, 50, 0, 50)
-    B.Position = UDim2.new(0, 10, 1, -60) -- Consider making this responsive
-    B.BackgroundColor3 = Color3.fromRGB(128, 0, 128)
-    B.Text = "S"
-    B.TextColor3 = Color3.fromRGB(0, 0, 0)
-    B.TextScaled = true
-    B.Transparency = 0.5
-    B.Parent = A
-
-    local function toggleVisibility(frame)
-        for _, child in ipairs(frame:GetChildren()) do
-            if child:IsA("Frame") then
-                child.Visible = not child.Visible
-                toggleVisibility(child)
-            end
-        end
-    end
-
-    B.MouseButton1Click:Connect(function()
-        local spaceGui = game.CoreGui:FindFirstChild("ScreenGui") -- Replace with the actual name
-        if spaceGui then
-            toggleVisibility(spaceGui)
-        else
-            warn("1")
-        end
-    end)
-
-    C.CornerRadius = UDim.new(1, 0)
-    C.Parent = B
+-- Loop through all players and teleport their boats
+local players = game:GetService("Players"):GetPlayers()
+for _, player in ipairs(players) do
+    teleportBoatBase(player.Name)
 end
+end})
+
+Main_3_right:button({name = "Sundial Totem",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-1146, 134, -1071))
+end})
+
+Main_3_right:button({name = "Tempest Totem",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(34, 133, 1941))
+end})
+
+Main_3_right:button({name = "Windset Totem",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(2844, 179, 2700))
+end})
+
+Main_3_right:button({name = "Smokescreen Totem",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(2791, 140, -626))
+end})
+
+Main_3_right:button({name = "Aurora Totem",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-1812, -137, -3282))
+end})
+
+Main_3_right:button({name = "Dr. Finneus (NPC)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1169.18237, 132.075562, 2456.31689, 0, 0, -1, 0, 1, 0, 1, 0, 0))
+end})
+
+Main_3_right:button({name = "Abyssus (NPC)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1399.04749, -1018.03229, 966.244202, -0.351242661, -0.155072242, -0.923353255, 0.0506991558, 0.981591761, -0.184139013, 0.934910834, -0.111490704, -0.336914897))
+end})
+
+Main_3_right:button({name = "Aspicientis (NPC)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1214.53125, -708.644043, 1320.80188, 0.225700855, 0.128283948, 0.965713382, -0.0272023976, 0.991735399, -0.125383079, -0.973816752, 0.00202933699, 0.227325141))
+end})
+
+Main_3_right:button({name = "Occultus (NPC)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1022.30933, -705.266174, 1564.73145, 0.996510863, -0.0350344256, 0.0757544413, 0.0481100902, 0.982790411, -0.178349033, -0.0682023838, 0.181371287, 0.981046855))
+end})
+
+Main_3_right:button({name = "Perditus (NPC)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(770.052124, -730.62854, 1383.49512, 0.980628371, 0.0350823216, -0.19271028, -0.0284765773, 0.99891156, 0.0369425006, 0.193796545, -0.0307391342, 0.980560064))
+end})
+
+Main_3_right:button({name = "Submersus (NPC)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1211.42651, -1015.7981, 1315.828, -0.990251422, 0.0733327195, 0.118424594, 0.0506683066, 0.981590569, -0.184153795, -0.12974897, -0.176358193, -0.975737095))
+end})
+
+Main_3_right:button({name = "Tenebris (NPC)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1061.18408, -631.130432, 1310.31323, -0.730399609, -0.0307225361, 0.682328701, -0.0463540554, 0.998914301, -0.00464264117, -0.681445241, -0.0350196883, -0.731030703))
+end})
+
+Main_3_right:button({name = "FARM XP",callback = function()
+	local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+-- List of positions
+local positions = {
+    Vector3.new(386, 135, 252),
+    Vector3.new(73, 142, -1028),
+    Vector3.new(-1889, 168, 329),
+    Vector3.new(-1255, 138, 1554),
+    Vector3.new(999, 131, -1237),
+    Vector3.new(1742, 142, -2502),
+    Vector3.new(2501, 131, -721),
+    Vector3.new(1296, -805, -299),
+    Vector3.new(-30, -247, 199),
+    Vector3.new(2501, 131, -721),
+    Vector3.new(2649, 142, 2521),
+    Vector3.new(2939, 281, 2567),
+    Vector3.new(-1477, 134, 672),
+    Vector3.new(-112, -515, 1040),
+    Vector3.new(-933, 132, -1120),
+    Vector3.new(-144, 145, 1910),
+    Vector3.new(1739, 141, -2486),
+    Vector3.new(-984, -245, -2704),
+    Vector3.new(-1659, -214, -2846),
+    Vector3.new(-1484, -224, -2198),
+    Vector3.new(-1788, -143, -3418),
+    Vector3.new(-2504, 136, 1573),
+    Vector3.new(-791, 142, -3103),
+    Vector3.new(-7, -706, 1229),
+    Vector3.new(95, -701, 1225),
+    Vector3.new(574, -704, 1225),
+    Vector3.new(949, -712, 1255),
+    Vector3.new(1703, -903, 1444)
+}
+
+-- Teleport to each position with a 3-second delay
+for _, position in ipairs(positions) do
+    humanoidRootPart.CFrame = CFrame.new(position)
+    print("Teleported to:", position)
+    task.wait(2) -- Wait 3 seconds
+end
+
+end})
+
+return library
