@@ -5462,6 +5462,24 @@ Main_3_left:button({name = "Rod of the Depths",callback = function()
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1703, -903, 1444))
 end})
 
+Main_3_left:button({name = "Isonade",callback = function()
+	local Players = game:GetService("Players")
+
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+local targetPathway = workspace.zones.fishing:FindFirstChild("Isonade")
+if targetPathway then
+    local targetPosition = targetPathway.Position
+    -- Set the Y-axis to 130 while keeping the X and Z coordinates of the pathway
+    humanoidRootPart.CFrame = CFrame.new(targetPosition.X, 130, targetPosition.Z)
+else
+    warn("Target pathway not found!")
+end
+
+end})
+
 Main_3_left:button({name = "Scurvy Rod (new)",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-2826, 215, 1513))
