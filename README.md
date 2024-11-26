@@ -5463,7 +5463,7 @@ Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1703, -903, 1444))
 end})
 
 Main_3_left:button({name = "GUi check isonade",callback = function()
-	wait(10)
+	wait(0.1)
 local PathwayName = "Isonade"
 local PathwayParent = workspace.zones.fishing
 
