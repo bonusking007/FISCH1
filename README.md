@@ -5462,7 +5462,48 @@ Main_3_left:button({name = "Rod of the Depths",callback = function()
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1703, -903, 1444))
 end})
 
-Main_3_left:button({name = "Isonade",callback = function()
+Main_3_left:button({name = "GUi check isonade",callback = function()
+	wait(10)
+local PathwayName = "Isonade"
+local PathwayParent = workspace.zones.fishing
+
+-- Create GUI
+local player = game.Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "IsonadeNotifier"
+screenGui.Parent = playerGui
+
+local textLabel = Instance.new("TextLabel")
+textLabel.Size = UDim2.new(0.5, 0, 0.1, 0) -- Width and height
+textLabel.Position = UDim2.new(0.25, 0, 0.05, 0) -- Center at top
+textLabel.BackgroundTransparency = 1 -- Transparent background
+textLabel.Text = ""
+textLabel.Font = Enum.Font.SourceSansBold
+textLabel.TextSize = 36
+textLabel.TextColor3 = Color3.new(1, 0, 0) -- Red text
+textLabel.Parent = screenGui
+
+-- Monitor Isonade
+local function monitorIsonade()
+    while true do
+        local pathway = PathwayParent:FindFirstChild(PathwayName)
+        if pathway then
+            textLabel.Text = "Isonade spawned!!!"
+        else
+            textLabel.Text = "" -- Clear text when Isonade is gone
+        end
+        wait(0.5) -- Check every 0.5 seconds
+    end
+end
+
+-- Start monitoring in a separate thread
+task.spawn(monitorIsonade)
+
+end})
+
+Main_3_left:button({name = "Tp to Isonade",callback = function()
 	local Players = game:GetService("Players")
 
 local player = Players.LocalPlayer
