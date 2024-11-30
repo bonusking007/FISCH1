@@ -5616,6 +5616,7 @@ for _, player in ipairs(players) do
 end
 end})
 
+
 Main_3_right:button({name = "Sundial Totem",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-1146, 134, -1071))
@@ -5726,5 +5727,21 @@ for _, position in ipairs(positions) do
 end
 
 end})
+
+Main_3_right:button({name = "Deep ocean Fragment",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(5843, 79, 383))
+end})
+
+Main_3_right:button({name = "Earth Fragment",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(5972, 274, 846))
+end})
+
+Main_3_right:button({name = "Elcipse Fragment",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(6073, 444, 684))
+end})
+
 
 return library
