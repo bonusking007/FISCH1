@@ -5568,6 +5568,27 @@ Main_3_left:button({name = "Tp megalodon (new)",callback = function()
 	
 end})
 
+Main_3_left:button({name = "Tp meteor (new)",callback = function()
+	local player = game.Players.LocalPlayer
+local meteorItems = workspace:WaitForChild("MeteorItems")
+
+-- Function to teleport to the first found part in MeteorItems
+local function teleportToMeteorItem()
+    if not player.Character or not player.Character:FindFirstChild("HumanoidRootPart") then return end
+    local rootPart = player.Character.HumanoidRootPart
+
+    for _, item in ipairs(meteorItems:GetDescendants()) do
+        if item:IsA("BasePart") then
+            rootPart.CFrame = item.CFrame
+            break -- Teleport to the first part found
+        end
+    end
+end
+
+teleportToMeteorItem()
+
+end})
+
 Main_3_left:button({name = "Boat Tp To Spawn",callback = function()
 	local targetCFrame = CFrame.new(220, 128, 220) -- Set your target CFrame here
 
