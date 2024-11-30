@@ -5627,6 +5627,11 @@ Main_3_right:button({name = "Eclipse Totem",callback = function()
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(5967, 274, 841))
 end})
 
+Main_3_right:button({name = "Meteor Totem",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-1949, 275, 231))
+end})
+
 Main_3_right:button({name = "Tempest Totem",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(34, 133, 1941))
