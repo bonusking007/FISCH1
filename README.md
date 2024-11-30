@@ -5531,14 +5531,41 @@ Main_3_left:button({name = "Secert elevator",callback = function()
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(2232, -803, 1014))
 end})
 
-Main_3_left:button({name = "AncientIslesMini (new)",callback = function()
+Main_3_left:button({name = "AncientIslesMini",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(4040, 131, 78))
 end})
 
-Main_3_left:button({name = "Relic Rod (new)",callback = function()
+Main_3_left:button({name = "Relic Rod",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(4098, 40, 28))
+end})
+
+Main_3_left:button({name = "Ancient idle (new)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(6066, 195, 288))
+end})
+
+Main_3_left:button({name = "Pillar totem (new)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-3154, -755, 2197))
+end})
+
+Main_3_left:button({name = "Rod craft (new)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-3160, -745, 1683))
+end})
+
+Main_3_left:button({name = "Tp megalodon (new)",callback = function()
+	local player = game.Players.LocalPlayer
+	local targetPath = workspace.zones.fishing:WaitForChild("Megalodon Default")
+	local yOffset = 10
+	
+	if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+		local rootPart = player.Character.HumanoidRootPart
+		rootPart.CFrame = targetPath.CFrame + Vector3.new(0, yOffset, 0)
+	end
+	
 end})
 
 Main_3_left:button({name = "Boat Tp To Spawn",callback = function()
@@ -5589,58 +5616,14 @@ for _, player in ipairs(players) do
 end
 end})
 
-Main_3_left:button({name = "Boat Tp To Frightful Pool",callback = function()
-	local targetPart = game:GetService("Workspace").zones.fishing.FischFright24
-local targetCFrame = targetPart and targetPart.CFrame or CFrame.new(0, 10, 0) -- Use FischFright24's CFrame or default if not found
-
--- List of boat names to check
-local boatNames = {
-    "Surfboard",
-    "Bass Boat",
-    "Hovercraft",
-    "Speedboat",
-    "Fishing Boat",
-    "Pontoon",
-    "Pirate Ship",
-    "Quack Cruiser",
-    "Titan",
-    "Luxury Speedboat",
-    "Jetski",
-    "Flying Dutchman",
-    "Rowboat"
-}
-
-local function teleportBoatBase(playerName)
-    local boatsFolder = game:GetService("Workspace"):FindFirstChild("active")
-        and game:GetService("Workspace").active:FindFirstChild("boats")
-        and game:GetService("Workspace").active.boats:FindFirstChild(playerName)
-
-    if boatsFolder then
-        for _, boatName in ipairs(boatNames) do
-            local boatModel = boatsFolder:FindFirstChild(boatName)
-            if boatModel and boatModel:IsA("Model") then
-                local basePart = boatModel:FindFirstChild("Base")
-                if basePart and basePart:IsA("BasePart") then
-                    basePart.CFrame = targetCFrame
-                    print("Teleported " .. boatName .. " of " .. playerName .. " to the CFrame of FischFright24.")
-                end
-            end
-        end
-    else
-        warn("Boats folder for " .. playerName .. " not found")
-    end
-end
-
--- Loop through all players and teleport their boats
-local players = game:GetService("Players"):GetPlayers()
-for _, player in ipairs(players) do
-    teleportBoatBase(player.Name)
-end
-end})
-
 Main_3_right:button({name = "Sundial Totem",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-1146, 134, -1071))
+end})
+
+Main_3_right:button({name = "Eclipse Totem",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(5967, 274, 841))
 end})
 
 Main_3_right:button({name = "Tempest Totem",callback = function()
