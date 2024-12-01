@@ -5607,6 +5607,7 @@ local boatNames = {
     "Jetski",
     "Flying Dutchman",
     "Rowboat"
+	"Archaeological Boat"
 }
 
 local function teleportBoatBase(playerName)
