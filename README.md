@@ -5589,6 +5589,51 @@ teleportToMeteorItem()
 
 end})
 
+Main_3_left:button({name = "TP BOAT (new)",callback = function()
+	local player = game.Players.LocalPlayer
+	local boatsFolder = workspace:WaitForChild("active"):WaitForChild("boats")
+	local targetPosition = Vector3.new(370, 128, 300) -- Set the desired position here
+	
+	-- Function to search for a part named "Base" in the model
+	local function findBasePart(model)
+		for _, descendant in pairs(model:GetDescendants()) do
+			if descendant:IsA("BasePart") and descendant.Name == "Base" then
+				return descendant
+			end
+		end
+		return nil
+	end
+	
+	-- Function to set PrimaryPart and teleport the player's boat
+	local function teleportBoat()
+		local playerName = player.Name
+		local boat = boatsFolder:FindFirstChild(playerName)
+		
+		if boat and boat:IsA("Model") then
+			-- Set a PrimaryPart if it doesn't have one
+			if not boat.PrimaryPart then
+				local basePart = findBasePart(boat)
+				if basePart then
+					boat.PrimaryPart = basePart
+				else
+					warn("No part named 'Base' found in the boat model.")
+					return
+				end
+			end
+			
+			-- Teleport the boat
+			boat:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+		else
+			warn("Boat for player not found in workspace.active.boats")
+		end
+	end
+	
+	-- Execute the teleport
+	teleportBoat()
+	
+end})
+
+
 Main_3_left:button({name = "Boat Tp To Spawn",callback = function()
 	local targetCFrame = CFrame.new(220, 128, 220) -- Set your target CFrame here
 
@@ -5607,7 +5652,6 @@ local boatNames = {
     "Jetski",
     "Flying Dutchman",
     "Rowboat"
-	"Archaeological Boat"
 }
 
 local function teleportBoatBase(playerName)
