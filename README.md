@@ -4971,6 +4971,13 @@ Main_1_left:keybind({name = "set ui keybind",def = nil,callback = function(key)
    window.key = key
 end})
 
+Main_2_left:button({name = "fps 10",callback = function()
+	setfpscap(10)
+end})
+
+Main_2_left:button({name = "recall fps",callback = function()
+	setfpscap(1000)
+end})
 
 Main_2_left:button({name = "Inf Oxygen",callback = function()
     local Players = game:GetService("Players")
@@ -5234,6 +5241,59 @@ end})
 
 Main_2_left:button({name = "infinteyield",callback = function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end})
+
+Main_3_left:button({name = "Ancient Isle (new)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(6066, 195, 288))
+end})
+
+Main_3_left:button({name = "Ancient Isle น้ำตก (new)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(5807, 135, 407))
+end})
+
+Main_3_left:button({name = "Pillar totem (new)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-3154, -755, 2197))
+end})
+
+Main_3_left:button({name = "Rod craft (new)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-3160, -745, 1683))
+end})
+
+Main_3_left:button({name = "Tp megalodon (new)",callback = function()
+	local player = game.Players.LocalPlayer
+	local targetPath = workspace.zones.fishing:WaitForChild("Megalodon Default")
+	local yOffset = 10
+	
+	if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+		local rootPart = player.Character.HumanoidRootPart
+		rootPart.CFrame = targetPath.CFrame + Vector3.new(0, yOffset, 0)
+	end
+	
+end})
+
+Main_3_left:button({name = "Tp meteor (new)",callback = function()
+	local player = game.Players.LocalPlayer
+local meteorItems = workspace:WaitForChild("MeteorItems")
+
+-- Function to teleport to the first found part in MeteorItems
+local function teleportToMeteorItem()
+    if not player.Character or not player.Character:FindFirstChild("HumanoidRootPart") then return end
+    local rootPart = player.Character.HumanoidRootPart
+
+    for _, item in ipairs(meteorItems:GetDescendants()) do
+        if item:IsA("BasePart") then
+            rootPart.CFrame = item.CFrame
+            break -- Teleport to the first part found
+        end
+    end
+end
+
+teleportToMeteorItem()
+
 end})
 
 Main_3_left:button({name = "Moosewood",callback = function()
@@ -5539,54 +5599,6 @@ end})
 Main_3_left:button({name = "Relic Rod",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(4098, 40, 28))
-end})
-
-Main_3_left:button({name = "Ancient Isle (new)",callback = function()
-    local Players = game:GetService("Players")
-Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(6066, 195, 288))
-end})
-
-Main_3_left:button({name = "Pillar totem (new)",callback = function()
-    local Players = game:GetService("Players")
-Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-3154, -755, 2197))
-end})
-
-Main_3_left:button({name = "Rod craft (new)",callback = function()
-    local Players = game:GetService("Players")
-Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-3160, -745, 1683))
-end})
-
-Main_3_left:button({name = "Tp megalodon (new)",callback = function()
-	local player = game.Players.LocalPlayer
-	local targetPath = workspace.zones.fishing:WaitForChild("Megalodon Default")
-	local yOffset = 10
-	
-	if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-		local rootPart = player.Character.HumanoidRootPart
-		rootPart.CFrame = targetPath.CFrame + Vector3.new(0, yOffset, 0)
-	end
-	
-end})
-
-Main_3_left:button({name = "Tp meteor (new)",callback = function()
-	local player = game.Players.LocalPlayer
-local meteorItems = workspace:WaitForChild("MeteorItems")
-
--- Function to teleport to the first found part in MeteorItems
-local function teleportToMeteorItem()
-    if not player.Character or not player.Character:FindFirstChild("HumanoidRootPart") then return end
-    local rootPart = player.Character.HumanoidRootPart
-
-    for _, item in ipairs(meteorItems:GetDescendants()) do
-        if item:IsA("BasePart") then
-            rootPart.CFrame = item.CFrame
-            break -- Teleport to the first part found
-        end
-    end
-end
-
-teleportToMeteorItem()
-
 end})
 
 Main_3_left:button({name = "TP BOAT MOOSEWOOD (new)",callback = function()
