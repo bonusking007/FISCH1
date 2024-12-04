@@ -5264,14 +5264,27 @@ Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-3160, -745, 1683)
 end})
 
 Main_3_left:button({name = "Tp megalodon (new)",callback = function()
+
 	local player = game.Players.LocalPlayer
 	local targetPath = workspace.zones.fishing:WaitForChild("Megalodon Default")
 	local yOffset = 10
+	local baseplateOffset = -10
 	
 	if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
 		local rootPart = player.Character.HumanoidRootPart
+	
+		-- Teleport player to the target location
 		rootPart.CFrame = targetPath.CFrame + Vector3.new(0, yOffset, 0)
+	
+		-- Create a baseplate under the player's position
+		local baseplate = Instance.new("Part")
+		baseplate.Size = Vector3.new(10, 1, 10) -- Size of the baseplate
+		baseplate.Position = rootPart.Position + Vector3.new(0, baseplateOffset, 0)
+		baseplate.Anchored = true
+		baseplate.BrickColor = BrickColor.new("Bright green") -- Optional, to give it a color
+		baseplate.Parent = workspace
 	end
+	
 	
 end})
 
