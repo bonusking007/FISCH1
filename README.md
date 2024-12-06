@@ -5283,6 +5283,14 @@ end
 
 end})
 
+Main_2_left:button({name = "Walk On Water",callback = function()
+for i, v in pairs(workspace.zones.fishing:GetChildren()) do
+    v.CanCollide = true
+end
+end})
+
+
+
 Main_2_left:button({name = "Equip tool",callback = function()
 		local Players = game:GetService("Players")
 		local player = Players.LocalPlayer
@@ -5378,25 +5386,6 @@ game:GetService("UserInputService").InputBegan:Connect(function(input)
 end)
 end})
 
-Main_3_left:button({name = "Frightful Pool",callback = function()
-    local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-local Workspace = game:GetService("Workspace")
-
--- Target CFrame with Y offset
-local targetPart = Workspace.zones.fishing.FischFright24
-
-if targetPart then
-    -- Get the current position of the target part and add 100 to the Y coordinate
-    local newPosition = targetPart.Position + Vector3.new(0, 100, 0)
-
-    -- Teleport the LocalPlayer's character to the new position
-    local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
-    character:SetPrimaryPartCFrame(CFrame.new(newPosition))
-else
-    print("Not Spawn Yet.")
-end
-end})
 
 Main_3_left:button({name = "Merchant Boat",callback = function()
     local player = game.Players.LocalPlayer
@@ -5418,9 +5407,11 @@ Main_3_left:button({name = "Merchant Boat",callback = function()
 end})
 
 Main_2_left:button({name = "Buy Relic",callback = function()
-	while wait(0.2) do
-		workspace:WaitForChild("world"):WaitForChild("npcs"):WaitForChild("Merlin"):WaitForChild("Merlin"):WaitForChild("power"):InvokeServer()
-	end 
+	workspace:WaitForChild("world"):WaitForChild("npcs"):WaitForChild("Merlin"):WaitForChild("Merlin"):WaitForChild("power"):InvokeServer()
+end})
+
+Main_2_left:button({name = "Buy Luck",callback = function()
+	workspace:WaitForChild("world"):WaitForChild("npcs"):WaitForChild("Merlin"):WaitForChild("Merlin"):WaitForChild("luck"):InvokeServer()
 end})
 
 Main_2_left:button({name = "Go To Witch",callback = function()
@@ -5661,6 +5652,11 @@ end})
 Main_3_left:button({name = "Roslit",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-1477, 134, 672))
+end})
+
+Main_3_left:button({name = "Roslit (Pearl)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-2020, 131, 588))
 end})
 
 Main_3_left:button({name = "Vertigo",callback = function()
