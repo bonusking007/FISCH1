@@ -4884,7 +4884,7 @@ end)
 
 end})
 
-Main_1_left:button({name = "Autofish fail100% (Key:F)",def = false,callback = function()
+Main_1_left:button({name = "Autofish fail100% (Key:V)",def = false,callback = function()
 
 
 	function ShowNotification(String)
@@ -5048,10 +5048,10 @@ Main_1_left:button({name = "Autofish fail100% (Key:F)",def = false,callback = fu
 		end
 	end
 	
-	-- Bind the toggle to a key (e.g., "F")
+	-- Bind the toggle to a key (e.g., "V")
 	local UserInputService = game:GetService("UserInputService")
 	UserInputService.InputBegan:Connect(function(input)
-		if input.KeyCode == Enum.KeyCode.F then  -- Change 'P' to any preferred key
+		if input.KeyCode == Enum.KeyCode.V then  -- Change 'V' to any preferred key
 			toggleAutofarm()
 		end
 	end)
