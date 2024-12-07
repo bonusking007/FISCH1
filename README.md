@@ -4686,6 +4686,7 @@ local Main_3_Page = window:page({name = "Teleport"})
 local Main_1_left = Main_1_Page:section({name = "General",side = "left",size = 270})
 
 local Main_2_left = Main_2_Page:section({name = "Misc",side = "left",size = 530})
+local Main_2_right = Main_2_Page:section({name = "Bypass Buy",side = "right",size = 200})
 
 local Main_3_left = Main_3_Page:section({name = "Teleport",side = "left",size = 1400})
 local Main_3_right = Main_3_Page:section({name = "Totem",side = "right",size = 480})
@@ -5033,7 +5034,7 @@ Main_2_left:button({name = "Appraise Held Item",callback = function()
     workspace:WaitForChild("world"):WaitForChild("npcs"):WaitForChild("Appraiser"):WaitForChild("appraiser"):WaitForChild("appraise"):InvokeServer()
 end})
 
-Main_2_left:button({name = "TP To Seller",callback = function()
+Main_2_left:button({name = "Tp To Merchant",callback = function()
     local player = game.Players.LocalPlayer
 player.Character.HumanoidRootPart.CFrame = CFrame.new(476, 151, 232)
 end})
@@ -5072,39 +5073,6 @@ game:GetService("UserInputService").InputBegan:Connect(function(input)
         toggle3DRendering()
     end
 end)
-end})
-
-
-Main_3_left:button({name = "Merchant Boat",callback = function()
-    local player = game.Players.LocalPlayer
-    local character = player.Character or player.CharacterAdded:Wait()
-    local targetObject = workspace.active:FindFirstChild("Merchant Boat") and workspace.active["Merchant Boat"]:FindFirstChild("1")
-    
-    if character and targetObject then
-        local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
-        if humanoidRootPart then
-            -- Teleport the player to the target object's CFrame
-            humanoidRootPart.CFrame = targetObject.CFrame
-        else
-            warn("HumanoidRootPart not found.")
-        end
-    else
-        warn("Merchant Boat 1")
-    end
-    
-end})
-
-Main_2_left:button({name = "Buy Relic",callback = function()
-	workspace:WaitForChild("world"):WaitForChild("npcs"):WaitForChild("Merlin"):WaitForChild("Merlin"):WaitForChild("power"):InvokeServer()
-end})
-
-Main_2_left:button({name = "Buy Luck",callback = function()
-	workspace:WaitForChild("world"):WaitForChild("npcs"):WaitForChild("Merlin"):WaitForChild("Merlin"):WaitForChild("luck"):InvokeServer()
-end})
-
-Main_2_left:button({name = "Go To Witch",callback = function()
-    local Players = game:GetService("Players")
-Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(405, 135, 318))
 end})
 
 Main_2_left:button({name = "Sell Held Item",callback = function()
@@ -5209,6 +5177,61 @@ end})
 
 Main_2_left:button({name = "infinteyield",callback = function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end})
+
+Main_2_right:button({name = "Destiny Rod",callback = function()
+	game:GetService("ReplicatedStorage").events.purchase:FireServer("Destiny Rod", "Rod")
+end})
+
+Main_2_right:button({name = "Mythical Rod",callback = function()
+	game:GetService("ReplicatedStorage").events.purchase:FireServer("Mythical Rod", "Rod")
+end})
+
+Main_2_right:button({name = "Trident Rod",callback = function()
+	game:GetService("ReplicatedStorage").events.purchase:FireServer("Trident Rod", "Rod")
+end})
+
+Main_2_right:button({name = "Aurora Rod",callback = function()
+	game:GetService("ReplicatedStorage").events.purchase:FireServer("Aurora Rod", "Rod")
+end})
+
+Main_2_right:button({name = "Buy Relic",callback = function()
+	local Players = game:GetService("Players")
+	Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-931, 226, -995))
+	wait(0.5)
+	workspace:WaitForChild("world"):WaitForChild("npcs"):WaitForChild("Merlin"):WaitForChild("Merlin"):WaitForChild("power"):InvokeServer()
+end})
+
+Main_2_right:button({name = "Buy Luck",callback = function()
+	local Players = game:GetService("Players")
+	Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-931, 226, -995))
+	wait(0.5)
+	workspace:WaitForChild("world"):WaitForChild("npcs"):WaitForChild("Merlin"):WaitForChild("Merlin"):WaitForChild("luck"):InvokeServer()
+end})
+
+
+
+--- 3
+
+
+
+Main_3_left:button({name = "Merchant Boat",callback = function()
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local targetObject = workspace.active:FindFirstChild("Merchant Boat") and workspace.active["Merchant Boat"]:FindFirstChild("1")
+    
+    if character and targetObject then
+        local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+        if humanoidRootPart then
+            -- Teleport the player to the target object's CFrame
+            humanoidRootPart.CFrame = targetObject.CFrame
+        else
+            warn("HumanoidRootPart not found.")
+        end
+    else
+        warn("Merchant Boat 1")
+    end
+    
 end})
 
 Main_3_left:button({name = "Ancient Isle (new)",callback = function()
@@ -5392,7 +5415,7 @@ Main_3_left:button({name = "Deep Ocean (safeplace)",callback = function()
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-508, -62, -7688))
 end})
 
-Main_3_left:button({name = "Buy luck",callback = function()
+Main_3_left:button({name = "Merlin",callback = function()
 	local Players = game:GetService("Players")
 	Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-931, 226, -995))
 end})
