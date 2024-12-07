@@ -5195,6 +5195,18 @@ Main_2_right:button({name = "Aurora Rod",callback = function()
 	game:GetService("ReplicatedStorage").events.purchase:FireServer("Aurora Rod", "Rod")
 end})
 
+Main_2_right:button({name = "Sundial Totem",callback = function()
+	game:GetService("ReplicatedStorage").events.purchase:FireServer("Sundial Totem", "Item")
+end})
+
+Main_2_right:button({name = "Eclipse Totem",callback = function()
+	game:GetService("ReplicatedStorage").events.purchase:FireServer("Eclipse Totem", "Item")
+end})
+
+Main_2_right:button({name = "Meteor Totem",callback = function()
+	game:GetService("ReplicatedStorage").events.purchase:FireServer("Meteor Totem", "Item")
+end})
+
 Main_2_right:button({name = "Buy Relic",callback = function()
 	local Players = game:GetService("Players")
 	Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-931, 226, -995))
