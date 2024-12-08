@@ -4686,7 +4686,7 @@ local Main_3_Page = window:page({name = "Teleport"})
 local Main_1_left = Main_1_Page:section({name = "General",side = "left",size = 270})
 
 local Main_2_left = Main_2_Page:section({name = "Misc",side = "left",size = 530})
-local Main_2_right = Main_2_Page:section({name = "Bypass Buy",side = "right",size = 200})
+local Main_2_right = Main_2_Page:section({name = "Bypass Buy",side = "right",size = 300})
 
 local Main_3_left = Main_3_Page:section({name = "Teleport",side = "left",size = 1400})
 local Main_3_right = Main_3_Page:section({name = "Totem",side = "right",size = 480})
