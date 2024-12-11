@@ -4682,6 +4682,7 @@ local window = library:new({textsize = 18,font = Enum.Font.RobotoMono,name = "Ba
 local Main_1_Page = window:page({name = "Main"})
 local Main_2_Page = window:page({name = "Misc"})
 local Main_3_Page = window:page({name = "Teleport"})
+local Main_4_Page = window:page({name = "Trade"})
 
 local Main_1_left = Main_1_Page:section({name = "General",side = "left",size = 270})
 
@@ -4691,7 +4692,35 @@ local Main_2_right = Main_2_Page:section({name = "Bypass Buy",side = "right",siz
 local Main_3_left = Main_3_Page:section({name = "Teleport",side = "left",size = 1400})
 local Main_3_right = Main_3_Page:section({name = "Totem",side = "right",size = 480})
 
+local Main_4_left = Main_4_Page:section({name = "Trade",side = "left",size = 500})
+
 Main_1_left:button({name = "Autofish (Key:F)",def = false,callback = function()
+
+	local player = game:GetService("Players").LocalPlayer
+	local playerGui = player:WaitForChild("PlayerGui")
+	local runService = game:GetService("RunService")
+	
+	-- Function to center a button
+	local function centerButton(button)
+		if button and button:IsA("GuiObject") then
+			button.Position = UDim2.new(0.5, -button.Size.X.Offset / 2, 0.5, -button.Size.Y.Offset / 2)
+		end
+	end
+	
+	-- Monitor and center buttons dynamically
+	runService.Heartbeat:Connect(function()
+		local shakeui = playerGui:FindFirstChild("shakeui")
+		if shakeui then
+			local safezone = shakeui:FindFirstChild("safezone")
+			if safezone then
+				local button = safezone:FindFirstChild("button")
+				if button then
+					centerButton(button)
+				end
+			end
+		end
+	end)
+	
 
 
 function ShowNotification(String)
@@ -4948,6 +4977,11 @@ end})
 Main_1_left:keybind({name = "set ui keybind",def = nil,callback = function(key)
    window.key = key
 end})
+
+Main_4_left:keybind({name = "Set Player Name",def = nil,callback = function(name)
+	Player.key = name
+ end})
+
 
 Main_2_left:button({name = "fps 10",callback = function()
 	setfpscap(10)
