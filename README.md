@@ -4687,7 +4687,7 @@ local Main_4_Page = window:page({name = "Trade"})
 local Main_1_left = Main_1_Page:section({name = "General",side = "left",size = 270})
 
 local Main_2_left = Main_2_Page:section({name = "Misc",side = "left",size = 530})
-local Main_2_right = Main_2_Page:section({name = "Bypass Buy",side = "right",size = 300})
+local Main_2_right = Main_2_Page:section({name = "Bypass Buy",side = "right",size = 450})
 
 local Main_3_left = Main_3_Page:section({name = "Teleport",side = "left",size = 1400})
 local Main_3_right = Main_3_Page:section({name = "Totem",side = "right",size = 480})
@@ -5256,12 +5256,52 @@ Main_2_right:button({name = "Buy Luck",callback = function()
 	workspace:WaitForChild("world"):WaitForChild("npcs"):WaitForChild("Merlin"):WaitForChild("Merlin"):WaitForChild("luck"):InvokeServer()
 end})
 
-Main_2_right:button({name = "Buy Skin Crate (BETA)",callback = function()
-	game:GetService("ReplicatedStorage").events.purchase:FireServer("Moosewood Collection", "Item")
+Main_2_right:button({name = "Buy Moose Crate (new)",callback = function()
+	local args = {
+		[1] = "Moosewood"
+	}
+	
+	game:GetService("ReplicatedStorage"):WaitForChild("packages"):WaitForChild("Net"):WaitForChild("RF/SkinCrates/Purchase"):InvokeServer(unpack(args))
 end})
 
-Main_2_right:button({name = "Buy Bag of Presents (BETA)",callback = function()
-	game:GetService("ReplicatedStorage").events.purchase:FireServer("Bag of Presents", "Item")
+Main_2_right:button({name = "Buy Desolate Crate (new)",callback = function()
+	local args = {
+		[1] = "Desolate"
+	}
+	
+	game:GetService("ReplicatedStorage"):WaitForChild("packages"):WaitForChild("Net"):WaitForChild("RF/SkinCrates/Purchase"):InvokeServer(unpack(args))
+end})
+
+Main_2_right:button({name = "Buy Ancient Crate (new)",callback = function()
+	local args = {
+		[1] = "Ancient"
+	}
+	
+	game:GetService("ReplicatedStorage"):WaitForChild("packages"):WaitForChild("Net"):WaitForChild("RF/SkinCrates/Purchase"):InvokeServer(unpack(args))
+end})
+
+Main_2_right:button({name = "Use Moose Crate (new)",callback = function()
+	local args = {
+		[1] = "Moosewood"
+	}
+	
+	game:GetService("ReplicatedStorage"):WaitForChild("packages"):WaitForChild("Net"):WaitForChild("RF/SkinCrates/RequestSpin"):InvokeServer(unpack(args))
+end})
+
+Main_2_right:button({name = "Use Desolate Crate (new)",callback = function()
+	local args = {
+		[1] = "Desolate"
+	}
+	
+	game:GetService("ReplicatedStorage"):WaitForChild("packages"):WaitForChild("Net"):WaitForChild("RF/SkinCrates/RequestSpin"):InvokeServer(unpack(args))
+end})
+
+Main_2_right:button({name = "Use Ancient Crate (new)",callback = function()
+	local args = {
+		[1] = "Ancient"
+	}
+	
+	game:GetService("ReplicatedStorage"):WaitForChild("packages"):WaitForChild("Net"):WaitForChild("RF/SkinCrates/RequestSpin"):InvokeServer(unpack(args))
 end})
 
 
