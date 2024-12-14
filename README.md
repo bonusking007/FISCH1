@@ -4692,7 +4692,7 @@ local Main_2_right = Main_2_Page:section({name = "Bypass Buy",side = "right",siz
 local Main_3_left = Main_3_Page:section({name = "Teleport",side = "left",size = 1400})
 local Main_3_right = Main_3_Page:section({name = "Totem",side = "right",size = 480})
 
-local Main_4_left = Main_4_Page:section({name = "Trade",side = "left",size = 500})
+local Main_4_left = Main_4_Page:section({name = "Trade (SOON)",side = "left",size = 500})
 
 Main_1_left:button({name = "Autofish (Key:F)",def = false,callback = function()
 
@@ -5241,20 +5241,28 @@ Main_2_right:button({name = "Meteor Totem",callback = function()
 	game:GetService("ReplicatedStorage").events.purchase:FireServer("Meteor Totem", "Item")
 end})
 
+
 Main_2_right:button({name = "Buy Relic",callback = function()
 	local Players = game:GetService("Players")
 	Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-931, 226, -995))
-	wait(0.5)
+	wait(0.2)
 	workspace:WaitForChild("world"):WaitForChild("npcs"):WaitForChild("Merlin"):WaitForChild("Merlin"):WaitForChild("power"):InvokeServer()
 end})
 
 Main_2_right:button({name = "Buy Luck",callback = function()
 	local Players = game:GetService("Players")
 	Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-931, 226, -995))
-	wait(0.5)
+	wait(0.2)
 	workspace:WaitForChild("world"):WaitForChild("npcs"):WaitForChild("Merlin"):WaitForChild("Merlin"):WaitForChild("luck"):InvokeServer()
 end})
 
+Main_2_right:button({name = "Buy Skin Crate (BETA)",callback = function()
+	game:GetService("ReplicatedStorage").events.purchase:FireServer("Moosewood Collection", "Item")
+end})
+
+Main_2_right:button({name = "Buy Bag of Presents (BETA)",callback = function()
+	game:GetService("ReplicatedStorage").events.purchase:FireServer("Bag of Presents", "Item")
+end})
 
 
 --- 3
@@ -5280,27 +5288,37 @@ Main_3_left:button({name = "Merchant Boat",callback = function()
     
 end})
 
-Main_3_left:button({name = "Ancient Isle (new)",callback = function()
+Main_3_left:button({name = "Santa quest (new)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-152, 365, -9494))
+end})
+
+Main_3_left:button({name = "Merchant Skin (new)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(415, 135, 196))
+end})
+
+Main_3_left:button({name = "Ancient Isle",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(6066, 195, 288))
 end})
 
-Main_3_left:button({name = "Ancient Isle น้ำตก (new)",callback = function()
+Main_3_left:button({name = "Ancient Isle น้ำตก",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(5807, 135, 407))
 end})
 
-Main_3_left:button({name = "Pillar totem (new)",callback = function()
+Main_3_left:button({name = "Pillar totem",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-3154, -755, 2197))
 end})
 
-Main_3_left:button({name = "Rod craft (new)",callback = function()
+Main_3_left:button({name = "Rod craft",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-3160, -745, 1683))
 end})
 
-Main_3_left:button({name = "Tp megalodon (new)",callback = function()
+Main_3_left:button({name = "Tp megalodon",callback = function()
 
 	local player = game.Players.LocalPlayer
 	local targetPath = workspace.zones.fishing:WaitForChild("Megalodon Default")
@@ -5325,7 +5343,7 @@ Main_3_left:button({name = "Tp megalodon (new)",callback = function()
 	
 end})
 
-Main_3_left:button({name = "Tp meteor (new)",callback = function()
+Main_3_left:button({name = "Tp meteor",callback = function()
 	local player = game.Players.LocalPlayer
 local meteorItems = workspace:WaitForChild("MeteorItems")
 
