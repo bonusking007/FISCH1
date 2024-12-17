@@ -4973,6 +4973,16 @@ task.wait(0.1)  -- Wait a short time to simulate key press duration
 VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.X, false, game)  -- Key up
 end})
 
+Main_1_left:button({name = "inf bait",def = false,callback = function()
+	local lp, pg = game.Players.LocalPlayer, game.Players.LocalPlayer:WaitForChild("PlayerGui")
+pg.ChildAdded:Connect(function(c)
+    if c.Name == "reel" then
+        local b = pg.hud.safezone.backpack:FindFirstChild("bait") and pg.hud.safezone.backpack.bait.Text:match("Current Bait : (.+)%[")
+        if b then pg.hud.safezone.equipment.bait.scroll.safezone.e:FireServer("None") c.Destroying:Wait() pg.hud.safezone.equipment.bait.scroll.safezone.e:FireServer(b) end
+    end
+end)
+end})
+
 
 Main_1_left:keybind({name = "set ui keybind",def = nil,callback = function(key)
    window.key = key
