@@ -5897,6 +5897,21 @@ Main_3_right:button({name = "Blue gem",callback = function()
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(20132, 208, 5447))
 end})
 
+Main_3_right:button({name = "Yellow gem",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(19500, 335, 5552))
+end})
+
+Main_3_right:button({name = "Green gem",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(19877, 448, 5558))
+end})
+
+Main_3_right:button({name = "Red gem",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(19927, 1138, 5354))
+end})
+
 Main_3_right:button({name = "Lever 1",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(19853.5078, 474.123901, 4970.03662, 0.643565595, -0, -0.765390992, 0, 1, -0, 0.765390992, 0, 0.643565595))
@@ -5927,53 +5942,31 @@ Main_3_right:button({name = "Lever 6",callback = function()
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(19964.834, 584.742065, 5573.2583, -0.99475944, 0, 0.102243692, 0, 1, 0, -0.102243692, 0, -0.99475944))
 end})
 
-
-
-Main_3_right:button({name = "FARM XP",callback = function()
-	local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
-
--- List of positions
-local positions = {
-    Vector3.new(386, 135, 252),
-    Vector3.new(73, 142, -1028),
-    Vector3.new(-1889, 168, 329),
-    Vector3.new(-1255, 138, 1554),
-    Vector3.new(999, 131, -1237),
-    Vector3.new(1742, 142, -2502),
-    Vector3.new(2501, 131, -721),
-    Vector3.new(1296, -805, -299),
-    Vector3.new(-30, -247, 199),
-    Vector3.new(2501, 131, -721),
-    Vector3.new(2649, 142, 2521),
-    Vector3.new(2939, 281, 2567),
-    Vector3.new(-1477, 134, 672),
-    Vector3.new(-112, -515, 1040),
-    Vector3.new(-933, 132, -1120),
-    Vector3.new(-144, 145, 1910),
-    Vector3.new(1739, 141, -2486),
-    Vector3.new(-984, -245, -2704),
-    Vector3.new(-1659, -214, -2846),
-    Vector3.new(-1484, -224, -2198),
-    Vector3.new(-1788, -143, -3418),
-    Vector3.new(-2504, 136, 1573),
-    Vector3.new(-791, 142, -3103),
-    Vector3.new(-7, -706, 1229),
-    Vector3.new(95, -701, 1225),
-    Vector3.new(574, -704, 1225),
-    Vector3.new(949, -712, 1255),
-    Vector3.new(1703, -903, 1444)
-}
-
--- Teleport to each position with a 3-second delay
-for _, position in ipairs(positions) do
-    humanoidRootPart.CFrame = CFrame.new(position)
-    print("Teleported to:", position)
-    task.wait(2) -- Wait 3 seconds
-end
-
+Main_3_right:button({name = "Button 1",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(403, 135, 263))
 end})
+
+Main_3_right:button({name = "Button 2",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-1717, 148, 731))
+end})
+
+Main_3_right:button({name = "Button 3",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(2932, 281, 2590))
+end})
+
+Main_3_right:button({name = "Button 4",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-2565, 181, 1350))
+end})
+
+Main_3_right:button({name = "Button 5",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(5503, 147, -317))
+end})
+
 
 Main_3_right:button({name = "Deep ocean Fragment",callback = function()
     local Players = game:GetService("Players")
