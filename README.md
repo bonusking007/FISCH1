@@ -4690,7 +4690,7 @@ local Main_2_left = Main_2_Page:section({name = "Misc",side = "left",size = 530}
 local Main_2_right = Main_2_Page:section({name = "Bypass Buy",side = "right",size = 450})
 
 local Main_3_left = Main_3_Page:section({name = "Teleport",side = "left",size = 1400})
-local Main_3_right = Main_3_Page:section({name = "Totem",side = "right",size = 480})
+local Main_3_right = Main_3_Page:section({name = "Totem",side = "right",size = 700})
 
 local Main_4_left = Main_4_Page:section({name = "Trade (SOON)",side = "left",size = 500})
 
@@ -4973,17 +4973,6 @@ task.wait(0.1)  -- Wait a short time to simulate key press duration
 VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.X, false, game)  -- Key up
 end})
 
-Main_1_left:button({name = "inf bait",def = false,callback = function()
-	local lp, pg = game.Players.LocalPlayer, game.Players.LocalPlayer:WaitForChild("PlayerGui")
-pg.ChildAdded:Connect(function(c)
-    if c.Name == "reel" then
-        local b = pg.hud.safezone.backpack:FindFirstChild("bait") and pg.hud.safezone.backpack.bait.Text:match("Current Bait : (.+)%[")
-        if b then pg.hud.safezone.equipment.bait.scroll.safezone.e:FireServer("None") c.Destroying:Wait() pg.hud.safezone.equipment.bait.scroll.safezone.e:FireServer(b) end
-    end
-end)
-end})
-
-
 Main_1_left:keybind({name = "set ui keybind",def = nil,callback = function(key)
    window.key = key
 end})
@@ -5001,13 +4990,43 @@ Main_2_left:button({name = "recall fps",callback = function()
 	setfpscap(1000)
 end})
 
-Main_2_left:button({name = "Inf Oxygen",callback = function()
+Main_2_left:button({name = "Inf Oxygen(water)",callback = function()
     local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
 -- Find the LocalPlayer's character in workspace
 local playerFolder = workspace:FindFirstChild(LocalPlayer.Name)
 local oxygenScript = playerFolder and playerFolder:FindFirstChild("client") and playerFolder.client:FindFirstChild("oxygen")
+
+-- Check if the script exists and is a LocalScript, then disable it
+if oxygenScript and oxygenScript:IsA("LocalScript") then
+    oxygenScript.Disabled = true
+end
+
+end})
+
+Main_2_left:button({name = "Inf Temprature",callback = function()
+    local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+-- Find the LocalPlayer's character in workspace
+local playerFolder = workspace:FindFirstChild(LocalPlayer.Name)
+local oxygenScript = playerFolder and playerFolder:FindFirstChild("client") and playerFolder.client:FindFirstChild("temperature")
+
+-- Check if the script exists and is a LocalScript, then disable it
+if oxygenScript and oxygenScript:IsA("LocalScript") then
+    oxygenScript.Disabled = true
+end
+
+end})
+
+Main_2_left:button({name = "Inf Oxygen(high air)",callback = function()
+    local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+-- Find the LocalPlayer's character in workspace
+local playerFolder = workspace:FindFirstChild(LocalPlayer.Name)
+local oxygenScript = playerFolder and playerFolder:FindFirstChild("client") and playerFolder.client:FindFirstChild("oxygen(peaks)")
 
 -- Check if the script exists and is a LocalScript, then disable it
 if oxygenScript and oxygenScript:IsA("LocalScript") then
@@ -5338,12 +5357,27 @@ Main_3_left:button({name = "Merchant Boat",callback = function()
     
 end})
 
-Main_3_left:button({name = "Santa quest (new)",callback = function()
+Main_3_left:button({name = "Northern Expedition",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(19564, 133, 5299))
+end})
+
+Main_3_left:button({name = "Top mountain",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(19964, 1139, 5348))
+end})
+
+Main_3_left:button({name = "Frozen door",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(19985, 906, 5449))
+end})
+
+Main_3_left:button({name = "Santa quest",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-152, 365, -9494))
 end})
 
-Main_3_left:button({name = "Merchant Skin (new)",callback = function()
+Main_3_left:button({name = "Merchant Skin",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(415, 135, 196))
 end})
@@ -5848,40 +5882,37 @@ Main_3_right:button({name = "Aurora Totem",callback = function()
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-1812, -137, -3282))
 end})
 
-Main_3_right:button({name = "Dr. Finneus (NPC)",callback = function()
+Main_3_right:button({name = "Level 1",callback = function()
     local Players = game:GetService("Players")
-Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1169.18237, 132.075562, 2456.31689, 0, 0, -1, 0, 1, 0, 1, 0, 0))
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(19853.5078, 474.123901, 4970.03662, 0.643565595, -0, -0.765390992, 0, 1, -0, 0.765390992, 0, 0.643565595))
 end})
 
-Main_3_right:button({name = "Abyssus (NPC)",callback = function()
+Main_3_right:button({name = "Level 2",callback = function()
     local Players = game:GetService("Players")
-Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1399.04749, -1018.03229, 966.244202, -0.351242661, -0.155072242, -0.923353255, 0.0506991558, 0.981591761, -0.184139013, 0.934910834, -0.111490704, -0.336914897))
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(19599.8184, 541.648071, 5613.19775, 0.364426255, -0, -0.931232274, 0, 1, -0, 0.931232274, 0, 0.364426255))
 end})
 
-Main_3_right:button({name = "Aspicientis (NPC)",callback = function()
+Main_3_right:button({name = "Level 3",callback = function()
     local Players = game:GetService("Players")
-Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1214.53125, -708.644043, 1320.80188, 0.225700855, 0.128283948, 0.965713382, -0.0272023976, 0.991735399, -0.125383079, -0.973816752, 0.00202933699, 0.227325141))
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(19436.0254, 688.032471, 5855.78467, 0.284492433, -0, -0.958678305, 0, 1, -0, 0.958678305, 0, 0.284492433))
 end})
 
-Main_3_right:button({name = "Occultus (NPC)",callback = function()
+Main_3_right:button({name = "Level 4",callback = function()
     local Players = game:GetService("Players")
-Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1022.30933, -705.266174, 1564.73145, 0.996510863, -0.0350344256, 0.0757544413, 0.0481100902, 0.982790411, -0.178349033, -0.0682023838, 0.181371287, 0.981046855))
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(20193.7109, 852.315491, 5644.88184, -0.999705791, 0, 0.024254702, 0, 1, 0, -0.024254702, 0, -0.999705791))
 end})
 
-Main_3_right:button({name = "Perditus (NPC)",callback = function()
+Main_3_right:button({name = "Level 5",callback = function()
     local Players = game:GetService("Players")
-Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(770.052124, -730.62854, 1383.49512, 0.980628371, 0.0350823216, -0.19271028, -0.0284765773, 0.99891156, 0.0369425006, 0.193796545, -0.0307391342, 0.980560064))
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(19879.6309, 422.617004, 5380.35791, 0.476114929, 0, 0.879383087, 0, 1, 0, -0.879383087, 0, 0.476114929))
 end})
 
-Main_3_right:button({name = "Submersus (NPC)",callback = function()
+Main_3_right:button({name = "Level 6",callback = function()
     local Players = game:GetService("Players")
-Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1211.42651, -1015.7981, 1315.828, -0.990251422, 0.0733327195, 0.118424594, 0.0506683066, 0.981590569, -0.184153795, -0.12974897, -0.176358193, -0.975737095))
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(19964.834, 584.742065, 5573.2583, -0.99475944, 0, 0.102243692, 0, 1, 0, -0.102243692, 0, -0.99475944))
 end})
 
-Main_3_right:button({name = "Tenebris (NPC)",callback = function()
-    local Players = game:GetService("Players")
-Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(1061.18408, -631.130432, 1310.31323, -0.730399609, -0.0307225361, 0.682328701, -0.0463540554, 0.998914301, -0.00464264117, -0.681445241, -0.0350196883, -0.731030703))
-end})
+
 
 Main_3_right:button({name = "FARM XP",callback = function()
 	local player = game.Players.LocalPlayer
