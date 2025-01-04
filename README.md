@@ -5357,6 +5357,11 @@ Main_3_left:button({name = "Merchant Boat",callback = function()
     
 end})
 
+Main_3_left:button({name = "Grand Reef",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-3577, 151, 524))
+end})
+
 Main_3_left:button({name = "Northern Expedition",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(19564, 133, 5299))
