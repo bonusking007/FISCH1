@@ -5357,6 +5357,46 @@ Main_3_left:button({name = "Merchant Boat",callback = function()
     
 end})
 
+Main_3_left:button({name = "Atlantis base",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-4267, -603, 1785))
+end})
+
+Main_3_left:button({name = "Rune puzzle inside",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-5153, -716, 1712))
+end})
+
+Main_3_left:button({name = "Kraken pool",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-4382, -996, 2051))
+end})
+
+Main_3_left:button({name = "Abyssal Spec Rod",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-3804, -567, 1865))
+end})
+
+Main_3_left:button({name = "Zeus Rod",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-4275, -627, 2663))
+end})
+
+Main_3_left:button({name = "Tempest Rod",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-4931, -595, 1853))
+end})
+
+Main_3_left:button({name = "Poseidon totem",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-3956, -554, 857))
+end})
+
+Main_3_left:button({name = "Poseidon Rod(new)",callback = function()
+    local Players = game:GetService("Players")
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-4082, -558, 895))
+end})
+
 Main_3_left:button({name = "Grand Reef",callback = function()
     local Players = game:GetService("Players")
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-3577, 151, 524))
