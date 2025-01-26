@@ -4689,7 +4689,7 @@ local Main_1_left = Main_1_Page:section({name = "General",side = "left",size = 2
 local Main_2_left = Main_2_Page:section({name = "Misc",side = "left",size = 530})
 local Main_2_right = Main_2_Page:section({name = "Bypass Buy",side = "right",size = 450})
 
-local Main_3_left = Main_3_Page:section({name = "Teleport",side = "left",size = 1400})
+local Main_3_left = Main_3_Page:section({name = "Teleport",side = "left",size = 2000})
 local Main_3_right = Main_3_Page:section({name = "Totem",side = "right",size = 700})
 
 local Main_4_left = Main_4_Page:section({name = "Trade (SOON)",side = "left",size = 500})
@@ -4991,55 +4991,48 @@ Main_2_left:button({name = "recall fps",callback = function()
 end})
 
 Main_2_left:button({name = "Inf Oxygen(water)",callback = function()
-    local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
+	local player = game.Players.LocalPlayer
+local path = workspace:FindFirstChild(player.Name)
 
--- Find the LocalPlayer's character in workspace
-local playerFolder = workspace:FindFirstChild(LocalPlayer.Name)
-local oxygenScript = playerFolder and playerFolder:FindFirstChild("client") and playerFolder.client:FindFirstChild("oxygen")
-
--- Check if the script exists and is a LocalScript, then disable it
-if oxygenScript and oxygenScript:IsA("LocalScript") then
-    oxygenScript.Disabled = true
+if path and path:FindFirstChild("oxygen") then
+    path.oxygen.Enabled = false -- Disable the "oxygen" part for the LocalPlayer
 end
+
 
 end})
 
 Main_2_left:button({name = "Inf Temprature",callback = function()
-    local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-
--- Find the LocalPlayer's character in workspace
-local playerFolder = workspace:FindFirstChild(LocalPlayer.Name)
-local oxygenScript = playerFolder and playerFolder:FindFirstChild("client") and playerFolder.client:FindFirstChild("temperature")
-
--- Check if the script exists and is a LocalScript, then disable it
-if oxygenScript and oxygenScript:IsA("LocalScript") then
-    oxygenScript.Disabled = true
-end
+	local player = game.Players.LocalPlayer
+	local path = workspace:FindFirstChild(player.Name)
+	
+	if path and path:FindFirstChild("temperature") then
+		path.temperature.Enabled = false -- Disable the "oxygen" part for the LocalPlayer
+	end
 
 end})
 
 Main_2_left:button({name = "Inf Oxygen(high air)",callback = function()
-    local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
+	local player = game.Players.LocalPlayer
+local path = workspace:FindFirstChild(player.Name)
 
--- Find the LocalPlayer's character in workspace
-local playerFolder = workspace:FindFirstChild(LocalPlayer.Name)
-local oxygenScript = playerFolder and playerFolder:FindFirstChild("client") and playerFolder.client:FindFirstChild("oxygen(peaks)")
-
--- Check if the script exists and is a LocalScript, then disable it
-if oxygenScript and oxygenScript:IsA("LocalScript") then
-    oxygenScript.Disabled = true
+if path and path:FindFirstChild("oxygen(peaks)") then
+    path["oxygen(peaks)"].Enabled = false
 end
+
 
 end})
 
-Main_2_left:button({name = "Walk On Water",callback = function()
+Main_2_left:button({name = "Walk On Water1",callback = function()
 for i, v in pairs(workspace.zones.fishing:GetChildren()) do
     v.CanCollide = true
 end
 end})
+
+Main_2_left:button({name = "Walk On Water0",callback = function()
+	for i, v in pairs(workspace.zones.fishing:GetChildren()) do
+		v.CanCollide = false
+	end
+	end})
 
 
 
@@ -5369,7 +5362,7 @@ end})
 
 Main_3_left:button({name = "Kraken pool",callback = function()
     local Players = game:GetService("Players")
-Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-4382, -996, 2051))
+Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-4174, -1000, 2067))
 end})
 
 Main_3_left:button({name = "Abyssal Spec Rod",callback = function()
@@ -5803,10 +5796,10 @@ Main_3_left:button({name = "Relic Rod",callback = function()
 Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(4098, 40, 28))
 end})
 
-Main_3_left:button({name = "TP BOAT MOOSEWOOD (new)",callback = function()
+Main_3_left:button({name = "TP BOAT MOOSEWOOD",callback = function()
 	local player = game.Players.LocalPlayer
 	local boatsFolder = workspace:WaitForChild("active"):WaitForChild("boats")
-	local targetPosition = Vector3.new(328, 121, 298) -- Set the desired position here
+	local targetPosition = Vector3.new(330, 150, 240) -- Set the desired position here
 	
 	-- Function to search for a part named "Base" in the model
 	local function findBasePart(model)
@@ -5847,10 +5840,98 @@ Main_3_left:button({name = "TP BOAT MOOSEWOOD (new)",callback = function()
 	
 end})
 
-Main_3_left:button({name = "TP BOAT ISLE (new)",callback = function()
+Main_3_left:button({name = "TP BOAT ISLE",callback = function()
 	local player = game.Players.LocalPlayer
 	local boatsFolder = workspace:WaitForChild("active"):WaitForChild("boats")
 	local targetPosition = Vector3.new(5772, 128, 355) -- Set the desired position here
+	
+	-- Function to search for a part named "Base" in the model
+	local function findBasePart(model)
+		for _, descendant in pairs(model:GetDescendants()) do
+			if descendant:IsA("BasePart") and descendant.Name == "Base" then
+				return descendant
+			end
+		end
+		return nil
+	end
+	
+	-- Function to set PrimaryPart and teleport the player's boat
+	local function teleportBoat()
+		local playerName = player.Name
+		local boat = boatsFolder:FindFirstChild(playerName)
+		
+		if boat and boat:IsA("Model") then
+			-- Set a PrimaryPart if it doesn't have one
+			if not boat.PrimaryPart then
+				local basePart = findBasePart(boat)
+				if basePart then
+					boat.PrimaryPart = basePart
+				else
+					warn("No part named 'Base' found in the boat model.")
+					return
+				end
+			end
+			
+			-- Teleport the boat
+			boat:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+		else
+			warn("Boat for player not found in workspace.active.boats")
+		end
+	end
+	
+	-- Execute the teleport
+	teleportBoat()
+	
+end})
+
+Main_3_left:button({name = "TP BOAT KRAKEN",callback = function()
+	local player = game.Players.LocalPlayer
+	local boatsFolder = workspace:WaitForChild("active"):WaitForChild("boats")
+	local targetPosition = Vector3.new(-4285, -1006, 2098) -- Set the desired position here
+	
+	-- Function to search for a part named "Base" in the model
+	local function findBasePart(model)
+		for _, descendant in pairs(model:GetDescendants()) do
+			if descendant:IsA("BasePart") and descendant.Name == "Base" then
+				return descendant
+			end
+		end
+		return nil
+	end
+	
+	-- Function to set PrimaryPart and teleport the player's boat
+	local function teleportBoat()
+		local playerName = player.Name
+		local boat = boatsFolder:FindFirstChild(playerName)
+		
+		if boat and boat:IsA("Model") then
+			-- Set a PrimaryPart if it doesn't have one
+			if not boat.PrimaryPart then
+				local basePart = findBasePart(boat)
+				if basePart then
+					boat.PrimaryPart = basePart
+				else
+					warn("No part named 'Base' found in the boat model.")
+					return
+				end
+			end
+			
+			-- Teleport the boat
+			boat:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+		else
+			warn("Boat for player not found in workspace.active.boats")
+		end
+	end
+	
+	-- Execute the teleport
+	teleportBoat()
+	
+end})
+
+Main_3_left:button({name = "TP BOAT SUN STONE",callback = function()
+	local player = game.Players.LocalPlayer
+	local boatsFolder = workspace:WaitForChild("active"):WaitForChild("boats")
+	local targetPosition = Vector3.new(-912, 128, -1069) -- Set the desired position here
 	
 	-- Function to search for a part named "Base" in the model
 	local function findBasePart(model)
